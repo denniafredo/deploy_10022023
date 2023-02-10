@@ -1,0 +1,1 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKowZJ1a0WeTztpxoK5Dfi43D4YCdeRVm/sFEcuvZv+T farhan.afif@ifg-life.id
