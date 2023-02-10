@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<TITLE>Watermark</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="../fpdf.css">
+</HEAD>
+<BODY ONLOAD="if(window.focus) window.focus()">
+<H2>Watermark</H2>
+<H4 class="st">Informations</H4>Author: Ivan<BR>License: Freeware
+<H4 CLASS="st">Description</H4>Simple script showing how to use the <A HREF="http://www.fpdf.org/?go=script&id=2" TARGET="_blank">PDF_rotate</A>
+class to display a watermark in the background of each page.
+<H4 CLASS="st">Source</H4><TABLE WIDTH="100%" STYLE="color:#4040C0; border-style:ridge" BORDERCOLORLIGHT="#B0B0E0" BORDERCOLORDARK="#000000" BORDER="2" CELLPADDING=6 CELLSPACING=0 BGCOLOR="#F0F5FF"><TR><TD style="border-width:0px">
+<NOBR><code><font color="#000000">
+&lt;?php<br>define<font class="kw">(</font><font class="str">'FPDF_FONTPATH'</font><font class="kw">,</font><font class="str">'font/'</font><font class="kw">);<br>require(</font><font class="str">'rotation.php'</font><font class="kw">);<br><br>class&nbsp;</font>PDF&nbsp;<font class="kw">extends&nbsp;</font>PDF_Rotate<br><font class="kw">{<br>function&nbsp;</font>Header<font class="kw">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;</font><font class="cmt">//Put watermark<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$<font class="kw">this-&gt;</font>SetFont<font class="kw">(</font><font class="str">'Arial'</font><font class="kw">,</font><font class="str">'B'</font><font class="kw">,</font>50<font class="kw">);<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$<font class="kw">this-&gt;</font>SetTextColor<font class="kw">(</font>255<font class="kw">,</font>192<font class="kw">,</font>203<font class="kw">);<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$<font class="kw">this-&gt;</font>RotatedText<font class="kw">(</font>30<font class="kw">,</font>190<font class="kw">,</font><font class="str">'W a t e r m a r k&nbsp;&nbsp;&nbsp;d e m o'</font><font class="kw">,</font>45<font class="kw">);<br>}<br><br>function&nbsp;</font>RotatedText<font class="kw">(</font>$x<font class="kw">,</font>$y<font class="kw">,</font>$txt<font class="kw">,</font>$angle<font class="kw">)<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;</font><font class="cmt">//Text rotated around its origin<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$<font class="kw">this-&gt;</font>Rotate<font class="kw">(</font>$angle<font class="kw">,</font>$x<font class="kw">,</font>$y<font class="kw">);<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$<font class="kw">this-&gt;</font>Text<font class="kw">(</font>$x<font class="kw">,</font>$y<font class="kw">,</font>$txt<font class="kw">);<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$<font class="kw">this-&gt;</font>Rotate<font class="kw">(</font>0<font class="kw">);<br>}<br>}<br><br></font>$pdf<font class="kw">=new&nbsp;</font>PDF<font class="kw">();<br></font>$pdf<font class="kw">-&gt;</font>Open<font class="kw">();<br></font>$pdf<font class="kw">-&gt;</font>AddPage<font class="kw">();<br></font>$pdf<font class="kw">-&gt;</font>SetFont<font class="kw">(</font><font class="str">'Arial'</font><font class="kw">,</font><font class="str">''</font><font class="kw">,</font>12<font class="kw">);<br></font>$txt<font class="kw">=</font><font class="str">'FPDF is a PHP class which allows to generate PDF files with straight PHP, that is to say '</font><font class="kw">.<br>&nbsp;&nbsp;&nbsp;&nbsp;</font><font class="str">'without using the PDFlib library. The advantage is that the latter requires a fee for a '</font><font class="kw">.<br>&nbsp;&nbsp;&nbsp;&nbsp;</font><font class="str">'commercial usage. F from FPDF stands for Free: you may use it for any kind of usage and '</font><font class="kw">.<br>&nbsp;&nbsp;&nbsp;&nbsp;</font><font class="str">'modify it to suit your needs.'</font><font class="kw">;<br>for(</font>$i<font class="kw">=</font>0<font class="kw">;</font>$i<font class="kw">&lt;</font>25<font class="kw">;</font>$i<font class="kw">++)&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;</font>$pdf<font class="kw">-&gt;</font>Write<font class="kw">(</font>5<font class="kw">,</font>$txt<font class="kw">);<br></font>$pdf<font class="kw">-&gt;</font>Output<font class="kw">();<br></font>?&gt;
+</font>
+</code></NOBR></TD></TR></TABLE>
+<BR>
+View the result <A HREF="watermark.pdf" TARGET="_blank">here</A>.
+<H4 CLASS="st">Download</H4><A HREF="script9.zip">ZIP</A> | <A HREF="script9.tgz">TGZ</A>
+</BODY>
+</HTML>

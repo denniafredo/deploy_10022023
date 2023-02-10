@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="hello world example" /> 
+  <Content type="html">
+     <iframe src="http://flexpaper.googlecode.com/svn/trunk/Example/flash/FlexPaperViewer.html" width="520" height="540" frameborder="0"></iframe>
+  </Content> 
+</Module>

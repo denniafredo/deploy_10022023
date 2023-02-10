@@ -1,0 +1,41 @@
+/* GLOBALHEADER */
+#globalheader { width: 982px; height: 38px; margin: 18px auto; position: relative; z-index: 9998; }
+#globalheader #globalnav { margin: 0; padding: 0; }
+#globalheader #globalnav li { display: inline; }
+#globalheader #globalnav li a { float: left; width: 117px; height: 0; padding-top: 38px; overflow: hidden; }
+#globalheader #globalnav li a,
+#globalheader #globalsearch { background-image: url(globalnavbg.png); _background-image: url(http://images.apple.com/global/nav/images/globalnavbg.gif); background-rep
+eat: no-repeat; }
+
+/* BUTTONS */
+#globalheader #globalnav li#gn-store a { background-position: 0 0; }
+#globalheader #globalnav li#gn-store a { background-position: -117px 0; }
+#globalheader #globalnav li#gn-mac a { background-position: -234px 0; }
+#globalheader #globalnav li#gn-ipoditunes a { background-position: -351px 0; }
+#globalheader #globalnav li#gn-iphone a { background-position: -468px 0; }
+#globalheader #globalnav li#gn-downloads a { background-position: -585px 0; }
+#globalheader #globalnav li#gn-support a { background-position: -702px 0; }
+
+/* OVER STATES */
+#globalheader #globalnav li#gn-apple a:hover { background-position: 0 -38px; }
+#globalheader #globalnav li#gn-store a:hover { background-position: -117px -38px; }#globalheader #globalnav li#gn-mac a:hover { background-position: -234px -38px; }
+#globalheader #globalnav li#gn-ipoditunes a:hover { background-position: -351px -38px; }#globalheader #globalnav li#gn-iphone a:hover { background-position: -468px -38px; }
+#globalheader #globalnav li#gn-downloads a:hover { background-position: -585px -38px; }
+#globalheader #globalnav li#gn-support a:hover { background-position: -702px -38px; }
+
+* PRESSED STATES */
+#globalheader #globalnav li#gn-apple a:active { background-position: 0 -76px; }#globalheader #globalnav li#gn-store a:active { background-position: -117px -76px; }
+#globalheader #globalnav li#gn-mac a:active { background-position: -234px -76px; }
+#globalheader #globalnav li#gn-ipoditunes a:active { background-position: -351px -76px; }
+#globalheader #globalnav li#gn-iphone a:active { background-position: -468px -76px; }
+#globalheader #globalnav li#gn-downloads a:active { background-position: -585px -76px; }
+#globalheader #globalnav li#gn-support a:active { background-position: -702px -76px; }
+
+/* ON STATES */
+#globalheader.home #globalnav li#gn-apple a:hover { background-position: 0 0; cursor: default; }
+#globalheader.store #globalnav li#gn-store a { background-position: -117px -114px !important; }
+#globalheader.mac #globalnav li#gn-mac a { background-position: -234px -114px !important; }
+#globalheader.ipoditunes #globalnav li#gn-ipoditunes a { background-position: -351px -114px !important; }
+#globalheader.iphone #globalnav li#gn-iphone a { background-position: -468px -114px !important; }
+#globalheader.downloads #globalnav li#gn-downloads a { background-position: -585px -114px !important; }
+#globalheader.support #globalnav li#gn-support a { background-position: -702px -114px !important; }

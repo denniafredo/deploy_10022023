@@ -1,0 +1,44 @@
+	body{
+	  font: 12px "Trebuchet MS", Verdana;
+		margin: 10px;
+		margin-top: 10px;
+		padding: 0px;
+		background-color: #ffffff;
+		color: #386796;
+	}
+	
+	td {
+	  font: 11px Verdana;	
+	}
+	
+a:link, a:visited {
+	font: 12px "Trebuchet MS", Verdana;
+	text-decoration: underline;
+	color: #000;
+}
+a:hover, a:active {
+	font: 12px "Trebuchet MS", Verdana;
+	text-decoration: none;
+	color: #A03E19;
+}
+
+.akunc {text-align: right}
+.akund {text-align: right}
+.sudah {background-color: #ccffcc;FONT-FAMILY: Verdana; FONT-SIZE: 9pt;}
+.belum {background-color: #fecfd3;FONT-FAMILY: Verdana; FONT-SIZE: 9pt;}
+
+.select2{
+  font-weight : lighter;
+	COLOR: #000080; 
+	FONT-SIZE: 11px; 
+	FONT-FAMILY: Verdana, sans-serif; 
+	TEXT-DECORATION: none;
+}
+
+input {
+	BORDER-RIGHT: rgb(000,102,153) 1px outset; 
+	BORDER-TOP: rgb(000,102,153) 1px outset; 
+	BORDER-LEFT: rgb(000,102,153) 1px outset; 
+	BORDER-BOTTOM: rgb(000,102,153) 1px outset;
+	FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR:#000080; ;px;  
+}
