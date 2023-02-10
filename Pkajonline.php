@@ -51,6 +51,8 @@ class Pkajonline extends CI_Controller {
 
         $datas = $this->Pkaj_model->data_pkajonline($filter);
         $this->Pkaj_model->insert_history_sign('Document viewed', $this->input->get('name'), $this->input->get('noagen'), $this->input->get('nopkaj'), 'PDF', 'TESTING');
+        $this->Pkaj_model->update_history_sign('Viewed', $this->input->get('nopkaj'));
+
         foreach($datas as $i => $d) { 
             $nopkaj = $d['NOPKAJAGEN'];
             $kdkantor = $d['KDKANTOR'];
@@ -405,6 +407,8 @@ class Pkajonline extends CI_Controller {
                         $data['otp'] = $this->Pkaj_model->get_sendOtp($notlp, $kantor, $nopkaj);
                         $data['pkaj'] = $this->Pkaj_model->data_pkajonline($filter);
                         $data['keterangan'] = "KODE OTP SUDAH DIKIRIM KE NO HP ANDA " . $notlp;
+                        $this->Pkaj_model->insert_history_sign('Otp', $this->input->get('name'), $this->input->get('noagen'), $this->input->get('nopkaj'), 'PDF', 'TESTING');
+                        $this->Pkaj_model->update_history_sign('Otp', $this->input->get('nopkaj'));
                     }                
                 }
 
@@ -469,7 +473,11 @@ class Pkajonline extends CI_Controller {
                 $tmptlhr = $d['TEMPATLAHIR'];
                 $tgllhr = $d['TGLLAHIR'];    
                 $jnskel = $d['JENISKELAMIN'];
-                $tglpkaj = $d['TGLPKAJAGEN'];        
+                $tglpkaj = $d['TGLPKAJAGEN']; 
+                
+                $this->Pkaj_model->insert_history_sign('Document signed', $namaklien, $this->input->get('iduser'), $nopkaj, 'PDF', 'TESTING');
+                $this->Pkaj_model->insert_history_sign('Document signed', $namabm, $nipbm, $nopkaj, 'PDF', 'TESTING');
+                $this->Pkaj_model->update_history_sign('Signed', $nopkaj);
             }
 
             $this->load->library('ciqrcode'); //pemanggilan library QR CODE
@@ -501,6 +509,8 @@ class Pkajonline extends CI_Controller {
             $this->ciqrcode->generate($qrkancab); // fungsi untuk generate QR CODE
 
             $result = $this->Pkaj_model->insert_pkajonline($nopkaj,$kdkantor,$noagenbm,$namabm,$noagen,$jabatanbm,$nipbm,$alamatktr,$telponktr,$faxktr,$noidagen,$alamatagen,$notelponagen,$namaklien,$tgl,$bln,$thn,$tmptlhr,$tgllhr,$jnskel,$tglpkaj,$image_qragen,$image_noagenbm); //simpan ke database
+
+            $this->Pkaj_model->insert_history_sign('Agreement completed', $namaklien, $d['NOAGEN'], $nopkaj, 'PDF', 'TESTING');
 
             json_encode($result); 
     }
