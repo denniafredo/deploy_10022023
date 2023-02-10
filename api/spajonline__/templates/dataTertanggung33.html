@@ -1,0 +1,461 @@
+<ion-view title="Biodata & Pekerjaan Tertanggung" nav-transition="none" id="page8"
+          cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <div id="dataTertanggung33-container7">
+            <form id="dataTertanggung33-form23" class="list">
+
+
+                <h3 id="dataTertanggung33-heading6" style="color:#000000;font-weight:400;">3. Data
+                    Pendukung untuk Tertanggung</h3>
+                <label class="item item-input" id="dataTertanggung33-input21"
+                       name="tinggiBadanTertanggung">
+                    <span class="input-label">Tinggi Badan (CM)</span>
+                    <input type="number" min="50" max="250" placeholder="50cm s/d 250cm"
+                           ng-model="data.tinggiBadanTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input22"
+                       name="beratBadanTertanggung">
+                    <span class="input-label">Berat Badan (KG)</span>
+                    <input type="number" min="10" max="300" placeholder="10kg s/d 300kg"
+                           ng-model="data.beratBadanTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input20"
+                       name="ibuKandungTertanggung">
+                    <span class="input-label">Nama ibu Kandung</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.ibuKandungTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-select" id="dataTertanggung33-select24"
+                       name="pendidikanTertanggung">
+                    <span class="input-label">Pendidikan Terakhir</span>
+                    <select ng-model="data.pendidikanTertanggung"
+                            ng-options="pendidikanTertanggung.id as pendidikanTertanggung.label for pendidikanTertanggung in pendidikans"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-select" id="dataTertanggung33-select23"
+                       name="statusPernikahanTertanggung">
+                    <span class="input-label">Status Pernikahan</span>
+                    <select ng-model="data.statusPernikahanTertanggung"
+                            ng-options="statusPernikahanTertanggung.id as statusPernikahanTertanggung.label for statusPernikahanTertanggung in statuss"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+            </form>
+
+        </div>
+
+        <div id="dataTertanggung33-container5" ng-hide="true">
+            <h3 id="dataTertanggung33-heading2" style="color:#000000;font-weight:400;">Saudara Yang
+                Tidak Serumah</h3>
+            <form id="dataTertanggung33-form21" class="list">
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="namaSaudaraTertanggung">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.namaSaudaraTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-textarea5"
+                       name="alamatSuratSaudaraTertanggung">
+                    <span class="input-label">Alamat Surat</span><textarea
+                        placeholder="__________________"
+                        ng-model="data.alamatSuratSaudaraTertanggung"
+                        ng-blur="saveDataSpaj()"></textarea>
+                </label>
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="provinsiSuratSaudaraTertanggung">
+                    <span class="input-label">Provinsi</span>
+                    <select ng-model="data.provinsiSuratSaudaraTertanggung"
+                            ng-options="provinsiSuratSaudaraTertanggung.id as provinsiSuratSaudaraTertanggung.label for provinsiSuratSaudaraTertanggung  in provinsis"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input17"
+                       name="kabupatenSuratSaudaraTertanggung">
+                    <span class="input-label">Kabupaten / Kota</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.kabupatenSuratSaudaraTertanggung"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input56"
+                       name="kodeposSuratSaudaraTertanggung">
+                    <span class="input-label">Kode Pos</span>
+                    <input type="number" placeholder="__________________"
+                           ng-model="data.kodeposSuratSaudaraTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input18"
+                       name="hpSuratSaudaraTertanggung">
+                    <span class="input-label">Nomor HP</span>
+                    <input type="tel" placeholder="Nomor HP"
+                           ng-model="data.hpSuratSaudaraTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input19"
+                       name="noTelpSaudaraTertanggung">
+                    <span class="input-label">Nomor Telepon</span>
+                    <input type="tel" placeholder="Nomor Telepon"
+                           ng-model="data.noTelpSaudaraTertanggung" ng-blur="saveDataSpaj()">
+                </label>
+            </form>
+        </div>
+
+        <div class="spacer" style="height: 40px;"></div>
+        Ada Tertanggung tambahan?
+        <div class="button-bar ">
+            <ion-radio class="radio radio-balanced " ng-blur="saveDataSpaj();" ng-hide="" ng-show=""
+                       id="produkDanManfaat12-radio2" name="isAdaTertanggungTambahan1"
+                       ng-model="data.isAdaTertanggungTambahan1" ng-value="true">ADA
+            </ion-radio>
+            <ion-radio class="radio radio-balanced " ng-blur="saveDataSpaj();" ng-hide="" ng-show=""
+                       id="produkDanManfaat12-radio1" name="isAdaTertanggungTambahan1"
+                       ng-model="data.isAdaTertanggungTambahan1" ng-value="false">TIDAK
+            </ion-radio>
+        </div>
+
+        <label class="item item-select" ng-hide="true" ng-show="data.isAdaTertanggungTambahan1"
+               id="dataTertanggung33-select20" name="jmlTertanggungTambahan">
+            <span class="input-label">Jumlah tertanggung Tambahan</span>
+            <select ng-model="data.jmlTertanggungTambahan">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </label>
+
+
+        <form ng-show="data.isAdaTertanggungTambahan1" id="dataTertanggung33-form21" class="list">
+            <div id="tt1" ng-show="true"><br/>
+                <h3>DATA TERTANGGUNG TAMBAHAN 1</h3>
+
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="hubunganTT1DenganTTU">
+                    <span class="input-label">Hubungan dengan Tertanggung Utama</span>
+                    <select ng-model="data.hubunganTT1DenganTTU"
+                            ng-options="hubunganTT1DenganTTU.id as hubunganTT1DenganTTU.label for hubunganTT1DenganTTU  in hubunganKeluargas"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="jenisKelaminTertanggungTambahan1">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenisKelaminTertanggungTambahan1"
+                            ng-options="jenisKelaminTertanggungTambahan1.id as jenisKelaminTertanggungTambahan1.label for jenisKelaminTertanggungTambahan1  in genders"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="namaTertanggungTambahan1">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.namaTertanggungTambahan1" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="noKtpTertanggungTambahan1">
+                    <span class="input-label">No. KTP</span>
+                    <input type="number" placeholder="___ ___ ___ ___ ___ ___"
+                           ng-model="data.noKtpTertanggungTambahan1" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tglLahirTertanggungTambahan1">
+                    <span class="input-label">Tanggal Lahir</span>
+                    <input type="date" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           placeholder="__________________"
+                           ng-model="data.tglLahirTertanggungTambahan1" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tempatLahirTertanggungTambahan1">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.tempatLahirTertanggungTambahan1" ng-blur="saveDataSpaj()">
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tinggiBadanTertanggungTambahan1">
+                    <span class="input-label">Tinggi Badan (CM)</span>
+                    <input type="number" min="50" max="250" placeholder="50cm s/d 250cm"
+                           placeholder="____" ng-model="data.tinggiBadanTertanggungTambahan1"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="beratBadanTertanggungTambahan1">
+                    <span class="input-label">Berat Badan (KG)</span>
+                    <input type="number" min="10" max="300" placeholder="10kg s/d 300kg"
+                           ng-model="data.beratBadanTertanggungTambahan1" ng-blur="saveDataSpaj()">
+                </label>
+
+
+                <br/>
+                Apakah Tertanggung 1 bekerja?
+                <div class="button-bar ">
+                    <ion-radio class="radio radio-balanced " ng-blur="saveDataSpaj();" ng-hide=""
+                               ng-show="" id="produkDanManfaat12-radio2"
+                               name="isTertanggungTambahan1Bekerja"
+                               ng-model="data.isTertanggungTambahan1Bekerja" ng-value="true">YA
+                    </ion-radio>
+                    <ion-radio class="radio radio-balanced " ng-blur="saveDataSpaj();" ng-hide=""
+                               ng-show="" id="produkDanManfaat12-radio1"
+                               name="isTertanggungTambahan1Bekerja"
+                               ng-model="data.isTertanggungTambahan1Bekerja" ng-value="false">TIDAK
+                    </ion-radio>
+                </div>
+                <div ng-hide="true" ng-show="data.isTertanggungTambahan1Bekerja">
+                    <label class="item item-input" id="dataTertanggung33-input23"
+                           name="namaKantorTertanggungTambahan1">
+                        <span class="input-label">Nama kantor tempat bekerja</span>
+                        <input type="text" placeholder="__________________"
+                               ng-model="data.namaKantorTertanggungTambahan1"
+                               ng-blur="saveDataSpaj()">
+                    </label>
+                    <label class="item item-input" id="dataTertanggung33-input23"
+                           name="alamatKantorTertanggungTambahan1">
+                        <span class="input-label">Alamat kantor tempat bekerja</span>
+                        <input type="text" placeholder="__________________"
+                               ng-model="data.alamatKantorTertanggungTambahan1"
+                               ng-blur="saveDataSpaj()">
+                    </label>
+                </div>
+            </div>
+
+
+            <div id="tt2" ng-hide="true"
+                 ng-show="data.jmlTertanggungTambahan == 2 || data.jmlTertanggungTambahan == 3 || data.jmlTertanggungTambahan == 4">
+                <br/>
+                <h3>DATA TERTANGGUNG TAMBAHAN 2</h3>
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="hubunganTT2DenganTTU">
+                    <span class="input-label">Hubungan dengan Tertanggung Utama</span>
+                    <select ng-model="data.hubunganTT2DenganTTU"
+                            ng-options="hubunganTT2DenganTTU.id as hubunganTT2DenganTTU.label for hubunganTT2DenganTTU  in hubunganKeluargas"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+				
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="namaTertanggungTambahan2">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.namaTertanggungTambahan2" ng-blur="saveDataSpaj()">
+                </label>
+                
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="jenisKelaminTertanggungTambahan2">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenisKelaminTertanggungTambahan2"
+                            ng-options="jenisKelaminTertanggungTambahan2.id as jenisKelaminTertanggungTambahan2.label for jenisKelaminTertanggungTambahan2  in genders"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="noKtpTertanggungTambahan2">
+                    <span class="input-label">No. KTP</span>
+                    <input type="number" placeholder="___ ___ ___ ___ ___ ___"
+                           ng-model="data.noKtpTertanggungTambahan2" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tglLahirTertanggungTambahan2">
+                    <span class="input-label">Tanggal Lahir</span>
+                    <input type="date" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           placeholder="__________________"
+                           ng-model="data.tglLahirTertanggungTambahan2" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tempatLahirTertanggungTambahan2">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.tempatLahirTertanggungTambahan2" ng-blur="saveDataSpaj()">
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tinggiBadanTertanggungTambahan2">
+                    <span class="input-label">Tinggi Badan (CM)</span>
+                    <input type="number" min="50" max="250" placeholder="50cm s/d 250cm"
+                           placeholder="____" ng-model="data.tinggiBadanTertanggungTambahan2"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="beratBadanTertanggungTambahan2">
+                    <span class="input-label">Berat Badan (KG)</span>
+                    <input type="number" min="10" max="300" placeholder="10kg s/d 300kg"
+                           ng-model="data.beratBadanTertanggungTambahan2" ng-blur="saveDataSpaj()">
+                </label>
+            </div>
+
+            <div id="tt3"
+                 ng-hide="true"
+                 ng-show="data.jmlTertanggungTambahan == 3 || data.jmlTertanggungTambahan == 4"
+            ><br/>
+                <h3>DATA TERTANGGUNG TAMBAHAN 3</h3>
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="hubunganTT3DenganTTU">
+                    <span class="input-label">Hubungan dengan Tertanggung Utama</span>
+                    <select ng-model="data.hubunganTT3DenganTTU"
+                            ng-options="hubunganTT3DenganTTU.id as hubunganTT3DenganTTU.label for hubunganTT3DenganTTU  in hubunganKeluargas"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+				
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="namaTertanggungTambahan3">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.namaTertanggungTambahan3" ng-blur="saveDataSpaj()">
+                </label>
+                
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="jenisKelaminTertanggungTambahan3">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenisKelaminTertanggungTambahan3"
+                            ng-options="jenisKelaminTertanggungTambahan1.id as jenisKelaminTertanggungTambahan3.label for jenisKelaminTertanggungTambahan3  in genders"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="noKtpTertanggungTambahan3">
+                    <span class="input-label">No. KTP</span>
+                    <input type="number" placeholder="___ ___ ___ ___ ___ ___"
+                           ng-model="data.noKtpTertanggungTambahan3" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tglLahirTertanggungTambahan3">
+                    <span class="input-label">Tanggal Lahir</span>
+                    <input type="date" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           placeholder="__________________"
+                           ng-model="data.tglLahirTertanggungTambahan3" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tempatLahirTertanggungTambahan3">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.tempatLahirTertanggungTambahan3" ng-blur="saveDataSpaj()">
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tinggiBadanTertanggungTambahan3">
+                    <span class="input-label">Tinggi Badan (CM)</span>
+                    <input type="number" min="50" max="250" placeholder="50cm s/d 250cm"
+                           placeholder="____" ng-model="data.tinggiBadanTertanggungTambahan1"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="beratBadanTertanggungTambahan1">
+                    <span class="input-label">Berat Badan (KG)</span>
+                    <input type="number" min="10" max="300" placeholder="10kg s/d 300kg"
+                           ng-model="data.beratBadanTertanggungTambahan1" ng-blur="saveDataSpaj()">
+                </label>
+            </div>
+
+            <div id="tt4" ng-hide="true" ng-show="data.jmlTertanggungTambahan == 4"><br/>
+                <h3>DATA TERTANGGUNG TAMBAHAN 4</h3>
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="hubunganTT4DenganTTU">
+                    <span class="input-label">Hubungan dengan Tertanggung Utama</span>
+                    <select ng-model="data.hubunganTT4DenganTTU"
+                            ng-options="hubunganTT4DenganTTU.id as hubunganTT4DenganTTU.label for hubunganTT4DenganTTU  in hubunganKeluargas"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+				
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="namaTertanggungTambahan4">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.namaTertanggungTambahan4" ng-blur="saveDataSpaj()">
+                </label>
+                
+                <label class="item item-select" id="dataTertanggung33-select20"
+                       name="jenisKelaminTertanggungTambahan4">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenisKelaminTertanggungTambahan4"
+                            ng-options="jenisKelaminTertanggungTambahan4.id as jenisKelaminTertanggungTambahan4.label for jenisKelaminTertanggungTambahan4  in genders"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="noKtpTertanggungTambahan4">
+                    <span class="input-label">No. KTP</span>
+                    <input type="number" placeholder="___ ___ ___ ___ ___ ___"
+                           ng-model="data.noKtpTertanggungTambahan4" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tglLahirTertanggungTambahan4">
+                    <span class="input-label">Tanggal Lahir</span>
+                    <input type="date" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           placeholder="__________________"
+                           ng-model="data.tglLahirTertanggungTambahan4" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tempatLahirTertanggungTambahan4">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.tempatLahirTertanggungTambahan4" ng-blur="saveDataSpaj()">
+                </label>
+
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="tinggiBadanTertanggungTambahan4">
+                    <span class="input-label">Tinggi Badan (CM)</span>
+                    <input type="number" min="50" max="250" placeholder="50cm s/d 250cm"
+                           placeholder="____" ng-model="data.tinggiBadanTertanggungTambahan4"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataTertanggung33-input23"
+                       name="beratBadanTertanggungTambahan4">
+                    <span class="input-label">Berat Badan (KG)</span>
+                    <input type="number" min="10" max="300" placeholder="10kg s/d 300kg"
+                           ng-model="data.beratBadanTertanggungTambahan4" ng-blur="saveDataSpaj()">
+                </label>
+            </div>
+        </form>
+
+
+        <div id="dataTertanggung33-container6">
+            <form id="dataTertanggung33-form22" class="list">
+                <form id="dataTertanggung33-form22" class="list">
+                    <div class="spacer" style="width: 748px; height: 21px;"></div>
+
+                    <div class="row">
+                        <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                        <div class="col" style="text-align:right;">
+                            <md-toggle ng-model="data.isPageTertanggung3Accepted"
+                                       name="isPageTertanggung3Accepted"
+                                       ng-change="saveDataSpaj();moveToNextPage()"
+                                       toggle-class="toggle-balanced">
+                            </md-toggle>
+                        </div>
+                    </div>
+
+                    <div class="spacer" style="height: 600px;"></div>
+                </form>
+        </div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+
+        <div class="row">
+            <div class="col">
+                <div id="dataTertanggung23-button-bar2" class="button-bar">
+                    <a ui-sref="aplikasiSPAJOnline.pekerjaanTertanggung"
+                       id="dataTertanggung33-button19"
+                       class="button button-light button button-block button icon-right ion-edit">DATA
+                        PEKERJAAN TERTANGGUNG UTAMA</a>
+                    <!--a ui-sref="aplikasiSPAJOnline.pekerjaanTertanggung" id="dataTertanggung33-button19" class="button button-light button button-block button icon-right ion-edit">TERTANGGUNG TAMBAHAN</a>
+                    <a ui-sref="aplikasiSPAJOnline.sKKTertanggungUtama" id="dataTertanggung33-button40" class="button button-light button button-block button icon-right ion-edit">SKK UTAMA</a>
+                    <a ui-sref="aplikasiSPAJOnline.sKKTertanggungTambahan" id="dataTertanggung33-button46" class="button button-light button button-block button icon-right ion-edit">SKK TAMBAHAN</a-->
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div id="dataTertanggung33-button-bar4" class="button-bar">
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung13"
+                               ng-click="isPageAccepted()" id="dataTertanggung33-button10"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">1.
+                                Identitas</a>
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung23({})"
+                               ng-click="isPageAccepted()" id="dataTertanggung33-button11"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">2. Tempat
+                                Tinggal</a>
+                            <button id="dataTertanggung33-button12"
+                                    style="font-weight:500;text-align:left;"
+                                    class="button button-balanced   icon-right">3. Pendukung
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</ion-view>

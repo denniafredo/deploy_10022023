@@ -1,0 +1,59 @@
+<style>
+	.no-scroll{
+		overflow-y: auto !important;
+	}
+</style>
+
+<ion-modal-view style="position: absolute;
+width: 90vw;
+height: 90%;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+border: 0;">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Tanda Tangan</h1>
+    </ion-header-bar>
+    <ion-content scroll="false">
+			<div class="item item-body">
+				<p>Dengan ini Pemegang Polis telah mengerti dan menyetujui hal-hal sebagai berikut: </p>
+				<div class="item item-checkbox ">
+					<label class="checkbox">
+						<input type="checkbox" ng-model="signaturePadModel.checkPemegangPolis">
+					</label>
+					<p>Pemegang Polis wajib melakukan pembayaran premi asuransi melalui kanal/channel pembayaran resmi yang telah disediakan oleh Perusahaan.</p>
+				</div>
+				<div class="item item-checkbox ">
+					<label class="checkbox">
+						<input type="checkbox" ng-model="signaturePadModel.checkPemegangPolis2">
+					</label>
+					<p>Perusahaan hanya mengakui pembayaran premi asuransi yang dilakukan Pemegang Polis melalui kanal/channel pembayaran resmi yang disediakan Perusahaan</p>
+				</div>
+			</div>
+	
+			<div class="card list">
+				<div class="button-bar padding">
+					<button class="button button-stable" ng-click="clear()">Kosongkan</button>
+				</div>
+				<div class="button-bar padding">
+					<div class="item item-checkbox ">
+						<label class="checkbox">
+							<input type="checkbox" ng-model="signaturePadModel.signatureConfirm">
+						</label>
+						Setujui Tandatangan
+					</div>
+					
+					<button class="button button-small button-positive"
+						ng-disabled="!(signaturePadModel.signatureConfirm && signature)"
+						ng-click="save();">OK
+					</button>
+				</div>
+				<div class="item item-body">
+					gunakan jari atau stylus untuk tanda tangan dibidang kosong dibawah ini:
+				</div>
+				<canvas id="signature-canvas" class="padding-horizontal item" style="width: 100%;height: 30%;"></canvas>
+			</div>
+    </ion-content>
+</ion-modal-view>

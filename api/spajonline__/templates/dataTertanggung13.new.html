@@ -1,0 +1,121 @@
+<ion-view title="Identitas Tertanggung" cache-view="false" nav-transition="none" id="page5"
+          style="background-color:#FFFFFF;">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+
+        <form id="dataTertanggung13-form2" class="list">
+
+            <h3 id="dataTertanggung13-heading3" style="color:#000000;font-weight:400;">1. Mengisi
+                Identitas Tertanggung Utama</h3>
+            GUID: {{data.spaj_guid}} BUILD: {{data.build_id}}
+            <label class="item item-input" id="dataTertanggung13-input3"
+                   name="namaLengkapTertanggung">
+                <span class="input-label">Nama Lengkap</span>
+                <input type="text" placeholder="nama lengkap" ng-model="data.namaLengkapTertanggung"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-input" id="dataTertanggung13-input2" name="nomorKTPTertanggung">
+                <span class="input-label">Nomor KTP</span>
+                <input type="number" placeholder="nomor KTP" ng-model="data.nomorKTPTertanggung"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+
+            <label class="item item-input" id="dataTertanggung13-input2" name="tglLahirTertanggung">
+                <span class="input-label">Tgl. Lahir</span>
+                <input type="date" ng-model-options="{timezone:'UTC'}"
+                       ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" placeholder=""
+                       ng-model="data.tglLahirTertanggung" ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-input" id="dataTertanggung13-input3"
+                   name="tempatLahirTertanggung">
+                <span class="input-label">Tempat Lahir</span>
+                <input type="text" placeholder="tempat lahir" ng-model="data.tempatLahirTertanggung"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-input" id="dataTertanggung13-input2" name="nomorKTPTertanggung">
+                <span class="input-label">Nomor NPWP</span>
+                <input type="number" placeholder="nomor NPWP" ng-model="data.nomorNPWPTertanggung"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-select" id="dataTertanggung13-select2" name="jenkelTertanggung">
+                <span class="input-label">Jenis Kelamin</span>
+                <select ng-model="data.jenkelTertanggung"
+                        ng-options="jenkelTertanggung.id as jenkelTertanggung.label for jenkelTertanggung in genders"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <label class="item item-select" id="dataTertanggung13-select1" name="agamaTertanggung">
+                <span class="input-label">Agama</span>
+                <select ng-model="data.agamaTertanggung"
+                        ng-options="agamaTertanggung.id as agamaTertanggung.label for agamaTertanggung in agamas"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <div class="spacer" style="width: 300px; height: 17px;"></div>
+            <center>
+                <div>
+                    <input type="file" class="fileUpload "
+                           accept="image/*" id="camKTPtertanggung"
+                           custom-on-change="changeImage">
+                    </input>
+                    <div style="text-align:left;width:100px;font-size:1.2em;font-weight:bolder;position:relative;top:-85px;right:-38px;">
+                        Swafoto dengan KTP
+                    </div>
+                </div>
+
+            </center>
+            <div>
+
+                <center>
+                    <div class="canvasContainer"
+                         style="overflow:auto;max-width:500px;max-height:400px;">
+                        <canvas id="canvasKTP" style="width:500px;height:400px;"
+                                ng-model="data.imageKTPTertanggung"></canvas>
+                    </div>
+                </center>
+            </div>
+        </form>
+        <form id="dataTertanggung13-form8" class="list">
+            <div class="spacer" style="height: 50px;"></div>
+            <div class="row">
+                <div class="col col-75"><span class="input-label">Data Sudah Benar</span></div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-model="data.isPageTertanggung1Accepted"
+                               name="isPageTertanggung1Accepted"
+                               ng-change="saveDataSpaj();moveToNextPage()"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+
+            <div class="spacer" style="height: 100px;"></div>
+        </form>
+
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+
+                        <div id="dataTertanggung13-button-bar1" class="button-bar">
+                            <button id="dataTertanggung13-button1"
+                                    style="font-weight:500;text-align:left;"
+                                    class="button button-balanced   icon-right ion-chevron-right">1.
+                                Identitas
+                            </button>
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung23({})"
+                               ng-click="isPageAccepted()" id="dataTertanggung13-button2"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">2. Tempat
+                                Tinggal</a>
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung33({})"
+                               ng-click="isPageAccepted()" id="dataTertanggung13-button3"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right">3. Pendukung</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-view>

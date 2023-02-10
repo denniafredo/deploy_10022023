@@ -1,0 +1,220 @@
+<html> 
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1 user-scalable=no, width=device-width">
+	<title></title>
+	<!--meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src 'self' data:; style-src 'self'; font-src 'self';"-->
+	<!--link rel="manifest" href="manifest.json"-->
+	<link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+	<link href='lib/ionic/css/openSans.css' rel='stylesheet' type='text/css'>
+
+<script>
+(function (global) {
+	if(typeof (global) === "undefined")
+	{
+		throw new Error("window is undefined");
+	}
+    var _hash = "!";
+    var noBackPlease = function () {
+        global.location.href += "#";
+        global.setTimeout(function () {
+            global.location.href += "!";
+        }, 50);
+    };
+
+    global.onhashchange = function () {
+        if (global.location.hash !== _hash) {
+            global.location.hash = _hash;
+        }
+    };
+
+    global.onload = function () {
+		noBackPlease();
+		document.body.onkeydown = function (e) {
+            var elm = e.target.nodeName.toLowerCase();
+            if (e.which === 8 && (elm !== 'input' && elm  !== 'textarea')) {
+                e.preventDefault();
+            }
+            e.stopPropagation();
+        };
+    };
+})(window);
+
+var getQueryParam = function(param) {
+	location.search.substr(1)
+	.split("&")
+	.some(function(item) { // returns first occurence and stops
+		return item.split("=")[0] == param && (param = item.split("=")[1])
+	})
+	return param;
+}
+</script>
+
+	<!--script src="js/jquery.slim.min.js"></script-->
+	<script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+	<!-- cordova script (this will be a 404 during development) -->
+	<!--script src="cordova.js"></script-->
+
+	<script src="js/applogin.js"></script>
+
+</head>
+    <!-- your app's js -->
+<body  ng-app="starter" >
+	   
+	 <ion-nav-view>
+	 </ion-nav-view>
+	 <script id="login.html" type="text/ng-template">
+		   
+	<ion-content style="margin-top:30%;">
+		<div style="text-align:center;max-width:400px;margin:0 auto;">
+			  <div>
+				<center>
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAABICAMAAADs6QoJAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAWVZXWlZYXFlaYF1eYl9gZGFiaGVmamdobGpqcG1ucW9wdHJyeXZ3eXd4fHp6Qm2yQ3K1Q3W4RXu8SnS1TXe4Snq6UHq6R4G/X4WvUYC3WYK+WY68fYWMdYiYf4mRfI2ZfJGfZYmsaYaob4ujYI+1bJSzaZu8eY+yd5WqfZOme5WocJi1dpq6RoHBSITDSYjGT4rHSorISo3KTIzIS5DMTJLNTZTPTZXQTprTUorAWYvGU5TLVJjOXZXBW5PKUJ3VUJ/YWp7RUqPaVKjeXaTRXanXWqraVqzgXK/iWLHlZY3FYpfEZZPKZJzEY5/MbZTHapLIaJfKdZfJdJ/GdJrNfJvLdJ7QZqPHZqPTYanUZ6/ZZbHdaLTfdqfDeaPDe6XOd6HQdKzUfaPTfqTVf6/YerXcgH1+40ge40kg6m1L6nlagX+A64dr6olv6pN7hIKDhoqMiIaGiYeIjIuMhIyUgI+Yj4+Qg5Gdj5GSjpWckI6Ok5OTlZaYkpmemJaWnJubhJSqgp2siJOhgJ61lZ2kmp6ii6G9l6CtmaClkaK1l66/mqi0nqy6oJ6epKOjoaWoqKamqaeoq6uroq29ra6xrbC0sK6usK+wsbCvtLOzt7u/uLe2ubi3u7u7gafChqLNjKbFjq/Ng6nXi6zSiq3ZjLDMg7fWi7HWjbHVjbHbjb/dkqvNmK/LkK3RlrDHm7LIkrHVkLLbkLLdkbfZkbTdlbTZlbXdm7XTmbbZm7nel7jgmrngobTKqrbEqbjKpLjWoLvcpL7ds7rCvb/BuL/IsL7Qur/Ror7gh8DjlcPgr8TQrsTbtcDNvsDDtcLSsMXYucXTv8rWvcvao8DjpMDkqMPiqMPkrcblrsjnssfhsMjlt83hv87isNHlv9LowL6+1qij1bq865mD6KCN4aic6aeY57Knw8PDwMjPyMfHysnJyc3RxNDcztHV0M/P1NPT0NXb2NfX2djYw9DgwNHlwdPpxdfsxNnlyNXkyNjjztvr0d3t2d/n1ODvAAAAeOVzSwAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjEuM40k/WcAAAlKSURBVGhD1ZcJfBxVHcd9M5tdtt1mG4qtF4J4oKIlNhoSjTRWwICC4oX3AUpTqbqtg9buaqYqqBUyhBGiz/hEBY9Yj3TdNsaKigqKByqKeEe8nhmPeOCtj9//vbd3ujsbwsePv7KZece87/sf7z/D3dT/Uv/H9L/ecsvt9nZ5uhP0H5aK+Ff6gW0uR8unf5fQRfyuU+rmr33okz+y/Z1o2fTvaDKsL77kqY/o3bSpr3/gpXYovpZLh9uJXCq9/zEbTzyxt3dT36P6T9ryOzsaV8uk/9vAi8Vz1q/buLFMH3i2HY6rZdIPaXSxdM66dbX0wQ/Y8ZhaHv2nFHH8dx7g66qeHxjY8kU7I57i0f9769zBg4e+d/t/bPuQybfp9Y30wbdJOyWWYtFv1SzKsS/rvPqx9fuZPU30F/JO8HHogJdVKs3drNScub+m50hNr8Z9YPDJobBPxVEM+t8Ibq2nu7mbbMfZPc22D1/WifEx6J8uu53+1txMr7f0WtuH39qJ8e3p/6pQ9c+0cC2d17OU7RetLP37ZK2hVszXemKZXmf764MOXN+efshYqoG0DWrqPxt6bNbV2b57Zem1Bpc3QX+ugelL0f0OXB+DroGE1AGwhuPVtnYpzw+e8Kb3nHvu+eff+JO/2+dbKQ69anD5R3rG0vTB4cdrnTJy+lf+aZc4rGLZboHlO/pTKp7dhn7KyMjpN9o1Dqf29DlLw0+ztRCEe4N+1W2/vO3qRvrjKvSRkY/YRQ6j9nRT5HW2U9wtvljasLZn38tHR0cv+FwNfbiBfsZX7SpLqz39HwbY9Pfuazf8anQb9PMzK/QHHn1yPX3kgy2PX3u6mqsgre36N33U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" width="" height="60px"/><br />
+				eSPAJ Login<br />
+					<sub style="color:#afafaf;" ng-model="android_ver">v.{{android_ver}}</sub>
+				</center>
+			  </div>
+			  <div id="user_name">
+					<label class="item item-input" style="margin-top:50px;">
+						<span class="input-label" >Username JAIM</span>
+						<input type="text" ng-model="user.username">
+					</label>
+					<label class="item item-input">
+						<span class="input-label" >Password JAIM</span>
+						<input type="password" ng-model="user.password">
+					</label>
+					<!--	  <div class="padding">
+					<button nav-clear class="button button-royal " style="width:80%;margin-top:60px">Login</button>
+					</div>-->
+					<div class="padding">
+						<button nav-clear class="button button-block button-positive" ng-click="login()">
+						Log-In
+						</button>
+					</div>
+					<div align="center">
+						<button class="button button-energized button-clear" ng-click="">
+						Don't have JAIM account? 
+						</button>
+						<br /><a href="tel:+62213845031">Call Jiwasraya's Agency</a>
+						<br />
+						<br />
+							<a href="rate:">Rate eSPAJ on Google Play</a>
+						
+					</div>					
+					
+					<!--div align="center">
+						<button class="button button-balanced button-clear" ng-click="jsPrompt('this is login')">
+							test
+						</button-->
+					</div>
+				</div>
+	</ion-content>
+		
+	 </ion-view>
+	 </script>
+	 <script id="home.html" type="text/ng-template">
+	 <ion-view view-title="Second page" ng-controllers="homeCtrl">
+	 <ion-nav-bar class = "bar-positive">
+	   <ion-nav-back-button class = "button-clear" ng-click = "goBack()">
+		  <i class = "icon ion-arrow-left-c"></i> 
+	   </ion-nav-back-button>
+		  <ion-content class="padding">
+			  <h3>First Name: {{name}}</h3> 
+		  </ion-content>
+		</ion-view>
+	 </script>
+	 
+	<script id="newaccount.html" type="text/ng-template">
+	 <ion-view view-title="New Account" ng-controllers="newAccountCtrl">
+	 <ion-nav-bar class = "bar-positive">
+	   <ion-nav-back-button class = "button-clear" ng-click = "goBack()">
+		  <i class = "icon ion-arrow-left-c"></i> 
+	   </ion-nav-back-button>
+	</ion-nav-bar>
+	  <ion-content>
+		<label class="item item-input" style="margin-top:10px;">
+				  <span class="input-label" >Username</span>
+				  <input type="text" ng-model="nuser.firstname">
+				</label>
+				 <label class="item item-input">
+				  <span class="input-label" >Email ID</span>
+				  <input type="email" ng-model="nuser.email">
+				</label>
+				 <label class="item item-input">
+				  <span class="input-label" >Password</span>
+				  <input type="password" ng-model="nuser.newpassword">
+				</label>
+				 <label class="item item-input">
+				  <span class="input-label" >Confirm Password</span>
+				  <input type="password" ng-model="nuser.confirmpassword">
+				</label>
+				  <div class="padding">
+				<button nav-clear class="button button-block button-positive" ng-click="CreateAccount()">
+				  Create Account
+				</button>
+				</div>
+				</ion-content>
+		</ion-view>
+		
+	 </script>
+	 
+	   <script id="menu.html" type="text/ng-template">
+		<ion-side-menus>
+
+	   <ion-side-menu-content>
+		<ion-nav-bar class="bar-stable nav-title-slide-ios7">
+		  <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Back</ion-nav-back-button>
+		</ion-nav-bar>
+		<ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+	   </ion-side-menu-content>
+
+	  <ion-side-menu side="left">
+		<header class="bar bar-header bar-stable">
+		  <h1 class="title">Left</h1>
+		</header>
+		<ion-content class="has-header">
+		 <ion-list>
+			<ion-item nav-clear menu-close href="#/app/search">
+			  Search
+			</ion-item>
+			<ion-item nav-clear menu-close href="#/app/browse">
+			  Browse
+			</ion-item>
+			<ion-item nav-clear menu-close href="#/app/playlists">
+			  Playlists
+			</ion-item>
+			<ion-item nav-clear menu-close href="#/app/login">
+			  Login
+			</ion-item>
+		  </ion-list>
+		</ion-content>
+	  </ion-side-menu>
+	</ion-side-menus>
+
+		</script>
+
+<style>
+.hcs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+</style>
+
+		<!--script id="playlists.html" type="text/ng-template">
+		  <ion-view title="Playlists">
+	  <ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	  </ion-nav-buttons>
+	  <ion-content class="has-header">
+		<ion-list>
+		  <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
+			{{playlist.title}}
+		  </ion-item>
+		</ion-list>
+	  </ion-content>
+	</ion-view>
+		</script--> 
+	
+ </body>

@@ -1,0 +1,10 @@
+<div>
+    <a ng-hide="signature"
+       class="button button-balanced  button-large button-outline button-block  icon-right"
+       ng-click="openSignatureModal()">Tap untuk Tandatangan</a>
+    <div ng-show="signature">
+        <p><a class="button button-balanced  button-large button-outline button-block  icon-right"
+              ng-click="openSignatureModal()">Ubah Tandatangan</a></p>
+        <img ng-src="{{signature}}" style="width:100%;"/>
+    </div>
+</div>

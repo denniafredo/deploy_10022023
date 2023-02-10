@@ -1,0 +1,79 @@
+<ion-view title="Tambah Penerima Manfaat" id="page25" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <br />
+        <div id="tambahPenerimaManfaat-container27">
+           <div class="item item-divider" style="margin-top:25px;">Tambah Penerima Manfaat</div>
+		   
+		    <div class="row">
+                <div class="col col-75"><span style="font-size:16px;color:#444;">Salin data dari Pemegang Polis?</span></div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-model="data.isTambahPenerimaManfaatPempol"
+                               name="isTambahPenerimaManfaatPempol"
+                               ng-change="copyPenerimaManfaatFromPempol()"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+				
+            <form id="tambahPenerimaManfaat-form37" class="list">
+				<label class="item item-select" id="tambahPenerimaManfaat-select16" name="listTertanggungs">
+					<span class="input-label">Salin data dari Tertanggung?</span>
+					<select ng-change="selectTertanggungs(data.dariTertanggung)" ng-model="data.dariTertanggung" ng-options="dariTertanggung.id as dariTertanggung.namaPenerimaManfaat for dariTertanggung in listTertanggungs"></select>
+				</label>
+                <label class="item item-select" id="tambahPenerimaManfaat-select16" name="penerimaManfaatHubungan">
+                    <span class="input-label">Hubungan Dengan Tertanggung</span>
+                    <select ng-model="data.penerimaManfaatHubungan" ng-options="penerimaManfaatHubungan.id as penerimaManfaatHubungan.label for penerimaManfaatHubungan in hubunganKeluargas"></select>
+                </label>
+				<label class="item item-input" id="editPenerimaManfaat-select17" name="noKtpPenerimaManfaat">
+                    <span class="input-label">No. KTP</span>
+                    <input type="text" placeholder="__________" name="noKtpPenerimaManfaat"  ng-pattern-restrict="^([0-9,.-]*|)$" onKeyPress="if(this.value.length==16) return false;" ng-model="data.noKtpPenerimaManfaat">
+                </label>
+                <label class="item item-input" id="tambahPenerimaManfaat-input51" name="namaPenerimaManfaat">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________" name="namaPenerimaManfaat"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.namaPenerimaManfaat">
+                </label>
+                <label class="item item-select" id="tambahPenerimaManfaat-select41" name="jenkelPenerimaManfaat">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenkelPenerimaManfaat" ng-options="jenkelPenerimaManfaat.id as jenkelPenerimaManfaat.label for jenkelPenerimaManfaat in genders"></select>
+                </label>
+                <!--label class="item item-input" id="tambahPenerimaManfaat-input54" name="tglLahirPenerimaManfaat">
+                    <span class="input-label">Tanggal Lahir</span>
+                    <input type="date" ng-model-options="{timezone:'UTC'}" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" placeholder="" name="tglLahirPenerimaManfaat" ng-model="data.tglLahirPenerimaManfaat">
+                </label-->
+				<label class="item item-input" id="dataTertanggung13-input2" name="tglLahirPenerimaManfaat">
+					<span class="input-label">Tgl. Lahir (d-m-y)</span>
+					<input type="hidden" ion-datetime-picker date ng-model="data.tglLahirPenerimaManfaat" ng-blur="saveDataSpaj($scope)">
+						{{data.tglLahirPenerimaManfaat| date: "dd-MM-yyyy"}}
+					</input>
+				</label>
+                <label class="item item-input" id="tambahPenerimaManfaat-input53" name="tempatLahirPenerima">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="__________" name="tempatLahirPenerima"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.tempatLahirPenerima">
+                </label>
+                <label class="item item-select" id="tambahPenerimaManfaat-select42" name="statusPenerimaManfaat">
+                    <span class="input-label">Status</span>
+                    <select ng-model="data.statusPenerimaManfaat" ng-options="statusPenerimaManfaat.id as statusPenerimaManfaat.label for statusPenerimaManfaat in statuss"></select>
+                </label>
+            </form>
+        </div>
+
+        <div class="spacer" style="height: 100px;"></div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+
+                <div id="tambahPenerimaManfaat-button-bar8" class="button-bar">
+                    <a ui-sref="aplikasiSPAJOnline.produkDanManfaat22" id="tambahPenerimaManfaat-button26" style="font-weight:500;" class="button button-assertive button-block button icon-left ion-backspace">BATAL</a>
+                    <button id="tambahPenerimaManfaat-button27" ng-click="savePenerimaManfaat($scope)" style="font-weight:500;" class="button button-balanced button-block button icon-right ion-android-add-circle">
+                        OK
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+</ion-view>

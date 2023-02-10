@@ -1,0 +1,100 @@
+<ion-view title="Produk dan Manfaat (2/2)" nav-transition="none" cache-view="false" id="page24">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+<br />
+        <div class="item item-divider" style="margin-top:25px;">Daftar Penerima Manfaat</div>
+        <ion-list id="produkDanManfaat22-list11">
+            <ion-item ng-show='dataPenerimaManfaat == null '>
+                Belum ada Penerima Manfaat. Silahkan klik TAMBAH PENERIMA MANFAAT
+            </ion-item>
+			
+			<ion-scroll scrollY="true" style="max-height:360px;border:solid #dddddd 1px;">
+            <ion-item ng-repeat="iten in dataPenerimaManfaat track by $index" class="item-icon-left item-icon-right" id="">
+                <div class="row">
+				 <div class="cols" style="width:60px;">
+					<i class="icon ion-android-person" ng-click="editPenerimaManfaat({{$index}})"></i>
+				 </div>
+				 <div class="cols" style="width:360px;">
+							<div class="row">
+								<div class="cols" style="width:90px;">Urutan</div>
+								<div class="cols">:</div>
+								<div class="cols cols33">{{$index+1}}</div>
+							</div>
+							<div class="row">
+								<div class="cols"  style="width:90px;">Nama</div>
+								<div class="cols">:</div>
+								<div class="cols">{{iten.namaPenerimaManfaat}}</div>
+							</div>
+							<!--div class="row">
+								<div class="cols"  style="width:90px;">Hubungan</div>
+								<div class="cols">:</div>
+								<div class="cols">{{iten.penerimaManfaatHubungan}}</div>
+							</div-->
+							<div class="row">
+								<div class="cols"  style="width:90px;">No. KTP</div>
+								<div class="cols">:</div>
+								<div class="cols">{{iten.noKtpPenerimaManfaat}}</div>
+							</div>
+				 </div>
+				</div>
+
+                <i class="icon ion-edit" ng-click="editPenerimaManfaat({{$index}})"></i>
+            </ion-item>
+			</ion-scroll>
+        </ion-list>
+
+                <a ui-sref="aplikasiSPAJOnline.tambahPenerimaManfaat" id="produkDanManfaat22-button25" 
+				style="font-weight:500;" class="button button-balanced button-outline button-block icon-right ion-android-person-add">TAMBAH PENERIMA MANFAAT</a>
+
+		<div class="item item-divider" style="margin-top:25px;">Rekening Penerima Manfaat</div>
+				<label class="item item-input" id="produkDanManfaat12-input37">
+                    <span class="input-label">Nama Bank</span>
+                    <input type="text" placeholder="__________" ng-model="data.namaBankPenerimaManfaat" name="namaBankPenerimaManfaat" ng-blur="saveDataSpaj()">
+                </label>				
+				<label class="item item-input" id="produkDanManfaat12-input37">
+                    <span class="input-label">Cabang Bank</span>
+                    <input type="text" placeholder="__________" ng-model="data.cabangBankPenerimaManfaat" name="cabangBankPenerimaManfaat" ng-blur="saveDataSpaj()">
+                </label>
+				<label class="item item-input" id="produkDanManfaat12-input37">
+                    <span class="input-label">No. Rekening</span>
+                    <input type="text" placeholder="__________" ng-model="data.nomorRekeningPenerimaManfaat" name="nomorRekeningPenerimaManfaat" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="produkDanManfaat12-input38">
+                    <span class="input-label">Atas Nama</span>
+                    <input type="text" placeholder="__________" ng-model="data.namaRekeningPenerimaManfaat" name="namaRekeningPenerimaManfaat" ng-blur="saveDataSpaj()">
+                </label>
+		
+		<div class="spacer" style="height: 40px;"></div>
+        <form id="dataPemegangPolis13-form25" class="list">
+            <div class="row">
+                <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-model="data.isPagePenerimaManfaatAccepted" name="isPagePenerimaManfaatAccepted" ng-change="saveDataSpaj();moveToNextPage()" toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+        </form>
+        <div class="spacer" style="height: 100px;"></div>
+			<div class="spacer" style="height: 600px;"></div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+
+                <div class="row">
+                    <div class="col">
+                        <div id="produkDanManfaat22-button-bar7" class="button-bar">
+                            <a ui-sref="aplikasiSPAJOnline.produkDanManfaat12" id="produkDanManfaat22-button23" style="text-align:left;" class="button button-light button-block icon-right ion-document-text">1.
+                                PRODUK</a>
+                            <button id="produkDanManfaat22-button24" style="text-align:left;" class="button button-balanced button-block icon-right ion-bookmark">
+                                2. MANFAAT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</ion-view>

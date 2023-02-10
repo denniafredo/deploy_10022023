@@ -1,0 +1,66 @@
+<ion-view title="Edit Penerima Manfaat" id="page23" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <br />
+        <div id="editPenerimaManfaat-container27">
+            <h3 id="editPenerimaManfaat-heading38" style="color:#000000;font-weight:400;">Edit
+                Penerima Manfaat</h3>
+				
+            <form id="editPenerimaManfaat-form37" class="list">
+
+			
+                <label class="item item-select" id="editPenerimaManfaat-select16" name="penerimaManfaatHubungan">
+                    <span class="input-label">Hubungan Dengan Tertanggung</span>
+                    <select ng-model="data.penerimaManfaatHubungan" ng-options="penerimaManfaatHubungan.id as penerimaManfaatHubungan.label for penerimaManfaatHubungan in hubunganKeluargas"></select>
+                </label>                
+				<label class="item item-input" id="editPenerimaManfaat-select17" name="noKtpPenerimaManfaat">
+                    <span class="input-label">No. KTP</span>
+                   <input type="text" placeholder="__________"  ng-pattern-restrict="^([0-9,.-]*|)$" onKeyPress="if(this.value.length==16) return false;" name="noKtpPenerimaManfaat" ng-model="data.noKtpPenerimaManfaat">
+                </label>
+                <label class="item item-input" id="editPenerimaManfaat-input51" name="namaPenerimaManfaat">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________" name="namaPenerimaManfaat"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.namaPenerimaManfaat">
+                </label>
+                <label class="item item-select" id="editPenerimaManfaat-select41" name="jenkelPenerimaManfaat">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenkelPenerimaManfaat" ng-options="jenkelPenerimaManfaat.id as jenkelPenerimaManfaat.label for jenkelPenerimaManfaat in genders"></select>
+                </label>
+                <!--label class="item item-input" id="editPenerimaManfaat-input54" name="tglLahirPenerimaManfaat">
+                    <span class="input-label">Tanggal Lahir</span>
+                    <input type="date" ng-model-options="{timezone:'UTC'}" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" placeholder="" name="tglLahirPenerimaManfaat" ng-model="data.tglLahirPenerimaManfaat">
+                </label-->
+				<label class="item item-input" id="dataTertanggung13-input2" name="tglLahirPenerimaManfaat">
+					<span class="input-label">Tgl. Lahir (d-m-y)</span>
+					<input type="hidden" ion-datetime-picker date ng-model="data.tglLahirPenerimaManfaat" ng-blur="saveDataSpaj($scope)">
+						{{data.tglLahirPenerimaManfaat| date: "dd-MM-yyyy"}}
+					</input>
+				</label>
+                <label class="item item-input" id="editPenerimaManfaat-input53" name="tempatLahirPenerima">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="__________"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" name="tempatLahirPenerima" ng-model="data.tempatLahirPenerima">
+                </label>
+                <label class="item item-select" id="editPenerimaManfaat-select42" name="statusPenerimaManfaat">
+                    <span class="input-label">Status</span>
+                    <select ng-model="data.statusPenerimaManfaat" ng-options="statusPenerimaManfaat.id as statusPenerimaManfaat.label for statusPenerimaManfaat in statuss"></select>
+                </label>
+            </form>
+        </div>
+
+        <div class="spacer" style="height: 100px;"></div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+                <a id="produkDanManfaat22-button25" style="font-weight:500;" class="button button-energized button-block  icon-right ion-ios-trash-outline" ng-click="delPenerimaManfaat()">HAPUS PENERIMA MANFAAT</a>
+                <div id="editPenerimaManfaat-button-bar8" class="button-bar">
+                    <a ui-sref="aplikasiSPAJOnline.produkDanManfaat22" id="editPenerimaManfaat-button26" style="font-weight:500;" class="button button-assertive button-block  icon-left ion-backspace">BATAL</a>
+                    <button id="editPenerimaManfaat-button27" ng-click="savePenerimaManfaat($scope)" style="font-weight:500;" class="button button-balanced button-block  icon-right ion-ios-download-outline">
+                        OK
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-view>

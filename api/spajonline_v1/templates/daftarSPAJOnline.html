@@ -1,0 +1,453 @@
+<ion-view title="Daftar eSPAJ" hide-back-button="true" cache-view="false" nav-transition="none" id="page22">
+    <div class="tabs tabs-outline tabs-top" style="postition:relative;float:left;height:64px;position:relative;text-align:left;">
+        <table style="z-align:999;width:100%;min-height:64px;position:relative;top:-38px;">
+            <tr>
+                <td width="33.33%">
+                    <!--a class="button button-balanced button-large button-inline button-outline icon-right ion-ios-contacts"
+					 style="margin-left:10px;position:relative;top:5px;" 
+					 ng-click="scrollTo('daftarSPAJOnline-heading311')">PROSPEK</a>
+
+					<a class="button button-balanced button-large button-inline button-outline icon-right ion-ios-contacts"
+					 style="margin-left:10px;position:relative;top:5px;"
+					  ng-click="scrollTo('daftarSPAJOnline-heading31')">NEW SPAJ</a-->
+                </td>
+                <td width="33.33%" style="text-align:center;">
+                    <div>
+                        <img src="img/qTYcSxSjeLujHxQ0FwaH_logo_jws.png" width="auto" height="64px" style="position:relative;top:38px;" />
+                    </div>
+                </td>
+                <td width="33.33%">
+
+                </td>
+            </tr>
+			<tr>
+			<td colspan="2">
+			     <div class="tabs-striped tabs-top tabs-background-stable">
+					<div class="tabs" style="">
+					<a class="tab-item" ng-click="changeTab(1)">
+					<sup>{{dataProspek.length}}</sup> Prospek
+					</a>
+					<a class="tab-item" ng-click="changeTab(2)">
+					<sup>{{unsavedList.length}}</sup> SPAJ Baru
+					</a>
+					<a class="tab-item" ng-click="changeTab(3)">
+					<sup>{{dataProcessed.length}}</sup> SPAJ Proses
+					</a>
+					<a class="tab-item" ng-click="changeTab(4)">
+					<sup>{{dataUnprocessedUnderwriting.length}}</sup> SPAJ Underwriting
+					</a>
+					<a class="tab-item" ng-click="changeTab(5)">
+					<sup>{{rejectList.length}}</sup> SPAJ Reject
+					</a>
+					</div>
+				</div>
+			</td>
+			</tr>
+        </table>
+    </div>
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <!--a ui-sref="sPAJOnlineJiwasraya" id="daftarSPAJOnline-button8" ng-click="doNewSPAJ()"
+        style="font-weight:500;" class="button button-positive button-large button-block button-outline icon-right ion-android-add-circle">Buat SPAJ Baru</a-->
+              <div class="spacer" style=" height: 120px;"></div>
+
+        <ion-searchbar show-cancel-button cancel-button-text="Custom Cancel"></ion-searchbar>
+
+        <ion-item ng-show='dataProspek == null'>
+            <img src="img/loading.gif">
+        </ion-item>
+
+
+	<div ng-hide="!isTab1" ng-show="isTab1">
+			
+	        <h3 id="daftarSPAJOnline-heading311" style="color:#000000;">{{dataProspek.length}} Prospek </h3>
+		<span style="font-size:0.95em;color:green;">{{(isOnline == 1)?"":"✔ offline mode"}}</span>
+        <ion-item ng-show='dataProspek.length == 0'>
+            <div class="row">
+                <div class="cols" style="padding-right:2px;">
+                    <img src="img/empty.png" width="64px" height="auto" style="display: block; margin-left: auto; margin-right: auto;" />
+                </div>
+                <div class="cols" style="margin-left:26px;position:relative;top:24px;">
+                    Data prospek kosong
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-scroll scrollX="true" scrollX="true" scrollY="true" style="max-height:400px;border:solid #dddddd 1px;">
+            <ion-list id="daftarSPAJOnline-list751">
+                <ion-item ng-repeat="iten in dataProspek track by $index" class="item-thumbnail-left item-icon-right " item="iten" href="#/{{iten}}" id="daftarSPAJOnline-list-item251">
+                    <img src="img/prospect.png" width="120px" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                    <div class="row">
+					    <div class="cols cols-33" style="margin-right:8px;text-align:left;">
+							<!--a style="margin-bottom:8px;padding-right:2px;min-width:100px;" ng-hide="{{iten.kd_produk != 'JL4BLN'}}" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{iten.build_id}}&filepdf={{iten.file_pdf}}&kodeprospek={{iten.no_prospek}}" target="_BLANK">PDF</a>
+							<a style="margin-bottom:8px;padding-right:2px;min-width:100px;" ng-hide="{{iten.kd_produk == 'JL4BLN'}}" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{iten.build_id}}" target="_BLANK">PDF</a-->
+							<a style="margin-bottom:8px;min-width:100px;" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{iten.build_id}}" target="_BLANK">PDF</a>
+							<br />
+							<a style="min-width:100px;" ng-hide="{{iten.KDJABATANAGEN == '02' || iten.KDJABATANAGEN == '19' }}" class="button button-positive button-medium button-inline button-outline icon-right ion-ios-color-wand-outline" ng-click="newSpajProspek('{{iten.build_id}}')">SPAJ</a>
+							<span style="min-width:100px;" ng-hide="{{iten.KDJABATANAGEN != '02' && iten.KDJABATANAGEN != '19' }}" ng-show="{{iten.KDJABATANAGEN == '02' || iten.KDJABATANAGEN == '19' }}" class="button button-positive button-medium button-inline button-outline icon-right ion-help" ng-click="alertJabatan('{{iten.KDJABATANAGEN}}')">Info</span>
+						</div>
+                        <div class="cols cols-33" style="padding-right:2px;">
+						    <p>Tgl. Entri
+                                <h2>{{iten.tgl_rekam}}</h2></p>
+                            <p>Build ID
+                                <h2>{{iten.build_id}}</h2></p>
+                            <!--p>No. Prospek
+                                <h2>{{iten.no_prospek}}</h2></p-->
+							<p>Cara Bayar
+								<h2 ng-if="iten.namacarabayar">{{iten.namacarabayar}}</h2>
+                                <h2 ng-if="!iten.namacarabayar">{{iten.cara_bayar}}</h2></p>
+                        </div>
+
+                        <div class="cols cols-33" style="padding-left:10px;">
+								<p>Produk
+                                <h2 ng-if="iten.namaproduk">{{iten.namaproduk}}</h2>
+								<h2 ng-if="!iten.namaproduk">{{iten.kd_produk}}</h2></p>
+								<p>Premi Rp.
+                                <h2>{{iten.jumlah_premi}}</h2></p>
+								<!--p>Alamat
+                                <h2>{{iten.alamat}}</h2></p>  
+								<p>Email
+                                <h2 >{{iten.email | lowercase}}</h2></p--> 
+								<p>Uang Asuransi <h2>{{iten.jua}}</h2></p>
+                        </div>
+						
+                        <div class="cols cols-33" style="padding-left:10px;">
+							<p>Calon Pemegang Polis
+							<h2>{{iten.namacpp}}</h2></p>
+							<!--div ng-hide="iten.nama_pempol==''||iten.nama_pempol===undefined" ng-show="iten.nama_pempol!=''||iten.nama_pempol!==undefined">
+								<p>Nama Pempol
+								<h2>{{iten.nama_pempol}}</h2></p>
+								<p>Umur Tertanggung
+								<h2>{{iten.usia_tertanggung_th}} tahun</h2></p>  
+								<p>Umur Pempol
+								<h2>{{iten.usia_pempol_th}} tahun</h2></p>
+							</div-->
+							<p>Calon Tertanggung
+							<h2>{{iten.namactt}}</h2></p>
+							<p>Hubungan
+							<h2>{{iten.namahubunganctt}}</h2></p>
+                        </div>
+
+                    </div>
+
+                    <!--h2> &nbsp;<{{iten.BUILD_ID}}> </h2-->
+
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+
+	</div>
+		
+		
+	<div ng-hide="!isTab2" ng-show="isTab2">
+        <h3 name="newL" id="daftarSPAJOnline-heading31" style="color:#000000;">{{unsavedList.length}} SPAJ baru</h3></h3>
+        <ion-item ng-show='unsavedList == null'>
+            <img src="img/loading.gif">
+        </ion-item>
+
+        <ion-item ng-show='unsavedList.length == 0'>
+            <div class="row">
+                <div class="cols" style="padding-right:2px;">
+                    <img src="img/empty.png" width="64px" height="auto" style="display: block; margin-left: auto; margin-right: auto;" />
+                </div>
+
+                <div class="cols" style="margin-left:26px;position:relative;top:24px;">
+                    SPAJ yang belum disimpan kosong.
+                </div>
+            </div>
+        </ion-item>
+        <ion-scroll scrollX="true" scrollY="true" style="max-height:400px;border:solid #dddddd 1px;">
+            <ion-list id="daftarSPAJOnline-list75">
+                <ion-item ng-repeat="iten in unsavedList track by $index" class="item-thumbnail-left item-icon-right " item="iten" href="#/{{iten}}" id="daftarSPAJOnline-list-item25">
+                    <img src="img/folder.png" width="160px" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                    <div class="row">
+						<!--div class="cols">
+                            <a ng-hide="{{item.PRODUK != 'JL4BLN'}}" class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://jaim.jiwasraya.co.id/simulasi/jspromapannew/CetakPDF?build_id={{iten.build_id}}&filepdf={{iten.file_pdf}}&kodeprospek={{iten.no_prospek}}" target="_BLANK">PDF</a>
+                            <a ng-hide="{{item.PRODUK == 'JL4BLN'}}" class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://jaim.jiwasraya.co.id/simulasi/files/pdf/{{item.file_pdf}}" target="_BLANK">PDF</a>
+                        </div-->
+						<div class="cols">
+                            <a style="width:100px;margin-bottom:8px;" class="button button-assertive button-medium button-inline button-outline icon-right ion-ios-trash-outline" ng-click="deleteUnsavedSpaj(iten.spaj_guid)">HAPUS</a>
+							<br />
+							<a style="width:100px;margin-bottom:8px;" class="button button-positive button-medium button-inline button-outline icon-right ion-ios-color-wand-outline" ng-click="editUnsavedSpaj(iten.spaj_guid)">EDIT</a>
+							<br />
+							<a style="width:100px;margin-bottom:8px;" ng-hide="!isValidToSubmit(iten.spaj_guid)" ng-show="isValidToSubmit(iten.spaj_guid)" class="button button-balanced button-medium button-inline button-outline icon-right ion-android-send" ng-click="retrySubmit(iten.spaj_guid)">SUBMIT</a>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Build ID
+								<h2>{{iten.build_id}}</h2></p>
+                            <p>Nama Tertanggung
+                                <h2>{{iten.namaLengkapTertanggung}}</h2></p>
+                            <p>No. KTP
+                                <h2>{{iten.nomorKTPTertanggung}}</h2></p>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Produk
+                                <h2>{{iten.namaProduk}}</h2></p>
+                            <p>Premi
+                                <h2>{{iten.premi}}</h2></p>
+							<p>Status Data</p>
+								<h2 ng-hide="isValidToSubmit(iten.spaj_guid)" ng-show="!isValidToSubmit(iten.spaj_guid)"><span style="color:red;">Belum Lengkap</span>
+								<h2 ng-hide="!isValidToSubmit(iten.spaj_guid)" ng-show="isValidToSubmit(iten.spaj_guid)"><span style="color:green;">Lengkap</span>
+								<br/></h2>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+						<div class="cols">
+                            <p>GUID
+								<h2>{{iten.spaj_guid}}</h2></p>
+                        </div>
+                    </div>
+
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+
+	</div>
+
+
+	<div ng-hide="!isTab3" ng-show="isTab3">
+        <h3 id="daftarSPAJOnline-heading31" style="color:#000000;">{{dataProcessed.length}} SPAJ Proses </h3>
+        <ion-item ng-show='dataProcessed == null'>
+            <img src="img/loading.gif">
+        </ion-item>
+
+        <ion-item ng-show='dataProcessed.length == 0'>
+            <div class="row">
+                <div class="cols" style="padding-right:2px;">
+                    <img src="img/empty.png" width="64px" height="auto" style="display: block; margin-left: auto; margin-right: auto;" />
+                </div>
+
+                <div class="cols" style="margin-left:26px;position:relative;top:24px;">
+                    SPAJ yang belum disimpan kosong.
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-scroll scrollX="true" scrollY="true" style="max-height:400px;border:solid #dddddd 1px;">
+            <ion-list id="daftarSPAJOnline-list74">
+                <ion-item ng-repeat="item in dataProcessed" class="item-thumbnail-left item-icon-right" item="item" href="#/{{item}}" id="daftarSPAJOnline-list-item25">
+                    <img src="img/sent.png" width="160px" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                    <div class="row">
+                        <div class="cols">
+                            <!--a style="min-width:100px;" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" ng-hide="{{item.PRODUK != 'JL4BLN'}}" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.BUILDID}}&filepdf={{item.FILE_PDF}}&kodeprospek={{item.NO_PROSPEK}}" target="_BLANK">PDF</a>
+                            <a style="min-width:100px;" ng-hide="{{item.PRODUK == 'JL4BLN'}}" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.FILE_PDF}}" target="_BLANK">PDF</a-->
+							<a style="width:100px;margin-bottom:8px;" class="button button-assertive button-medium button-inline button-outline icon-right ion-ios-trash-outline" ng-click="deleteProcessSpaj(item.NOSPAJ, item.KODEAGEN)" ng-show="showDeleteSpaj(item.STATUS)" ng-hide="!showDeleteSpaj(item.STATUS)">HAPUS</a>
+							<br />
+							<a style="min-width:100px;margin-bottom:8px;" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.BUILDID}}" target="_BLANK">PDF</a>
+							<br />
+							<a style="min-width:100px;" class="button button-balanced button-medium button-inline button-outline icon-right ion-ios-paper-outline" ng-click="" href="https://aims.ifg-life.id/spajonline/cetak?bid={{item.BUILDID}}" target="_BLANK">SPAJ</a>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+
+                        <div class="cols">
+                            <p>Submit Date
+                                <h2>{{item.TANGGALREKAM}}</h2></p>
+                            <p>NOSPAJ
+                                <h2>{{item.NOSPAJ}}</h2> </p>
+							<p>Status
+								<h2>{{item.STATUS == '1' ? "Terhapus" : "Proses"}}</h2></p>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Produk
+                                <h2>{{item.NAMAPRODUK}}</h2> </p>
+
+                            <p>BUILD ID
+                                <h2>{{item.BUILDID}}</h2> </p>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+
+                    </div>
+
+                    <!--h2>{{item.spaj_guid}} </h2-->
+                    <!--a class="button button-assertive button-large button-inline button-outline icon-right ion-ios-trash-outline"  ng-click="editSpaj(iten)">HAPUS</a>
+				<a class="button button-positive button-large button-inline button-outline icon-right ion-ios-bolt-outline"  ng-click="editSpaj(iten)">VIEW</a-->
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+
+	</div>
+
+	<div ng-hide="!isTab4" ng-show="isTab4">
+        <h3 id="daftarSPAJOnline-heading31" style="color:#000000;">{{dataUnprocessedUnderwriting.length}} SPAJ dalam Proses Underwriting </h3>
+
+        <ion-item ng-show='dataUnprocessedUnderwriting == null'>
+            <img src="img/empty.png">
+        </ion-item>
+
+        <ion-item ng-show='dataUnprocessedUnderwriting.length == 0'>
+            <div class="row">
+                <div class="cols" style="padding-right:2px;">
+                    <img src="img/empty.png" width="64px" height="auto" style="display: block; margin-left: auto; margin-right: auto;" />
+                </div>
+
+                <div class="cols" style="margin-left:26px;position:relative;top:24px;">
+                    Belum ada data.
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-scroll scrollX="true" scrollY="true" style="max-height:400px;border:solid #dddddd 1px;">
+            <ion-list id="daftarSPAJOnline-list73">
+                <ion-item ng-repeat="item in dataUnprocessedUnderwriting" class="item-thumbnail-left item-icon-right" item="item" href="#/{{item}}" id="daftarSPAJOnline-list-item25">
+                    <img src="img/underwrite.png" width="160px" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                    <div class="row">
+
+                        <div class="cols">
+                            <!--a ng-hide="{{item.PRODUK != 'JL4BLN'}}" style="min-width:100px;" class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.BUILDID}}&filepdf={{iten.FILE_PDF}}&kodeprospek={{iten.NO_PROSPEK}}" target="_BLANK">PDF</a>
+                            <a ng-hide="{{item.PRODUK == 'JL4BLN'}}" style="min-width:100px;" class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.FILE_PDF}}" target="_BLANK">PDF</a-->
+							<a style="min-width:100px;margin-bottom:8px;" class="button button-energized button-medium button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.BUILDID}}" target="_BLANK">PDF</a>
+							<br />
+							<a style="min-width:100px;" class="button button-balanced button-medium button-inline button-outline icon-right ion-ios-paper-outline" ng-click="" href="https://aims.ifg-life.id/spajonline/cetak?bid={{item.BUILDID}}" target="_BLANK">SPAJ</a>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Submit Date
+                                <h2>{{item.TANGGALREKAM}}</h2></p>
+                            <p>NOSPAJ
+                                <h2>{{item.NOSPAJ}}</h2> </p>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Produk
+                                <h2>{{item.NAMAPRODUK}}</h2> </p>
+
+                            <p>BUILD ID
+                                <h2>{{item.BUILDID}}</h2> </p>
+                        </div>
+                        <div class="cols">
+
+                        </div>
+                        <div class="cols">
+                        </div>
+                    </div>
+
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+
+	</div>
+
+<div ng-hide="!isTab5" ng-show="isTab5">
+        <h3 id="daftarSPAJOnline-heading31" style="color:#000000;">{{rejectedList.length}} SPAJ reject </h3>
+
+        <ion-item ng-show='rejectedList == null'>
+            <img src="img/empty.png"> 
+        </ion-item>
+
+        <ion-item ng-show='rejectedList.length == 0'>
+            <div class="row">
+                <div class="cols" style="padding-right:2px;">
+                    <img src="img/empty.png" width="64px" height="auto" style="display: block; margin-left: auto; margin-right: auto;" />
+                </div>
+
+                <div class="cols" style="margin-left:26px;position:relative;top:24px;">
+                    Belum ada data.
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-scroll scrollX="true" scrollY="true" style="max-height:400px;border:solid #dddddd 1px;">
+            <ion-list id="daftarSPAJOnline-list73">
+                <ion-item ng-repeat="item in rejectedList" class="item-thumbnail-left item-icon-right" item="item" href="#/{{item}}" id="daftarSPAJOnline-list-item25">
+                    <img src="img/underwrite.png" width="160px" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                    <div class="row">
+
+                        <div class="cols">
+                            <a ng-hide="{{item.PRODUK != 'JL4BLN'}}" style="min-width:100px;" class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.BUILDID}}&filepdf={{iten.FILE_PDF}}&kodeprospek={{iten.NO_PROSPEK}}" target="_BLANK">PDF</a>
+                            <a ng-hide="{{item.PRODUK == 'JL4BLN'}}" style="min-width:100px;" class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline" ng-click="" href="https://aims.ifg-life.id/simulasi/cetak?bid={{item.FILE_PDF}}" target="_BLANK">PDF</a>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Submit Date
+                                <h2>{{item.TANGGALREKAM}}</h2></p>
+                            <p>NOSPAJ
+                                <h2>{{item.NOSPAJ}}</h2> </p>
+                        </div>
+                        <div class="cols">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="cols">
+                            <p>Produk
+                                <h2>{{item.NAMAPRODUK}}</h2> </p>
+
+                            <p>BUILD ID
+                                <h2>{{item.BUILDID}}</h2> </p>
+                        </div>
+                        <div class="cols">
+
+                        </div>
+                        <div class="cols">
+                        </div>
+                    </div>
+
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+
+</div>
+       
+
+
+	<div class="spacer" style="min-height: 300px;"></div>
+
+    </ion-content>
+    <div class="tabs tabs-positive" style="height:auto;">
+        <div class="row">
+            <div class="col">
+			<div style="text-align:center;">
+				<a style="width:190px;" class="button button-balanced button-medium button-inline button icon-right" ng-click="showProfile('{{idagen}}')">No Agen: {{idagen}}</a> 
+				<a style="width:190px;" class="button button-assertive button-medium button-inline button icon-right ion-ios-trash-outline" ng-click="deleteData()">Hapus SPAJ Baru</a>        
+			</div>
+                <!--div class="row">
+                    <div class="col">
+                        <button
+                                style="font-weight:500;"
+                                class="button button-block  button-medium button-balanced icon-right ion-ios-plus-outline"
+                                ui-sref="sPAJOnlineJiwasraya" ng-click="">SPAJ BARU
+                        </button>                       
+						<button
+                                style="font-weight:500;"
+                                class="button button-block  button-large button-balanced icon-right ion-ios-plus-outline"
+                                ui-sref="viewPrintSPAJ">CETAK SPAJ
+                        </button>
+                    </div>
+                </div-->
+            </div>
+        </div>
+    </div>
+	
+	<style>
+	.tabs-striped.tabs-background-stable .tabs {
+		background-color: #f8f8f8;
+		background-image: none;
+		top: 100px;
+	}
+	
+	sup{
+		color:green;
+	}
+	.popup-userinfo .popup { 
+		width: 75%; 
+		min-width:400px;
+	}
+	</style>
+</ion-view>

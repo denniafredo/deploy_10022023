@@ -1,0 +1,188 @@
+<ion-view title="Tempat Tinggal Pempol" nav-transition="none" id="page11" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+       <div class="item item-divider" style="margin-top:25px;">Domisili Pemegang Polis</div>
+        <form id="dataPemegangPolis23-form26" class="list">
+            <label class="item item-input" id="dataPemegangPolis23-textarea6"
+                   name="alamatKTPPempol">
+                <span class="input-label">Alamat KTP</span><textarea placeholder="alamat KTP"
+                                                                     ng-model="data.alamatKTPPempol"
+                                                                     ng-blur="saveDataSpaj($scope)"></textarea>
+            </label>
+            <label class="item item-select" id="dataPemegangPolis23-select27"
+                   name="provinsiKTPPempol">
+                <span class="input-label">Provinsi</span>
+                <select ng-model="data.provinsiKTPPempol"
+                        ng-options="provinsiKTPPempol.id as provinsiKTPPempol.label for provinsiKTPPempol in provinsis"
+                        ng-change="saveDataSpaj($scope);setKabupatensValues(data.provinsiKTPPempol);"></select>
+            </label>
+			
+			<label class="item item-select" id="dataTertanggung23-input28"
+                   name="kabupatenKTPPempol">
+                <span class="input-label">Kabupaten/Kota</span>
+                <select ng-model="data.kabupatenKTPPempol"
+                        ng-options="kabupatenKTPPempol.id as kabupatenKTPPempol.label for kabupatenKTPPempol in kabupatens"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <!--label class="item item-input" id="dataPemegangPolis23-input28"
+                   name="kabupatenKTPPempol">
+                <span class="input-label">Kabupaten / Kota</span>
+                <input type="text" placeholder="" ng-model="data.kabupatenKTPPempol"
+                       ng-blur="saveDataSpaj($scope)">
+            </label-->
+            <label class="item item-input" id="dataPemegangPolis23-input52" name="kodeposKTPPempol">
+                <span class="input-label">Kode Pos</span>
+                <input type="number" placeholder="kode pos" ng-model="data.kodeposKTPPempol"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-select" id="dataPemegangPolis23-select29"
+                   name="statusTinggalKTPPempol">
+                <span class="input-label">Status Tempat Tinggal</span>
+                <select ng-model="data.statusTinggalKTPPempol"
+                        ng-options="statusTinggalKTPPempol.id as statusTinggalKTPPempol.label for statusTinggalKTPPempol in statustempattinggals"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+
+            <div class="row">
+                <div class="col col-75" style="font-size:1.1em;">Alamat surat sama dengan KTP</div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-change="saveDataSpaj($scope);"
+                               ng-model="data.isAlamatKTPPempolSama" name="isAlamatKTPPempolSama"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+
+        </form>
+        <div id="dataPemegangPolis23-container8" ng-show="true"
+             ng-hide="data.isAlamatKTPPempolSama">
+            <form id="dataPemegangPolis23-form27" class="list">
+                <h3 id="dataPemegangPolis23-heading14" style="color:#000000;font-weight:400;">Alamat
+                    Surat</h3>
+                <label class="item item-input" id="dataPemegangPolis23-textarea7"
+                       name="alamatSuratPempol">
+                    <span class="input-label">Alamat Surat</span><textarea
+                        placeholder="alamat surat-menyurat" ng-model="data.alamatSuratPempol"
+                        ng-blur="saveDataSpaj($scope)"></textarea>
+                </label>
+                <label class="item item-select" id="dataPemegangPolis23-select30"
+                       name="provinsiSuratPempol">
+                    <span class="input-label">Provinsi</span>
+                    <select ng-model="data.provinsiSuratPempol"
+                            ng-options="provinsiSuratPempol.id as provinsiSuratPempol.label for provinsiSuratPempol in provinsis"
+                            ng-change="saveDataSpaj($scope);setKabupatensValues1(data.provinsiSuratPempol)"></select>
+                </label>
+				<label class="item item-select" id="dataPemegangPolis23-select9"
+					   name="kabupatenSuratPempol">
+					<span class="input-label">Kabupaten/Kota</span>
+					<select ng-model="data.kabupatenSuratPempol"
+							ng-options="kabupatenSuratPempol.id as kabupatenSuratPempol.label for kabupatenSuratPempol in kabupatens1"
+							ng-change="saveDataSpaj($scope)"></select>
+				</label>
+                <!--label class="item item-input" id="dataPemegangPolis23-input29"
+                       name="kabupatenSuratPempol">
+                    <span class="input-label">Kabupaten / Kota</span>
+                    <input type="text" placeholder="" ng-model="data.kabupatenSuratPempol"
+                           ng-blur="saveDataSpaj($scope)">
+                </label-->
+                <label class="item item-input" id="dataPemegangPolis23-input55"
+                       name="kodeposSuratPempol">
+                    <span class="input-label">Kode Pos</span>
+                    <input type="number" placeholder="kode pos" ng-model="data.kodeposSuratPempol"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-select" id="dataPemegangPolis23-select32"
+                       name="statusTinggalSuratPempol">
+                    <span class="input-label">Status Tempat Tinggal</span>
+                    <select ng-model="data.statusTinggalSuratPempol"
+                            ng-options="statusTinggalSuratPempol.id as statusTinggalSuratPempol.label for statusTinggalSuratPempol in statustempattinggals"
+                            ng-change="saveDataSpaj($scope)"></select>
+                </label>
+            </form>
+        </div>
+        <div class="item item-divider" style="margin-top:25px;">Kontak dan Telepon</div>
+        <div id="dataPemegangPolis23-container9">
+            <form id="dataPemegangPolis23-form28" class="list">
+                <label class="item item-input" id="dataPemegangPolis23-input30"
+                       name="nomorHpPempol">
+                    <span class="input-label">Nomor HP</span>
+                    <input type="tel" placeholder="Nomor HP" ng-model="data.nomorHpPempol"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis23-input31"
+                       name="nomorTelpPempol">
+                    <span class="input-label">Nomor Telepon</span>
+                    <input type="tel" placeholder="Nomor Telepon" ng-model="data.nomorTelpPempol"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis23-input44" name="emailPempol">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="Email" ng-model="data.emailPempol"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+<div class="item item-divider" style="margin-top:25px;">Persetujuan agar dapat dihubungi</div>
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Setuju dihubungi melalui HP/Telepon?
+                    </div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-change="saveDataSpaj($scope);"
+                                   ng-model="data.isSetujuHPPempol" name="isSetujuHPPempol"
+                                   toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Setuju dihubungi melalui
+                        email?
+                    </div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-change="saveDataSpaj($scope);"
+                                   ng-model="data.isSetujuEmailPempol" name="isSetujuEmailPempol"
+                                   toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-change="saveDataSpaj($scope);moveToNextPage()"
+                                   ng-model="data.isPagePempol2Accepted"
+                                   name="isPagePempol2Accepted"
+                                   toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+                <div class="spacer" style="height: 400px;"></div>
+            </form>
+        </div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div id="dataPemegangPolis23-button-bar6" class="button-bar">
+                            <a ui-sref="aplikasiSPAJOnline.dataPemegangPolis13"
+                               ng-click="isPageAccepted()" id="dataPemegangPolis23-button16"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">1.
+                                Identitas</a>
+                            <button id="dataPemegangPolis23-button17"
+                                    style="font-weight:500;text-align:left;"
+                                    class="button button-balanced   icon-right ion-chevron-right">2.
+                                Tempat Tinggal
+                            </button>
+                            <a ui-sref="aplikasiSPAJOnline.dataPemegangPolis33({})"
+                               ng-click="isPageAccepted()" id="dataPemegangPolis23-button18"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ">3. Pendukung</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-view>

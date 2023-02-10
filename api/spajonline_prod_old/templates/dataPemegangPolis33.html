@@ -1,0 +1,129 @@
+<ion-view title="Data Pendukung" nav-transition="none" id="page9" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <div id="dataPemegangPolis33-container17">
+            <form id="dataPemegangPolis33-form10" class="list">
+
+
+                <h3 id="dataPemegangPolis33-heading24" style="color:#000000;font-weight:400;">Data
+                    Pendukung</h3>
+                <label class="item item-input" id="dataPemegangPolis33-input10"
+                       name="tinggiBadanPempol">
+                    <span class="input-label">Tinggi Badan (CM)</span>
+                    <input type="number" placeholder="" ng-model="data.tinggiBadanPempol"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-input16"
+                       name="beratBadanPempol">
+                    <span class="input-label">Berat Badan (KG)</span>
+                    <input type="number" placeholder="" ng-model="data.beratBadanPempol"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-input9" name="namaIbuPempol">
+                    <span class="input-label">Nama ibu Kandung</span>
+                    <input type="text" placeholder="" ng-model="data.namaIbuPempol"
+                           ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-select" id="dataPemegangPolis33-select11"
+                       name="pendidikanPempol">
+                    <span class="input-label">Pendidikan Terakhir</span>
+                    <select ng-model="data.pendidikanPempol"
+                            ng-options="pendidikanPempol.id as pendidikanPempol.label for pendidikanPempol in pendidikans"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-select" id="dataPemegangPolis33-select13"
+                       name="statusNikahPempol">
+                    <span class="input-label">Status Pernikahan</span>
+                    <select ng-model="data.statusNikahPempol"
+                            ng-options="statusNikahPempol.id as statusNikahPempol.label for statusNikahPempol in statuss"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+            </form>
+        </div>
+        <!--h3 id="dataPemegangPolis33-heading26" ng-hide="true" style="color:#000000;font-weight:400;">Saudara Yang Tidak Serumah</h3>
+        <div id="dataPemegangPolis33-container18" ng-hide="true">
+            <form id="dataPemegangPolis33-form11" class="list">
+                <label class="item item-input" id="dataPemegangPolis33-input39" name="namaSaudaraTakSerumahPempol">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="" ng-model="data.namaSaudaraTakSerumahPempol" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-textarea9" name="alamatSuratTakSerumahPempol">
+                    <span class="input-label">Alamat Surat</span><textarea placeholder="" ng-model="data.alamatSuratTakSerumahPempol" ng-blur="saveDataSpaj()"></textarea>
+                </label>
+                <label class="item item-select" id="dataPemegangPolis33-select14" name="provinsiSuratTakSerumahPempol">
+                    <span class="input-label">Provinsi</span>
+                    <select ng-model="data.provinsiSuratTakSerumahPempol" ng-options="provinsiSuratTakSerumahPempol.id as provinsiSuratTakSerumahPempol.label for provinsiSuratTakSerumahPempol in provinsis" ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-input40" name="kabupatenTakSerumahPempol">
+                    <span class="input-label">Kabupaten / Kota</span>
+                    <input type="text" placeholder="" ng-model="data.kabupatenTakSerumahPempol" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-input57" name="kodeposTakSerumahPempol">
+                    <span class="input-label">Kode Pos</span>
+                    <input type="number" placeholder="" ng-model="data.kodeposTakSerumahPempol" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-input41" name="noHPTakSerumah">
+                    <span class="input-label">Nomor HP</span>
+                    <input type="tel" placeholder="Nomor HP" ng-model="data.noHPTakSerumah" ng-blur="saveDataSpaj()">
+                </label>
+                <label class="item item-input" id="dataPemegangPolis33-input42" name="noTelTakSerumah">
+                    <span class="input-label">Nomor Telepon</span>
+                    <input type="tel" placeholder="Nomor Telepon" ng-model="data.noTelTakSerumah" ng-blur="saveDataSpaj()">
+                </label>
+            </form>
+        </div-->
+        <div id="dataPemegangPolis33-container19">
+            <form id="dataPemegangPolis33-form13" class="list">
+                <div class="spacer" style="width: 748px; height: 21px;"></div>
+
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-change="saveDataSpaj();moveToNextPage()"
+                                   ng-model="data.isPagePempol3Accepted"
+                                   name="isPagePempol3Accepted"
+                                   toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+
+
+                <div class="spacer" style="height: 100px;"></div>
+            </form>
+        </div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+                <div id="dataTertanggung23-button-bar2" class="button-bar">
+                    <a ng-hide="" ng-show='!isTertanggungPempol'
+                       ui-sref="aplikasiSPAJOnline.pekerjaanPemegangPolis({})"
+                       id="dataPemegangPolis33-button34" class="button button-light ">PEKERJAAN
+                        PEMEGANG POLIS</a></div>
+                <div class="row">
+                    <div class="col">
+                        <div id="dataPemegangPolis33-button-bar11" class="button-bar">
+                            <a ui-sref="aplikasiSPAJOnline.dataPemegangPolis13"
+                               ng-click="isPageAccepted()" id="dataPemegangPolis33-button20"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">1.
+                                Identitas</a>
+                            <a ui-sref="aplikasiSPAJOnline.dataPemegangPolis23({})"
+                               ng-click="isPageAccepted()" id="dataPemegangPolis33-button21"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">2. Tempat
+                                Tinggal</a>
+                            <button id="dataPemegangPolis33-button33"
+                                    style="font-weight:500;text-align:left;"
+                                    class="button button-balanced icon-right">3. Pendukung
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ion-view>

@@ -1,0 +1,58 @@
+<ion-view title="SKK Tertanggung" id="page16">
+    <ion-content padding="true" class="manual-remove-top-padding scroll-content ionic-scroll  has-header has-tabs-top">
+	        <div id="skkTertanggung-1" style="padding:12px;">
+
+			<div class="item item-divider" style="margin-top:8px;">SKK Tertanggung Utama</div>
+			    <ion-item ng-show='daftarDokumens.length == 0'>
+                    Nama :
+                </ion-item>			    
+				<ion-item ng-show='daftarDokumens.length == 0'>
+                    Tgl. Lahir :
+                </ion-item>			    
+				<ion-item ng-show='daftarDokumens.length == 0'>
+                    Gender :
+                </ion-item>
+			<a style="" ui-sref="aplikasiSPAJOnline.skkTertanggungUtama"
+			id="dokumenPendukungSPAJ-button35" style="font-weight:500;"
+			class="button button-balanced button-medium button-block button-outline icon-right ion-android-add-circle">Lengkapi SKK Tertanggung Utama</a>
+
+			<div class="item item-divider" style="margin-top:8px;">SKK Tertanggung Tambahan</div>
+			<ion-list id="daftarSPAJOnline-list71">
+                <ion-item ng-show='daftarDokumens.length == 0'>
+                    Tidak Ada Tertanggung Tambahan
+                </ion-item>
+				<ion-scroll scrollY="true" style="max-height:300px;border:solid #dddddd 1px;">
+					<ion-item class="item item-icon-right">
+					<h3>Tertanggung #1</h3><br />
+						<ion-item ng-show='daftarDokumens.length == 0'>
+						Nama :
+						</ion-item>			    
+						<ion-item ng-show='daftarDokumens.length == 0'>
+						Tgl. Lahir :
+						</ion-item>			    
+						<ion-item ng-show='daftarDokumens.length == 0'>
+						Gender :
+						</ion-item>
+
+                    <i class="icon ion-edit" ng-click="editDokumen({{$index}})"></i>
+					</ion-item>
+					
+					
+					
+					<!--ion-item ng-repeat="item in daftarDokumens"
+							  class="item item-avatar item-thumbnail-left item-icon-right"
+							  href=""
+							  id="daftarSPAJOnline-list-item25">
+						<img style="width:50%;" data-ng-src="{{item.camDokumen}}"
+							 ng-model="item.camDokumen" id="tempImgDokumen" src=""/>
+						<h2>Nama Dokumen: {{item.addNamaDokumen}}</h2>
+						<p>Keterangan: {{item.addKeteranganDokumen}}</p>
+
+						<i class="icon ion-edit" ng-click="editSKK({{$index}})"></i>
+					</ion-item-->
+				</ion-scroll>
+            </ion-list>
+
+		</div>
+	</ion-content>
+</ion-view>

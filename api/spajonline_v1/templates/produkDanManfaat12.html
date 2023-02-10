@@ -1,0 +1,471 @@
+<ion-view title="Produk dan Manfaat (1/2)" nav-transition="none" id="page13" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+       <div class="item item-divider" style="margin-top:25px;">Tujuan Berasuransi</div>
+        <form id="produkDanManfaat12-form32" class="list">
+            <ion-checkbox name="isTujuanProteksi" ng-model="data.isTujuanProteksi" ng-change="saveDataSpaj()">Proteksi
+            </ion-checkbox>
+            <ion-checkbox name="isTujuanTabungan" ng-model="data.isTujuanTabungan" ng-change="saveDataSpaj()">Tabungan
+            </ion-checkbox>
+            <ion-checkbox name="isTujuanPendidikan" ng-model="data.isTujuanPendidikan" ng-change="saveDataSpaj()">Pendidikan
+            </ion-checkbox>
+            <ion-checkbox name="isTujuanInvestasi" ng-model="data.isTujuanInvestasi" ng-change="saveDataSpaj()">Investasi
+            </ion-checkbox>
+            <ion-checkbox name="isTujuanPensiun" ng-model="data.isTujuanPensiun" ng-change="saveDataSpaj()">Pensiun
+            </ion-checkbox>
+            <ion-checkbox name="isTujuanLainnya" ng-model="data.isTujuanLainnya" ng-change="saveDataSpaj()">Tujuan Lainnya
+            </ion-checkbox>
+            <label class="item item-input" ng-hide="true" ng-show="data.isTujuanLainnya" id="produkDanManfaat12-input36" name="textTujuanLainnya">
+                <input type="text" placeholder="Tujuan lainnya" ng-model="data.tujuanAsuransiLainnya" ng-blur="saveDataSpaj()">
+            </label>
+        </form>
+        <div class="item item-divider" style="margin-top:25px;">Pilihan Produk </div>
+        <div id="produkDanManfaat12-container11">
+            <label class="item item-select" id="produkDanManfaat12-select37" name="jenisAsuransi">
+                <span class="input-label">Jenis Asuransi</span>
+                <select ng-model="data.jenisAsuransi" ng-disabled="true" ng-options="jenisAsuransi.id as jenisAsuransi.label for jenisAsuransi in jenisAsuransis" ng-change="setCaraBayarValues(data.jenisAsuransi);getRiderGroup(data.jenisAsuransi);caraBayarFix(data.jenisAsuransi);saveDataSpaj()"></select>
+            </label>
+            <label class="item item-select" ng-show="data.jenisAsuransi == 'JSPROTEKSIKELUARGA' " id="produkDanManfaat12-select37" name="jenisJsProteksiKeluarga">
+                <span class="input-label">Status JS Keluarga</span>
+                <select ng-model="data.jenisJsProteksiKeluarga" ng-disabled="true" ng-options="jenisJsProteksiKeluarga.id as jenisJsProteksiKeluarga.label for jenisJsProteksiKeluarga in jenisJsProteksiKeluargas" ng-change="saveDataSpaj()"></select>
+            </label>
+            <label class="item item-select" id="produkDanManfaat12-select38" name="caraBayar">
+                <span class="input-label">Cara Bayar</span>
+                <select ng-model="data.caraBayar" ng-disabled="true" ng-options="caraBayar.id as caraBayar.label for caraBayar in caraBayars" ng-change="saveDataSpaj()"></select>
+            </label>
+            <div class="spacer" style="width: 748px; height: 14px;"></div>
+            <label ng-show="data.jenisAsuransi == 'GUARDIAN' " class="item item-select" id="produkDanManfaat12-select37" name="pctUnitlinkGuardian">
+                <span class="input-label">Jenis Guardian</span>
+                <select ng-model="data.pctUnitlinkGuardian" ng-disabled="true" ng-options="pctUnitlinkGuardian.id as pctUnitlinkGuardian.label for pctUnitlinkGuardian in pctUnitlinkGuardians" ng-change="saveDataSpaj();pctTahun(data.pctUnitlinkGuardian)"></select>
+            </label>
+            <div class="spacer" style="width: 748px; height: 14px;"></div>
+            <div id="isUnitLink" ng-hide="true" style="background:#fefecc;" ng-show="data.jenisAsuransi == 'JL4BLN' || data.jenisAsuransi == 'JL4BLN_' || data.jenisAsuransi == 'JL4XN'  ">
+                <div class="item item-divider" style="margin-top:25px;">Alokasi Dana Unit Link</div>
+                <div class="spacer" style="width: 748px; height: 14px;"></div>
+                <div id="produkDanManfaat12-container11">
+                    <!--form id="produkDanManfaat12-unitLink" class="list" style="padding:16px;">
+                        <select ng-model="data.alokasiDana" ng-options="jenisFund.id as jenisFund.label for jenisFund in jenisFunds" ng-change="selectUnitInvestasi(data.alokasiDana);saveDataSpaj()"></select>
+                    </form-->
+					
+					<label class="item">
+						{{data.nama_alokasi1}} {{data.alokasi1}}%
+					</label>
+					<label class="item">
+						{{data.nama_alokasi2}} {{data.alokasi2}}%
+					</label>
+                </div>
+            </div>
+            <div class="spacer" style="width: 748px; height: 14px;"></div>
+            <div id="isRiderProduk" style="background:#fefecc;" ng-show="data.isRiderShow">
+               <div class="item item-divider" style="margin-top:25px;">RIDER</div>
+                <div class="spacer" style="width: 748px; height: 14px;"></div>
+                <div id="produkDanManfaat12-container11">
+                    <form id="produkDanManfaat12-rider" class="list">
+                        <ion-checkbox name="isTermRider" ng-model="data.isTermRider" ng-show="isShowTermRider" ng-disabled="true">a. IFG Term Life (TL)
+                        </ion-checkbox>
+                        <label class="item item-input" id="dataTertanggung33-termRiderUA" name="termRiderUA" ng-hide="false" ng-show="data.isTermRider && isShowTermRider">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.termRiderUA" ui-number-mask="0" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isADB" ng-model="data.isADB" ng-show="isShowADB" ng-disabled="true">b. IFG Accidental Death(ADB)
+                        </ion-checkbox>
+                        <label class="item item-input" id="dataTertanggung33-isADB" name="adbUA" ng-hide="false" ng-show="data.isADB && isShowADB">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ui-number-mask="0" ng-model="data.adbUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isADDB" ng-model="data.isADDB" ng-show="isShowADDB" ng-disabled="true">c. IFG Accidental Death & Dismemberment Benefit (ADDB)
+                        </ion-checkbox>
+                        <label class="item item-input" id="dataTertanggung33-isADDB" name="addbUA" ng-hide="false" ng-show="data.isADDB && isShowADDB">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _"  ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$" ui-number-mask="0" ng-model="data.addbUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isTPD" ng-model="data.isTPD" ng-show="isShowTPD" ng-disabled="true">d. Total Permanent Disability (TPD)
+                        </ion-checkbox>
+                        <label class="item item-input" id="dataTertanggung33-isTPD" name="tpdUA" ng-hide="false" ng-show="data.isTPD && isShowTPD">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ui-number-mask="0" ng-model="data.tpdUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isCI53" ng-model="data.isCI53" ng-show="isShowCI53" ng-disabled="true">e. Critical Illness 53 (CI53)
+                        </ion-checkbox>
+                        <label class="item item-input" id="dataTertanggung33-isCI53" name="CI53UA" ng-hide="false" ng-show="data.isCI53 && isShowCI53">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$"  ui-number-mask="0" ng-model="data.CI53UA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="hospitalCP" ng-model="data.hospitalCP"   ng-show="isShowhospitalCP" ng-disabled="true">f. Hospital Cash Plan
+                        </ion-checkbox>
+                        <label class="item item-select" id="produkDanManfaat12-hospitalCP" name="HCPType" ng-hide="false" ng-show="data.hospitalCP && isShowhospitalCP">
+                            Pilih Tipe
+                            <ion-radio id="produkDanManfaat12-hospitalCP1" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM100" ng-disabled="true">HCPM 100
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP2" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM200" ng-disabled="true">HCPM 200
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP3" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM300" ng-disabled="true">HCPM 300
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP4" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM400" ng-disabled="true">HCPM 400
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP5" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM500" ng-disabled="true">HCPM 500
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP5" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM600" ng-disabled="true">HCPM 600
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP5" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM700" ng-disabled="true">HCPM 700
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP5" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM800" ng-disabled="true">HCPM 800
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP5" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM900" ng-disabled="true">HCPM 900
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP5" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPM1000" ng-disabled="true">HCPM 1000
+                            </ion-radio>
+                            <!--ion-radio id="produkDanManfaat12-hospitalCP6" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB100">HCPB 100
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP7" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB200">HCPB 200
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP8" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB300">HCPB 300
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP9" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB400">HCPB 400
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP0" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB500">HCPB 500
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP0" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB600">HCPB 600
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP0" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB700">HCPB 700
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP0" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB800">HCPB 800
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP0" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB900">HCPB 900
+                            </ion-radio>
+                            <ion-radio id="produkDanManfaat12-hospitalCP0" name="hcpTypeSelect" ng-model="data.hcpTypeSelect" ng-change="saveDataSpaj()" value="HCPB1000">HCPB 1000
+                            </ion-radio-->
+                        </label>
+                        <ion-checkbox name="isPBD" ng-model="data.isPBD" ng-change="saveDataSpaj()" ng-show="isShowPBD" ng-disabled="true">g. IFG Payor Benefit Death (PB-D)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-isPBD" name="isPBD" ng-hide="false" ng-show="data.isPBD && isShowPBD">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$"  ui-number-mask="0" ng-model="data.PBD" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isPBC151" ng-model="data.isPBC151" ng-change="saveDataSpaj()" ng-show="isShowPBC151" ng-disabled="true">h. IFG Payor Benefit Critical Illness51 (PB-CI51)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-isPBC151" name="isPBC151" ng-hide="false" ng-show="data.isPBC151 && isShowPBC151">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _"  ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$"  ui-number-mask="0" ng-model="data.PBC151" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isPBTPD" ng-model="data.isPBTPD" ng-change="saveDataSpaj()" ng-show="isShowPBTPD" ng-disabled="true">i. IFG Payor Benefit Total Permanent Disability (PB-TPD)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-isPBTPD" name="isPBTPD" ng-hide="false" ng-show="data.isPBTPD && isShowPBTPD">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _"  ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$"  ui-number-mask="0" ng-model="data.pbtpdUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isSPD" ng-model="data.isSPD" ng-change="saveDataSpaj()" ng-show="isShowSPD" ng-disabled="true">j. IFG Spouse Payor Death Benefit (SP-D)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-444" name="SPOUSE_TPDUA" ng-hide="false" ng-show="data.isSPD && isShowSPD">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ui-number-mask="0" ng-model="data.SPOUSE_TPDUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="SPBCI" ng-model="data.SPBCI" ng-change="saveDataSpaj()" ng-show="isShowSPCI51" ng-disabled="true">k. IFG Spouse Payor Critical Illness51 (SP-CI51)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-444" name="SPOUSE_CIUA" ng-hide="false" ng-show="data.SPBCI && isShowSPCI51">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ui-number-mask="0" ng-model="data.SPOUSE_CIUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isSPTBD" ng-model="data.isSPTBD" ng-change="saveDataSpaj()" ng-show="isShowSPTBD" ng-disabled="true">l. IFG Spouse Payor Total Permanent Disability (SP-TPD)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-444" name="SPOUSE_DEATHUA" ng-hide="false" ng-show="data.isSPTBD && isShowSPTBD">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$"  ui-number-mask="0" ng-model="data.SPOUSE_DEATHUA" ng-blur="saveDataSpaj()">
+                        </label>
+						
+						
+                        <ion-checkbox name="isWPCI51" ng-model="data.isWPCI51" ng-change="saveDataSpaj()" ng-show="isShowWPC151" ng-disabled="true">m. IFG Waiver Critical Illness51 (WP-CI51)
+                        </ion-checkbox>
+						 <label class="item item-input" id="dataTertanggung33-444" name="WPCI51UA" ng-hide="false" ng-show="data.isWPCI51 && isShowWPC151">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _"  ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$"  ui-number-mask="0" ng-model="data.WPCI51UA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isWPTPD" ng-model="data.isWPTPD" ng-change="saveDataSpaj()" ng-show="isShowWPTPD" ng-disabled="true">n. IFG Waiver Total Permanent Disability (WP-TPD)
+                        </ion-checkbox>
+						<label class="item item-input" id="dataTertanggung33-isCI53" name="WPTPDUA" ng-hide="false" ng-show="data.isWPTPD && isShowWPTPD">
+                            <span class="input-label">Uang Asuransi (Rp.)</span>
+                            <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ui-number-mask="0" ng-model="data.WPTPDUA" ng-blur="saveDataSpaj()">
+                        </label>
+                        <ion-checkbox name="isTermRider" ng-model="data.isRiderLainnya" ng-show="isShowRiderLainnya">f. Rider Lainnya
+                        </ion-checkbox>
+                        <label class="item item-select" id="produkDanManfaat12-isRiderLainnya" name="riderLainnyaPremi" ng-hide="false" ng-show="data.isRiderLainnya">
+                            <label class="item item-input" id="produkDanManfaat12-namaRiderLainnya" name="namaRiderLainnya">Rider Lainnya&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________" ng-model="namaRiderLainnya" ng-blur="saveDataSpaj()">
+                            </label>
+                            <ion-item class="range range-positive" id="produkDanManfaat12-range10">
+                                Premi Lainnya
+                                <input type="range" value="50" min="0" max="200000000" step="100000"  ng-pattern-restrict="^([0-9,.-]*|)$"  ng-model="data.riderLainnyaPremi" ng-blur="saveDataSpaj()" name="riderLainnyaPremi">
+                                <label style="font-size:2em;">{{data.riderLainnyaPremi | currency:"Rp. ":0}}</label>
+                            </ion-item>
+                        </label>
+                    </form>
+                </div>
+            </div>
+            <form class="list">
+                <div class="spacer" style="width: 748px; height: 14px;"></div>
+                <!--ion-item class="range range-positive" id="produkDanManfaat12-range8" ng-show="data.caraBayar != 'sekaligus' " >Masa Bayar Premi<br/>
+               <input type="range" value="50" min="0" max="100" step="1"
+                  ng-model="data.masaBayarPremi" name="masaBayarPremi"
+                  ng-blur="saveDataSpaj()" >
+               <label style="font-size:2em;" name="masaBayarPremi">{{data.masaBayarPremi}} Tahun</label>
+            </ion-item-->
+
+                <label class="item item-input" ng-hide="" id="dataTertanggung33-range8" name="masaBayarPremi">
+                    <span class="input-label">masa Bayar Premi (Thn)</span>
+                    <input type="text" placeholder=""  ng-pattern-restrict="^([0-9,.-]*|)$"  ng-model="data.masaBayarPremi" ng-blur="saveDataSpaj()" ng-readonly="true" ui-number-mask="0" value="0" max="100" />
+                </label>
+
+                <br/> Pilih salah satu:
+                <br/>
+                <div class="button-bar ">
+                    <ion-radio class="radio radio-balanced " ng-change="saveDataSpaj()" ng-hide="" ng-show="" id="isSKKCesar_TT1-1111" name="isPremi" ng-model="data.isPremi" ng-value="true">PREMI
+                    </ion-radio>
+                    <ion-radio class="radio radio-balanced " ng-change="saveDataSpaj()" ng-hide="" ng-show="" id="isSKKCesar_TT1-1111" name="isPremi" ng-model="data.isPremi" ng-value="false">{{labelUA}}
+                    </ion-radio>
+                </div>
+
+                <label class="item item-input" ng-show="data.isPremi && (data.jenisAsuransi == 'JL4BLN' || data.jenisAsuransi == 'JL4BLN_' || data.jenisAsuransi == 'JL4XN')" ng-hide="!data.isPremi" id="dataTertanggung33-premiBerkala" name="premiBerkala">
+                    <span class="input-label">Premi Berkala (Rp.)</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.premiBerkala" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+                <label class="item item-input" ng-show="data.isPremi && (data.jenisAsuransi == 'JL4BLN' || data.jenisAsuransi == 'JL4BLN_' || data.jenisAsuransi == 'JL4XN')" ng-hide="!data.isPremi" id="dataTertanggung33-topupBerkala" name="topupBerkala">
+                    <span class="input-label">Topup Berkala (Rp.)</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true"  ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.topupBerkala" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+
+                <label class="item item-input" ng-show="data.isPremi" ng-hide="!data.isPremi" id="dataTertanggung33-premi" name="premi">
+                    <span class="input-label">Premi Total (Rp.)</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.premi" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+				
+                <label class="item item-input" ng-show="data.isPremi && (data.jenisAsuransi == 'JL4BLN' || data.jenisAsuransi == 'JL4BLN_' || data.jenisAsuransi == 'JL4XN')" ng-hide="!data.isPremi" id="dataTertanggung33-topupSekaligus" name="topupSekaligus">
+                    <span class="input-label">Topup Sekaligus (Rp.)</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.topupSekaligus" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+
+                <label class="item item-input" ng-show="!data.isPremi" ng-hide="data.isPremi" id="dataTertanggung33-ua" name="uangAsuransi">
+                    <span class="input-label">{{labelUA}} (Rp.)</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.uangAsuransi" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+
+                <br/>
+                <br/>
+                <!--ion-item class="range range-positive" id="produkDanManfaat12-range11">Jangka Waktu
+               Asuransi
+               <input type="range" value="50" min="0" max="100" step="1"
+                  ng-model="data.jangkaWaktuAsuransi" name="jangkaWaktuAsuransi"
+                  ng-blur="saveDataSpaj()">
+               <label style="font-size:2em;">{{data.jangkaWaktuAsuransi}} Tahun</label>
+            </ion-item-->
+                <label class="item item-input" ng-hide="" id="dataTertanggung33-range11" name="jangkaWaktuAsuransi">
+                    <span class="input-label">Jangka Waktu Asuransi (Thn)</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _" ng-readonly="true" ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.jangkaWaktuAsuransi" ng-blur="saveDataSpaj()" ui-number-mask="0" value="0" />
+                </label>
+
+				 <div class="item item-divider" style="margin-top:25px;"> Data Pembayar Premi</div>
+					<div class="item item-divider" style="">
+						<span style="position:relative;top:14px;">Pembayar premi adalah pemegang polis</span>
+						<span  style="float:right;position:relative;top:5px;">
+							<md-toggle
+							ng-model="data.pempolIsPembayarPremi" name="pempolIsPembayarPremi"
+							toggle-class="toggle-balanced">
+							</md-toggle>
+						</span>
+					</div>
+					
+					<div ng-show="!data.pempolIsPembayarPremi" ng-show="data.pempolIsPembayarPremi">
+								<label class="item item-select" id="dataTertanggung33-select20"
+									   name="hubunganPembayarPremiDenganTTU">
+									<span class="input-label">Hubungan dengan Tertanggung Utama</span>
+									<select ng-model="data.hubunganPembayarPremiDenganTTU"
+											ng-options="hubunganPembayarPremiDenganTTU.id as hubunganPembayarPremiDenganTTU.label for hubunganPembayarPremiDenganTTU  in hubunganKeluargas"
+											ng-change="saveDataSpaj()"></select>
+								</label>
+								<label class="item item-select" id="dataTertanggung33-select20"
+									   name="jenisKelaminPembayarPremi">
+									<span class="input-label">Jenis Kelamin</span>
+									<select ng-model="data.jenisKelaminPembayarPremi"
+											ng-options="jenisKelaminPembayarPremi.id as jenisKelaminPembayarPremi.label for jenisKelaminPembayarPremi  in genders"
+											ng-change="saveDataSpaj()"></select>
+								</label>
+								<label class="item item-input" id="dataTertanggung33-input23"
+									   name="namaPembayarPremi">
+									<span class="input-label">Nama</span>
+									<input type="text" placeholder="__________________"
+										    ng-pattern-restrict="^([A-Za-z 0-9'`,.-]*|)$" ng-model="data.namaPembayarPremi" ng-blur="saveDataSpaj()">
+								</label>
+								<label class="item item-input" id="dataTertanggung13-input3"
+									   name="namaAliasPembayarPremi">
+									<span class="input-label">Nama Alias</span>
+									<input type="text" placeholder="__________________" 
+											ng-pattern-restrict="^([A-Za-z 0-9'`,.-]*|)$" ng-model="data.aliasPembayarPremi" ng-blur="saveDataSpaj()" >
+								</label>
+								<label class="item item-input" id="dataTertanggung33-input23"
+									   name="noKtpPembayarPremi">
+									<span class="input-label">No. KTP</span>
+									<input type="text" placeholder="___ ___ ___ ___ ___ ___"
+										    ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.noKtpPembayarPremi" onKeyPress="if(this.value.length==16) return false;" ng-blur="saveDataSpaj()">
+								</label>
+								<label class="item item-input" id="dataTertanggung23-textarea1"
+									   name="alamatKTPtertanggung">
+									<span class="input-label">Alamat KTP</span><textarea
+										placeholder="__________________" ng-model="data.alamatKTPtertanggung" ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" 
+										ng-blur=""></textarea>
+								</label>
+								<label class="item item-input" id="dataTertanggung33-input23" name="tglLahirPembayarPremi">
+									<span class="input-label">Tgl. Lahir (d-m-y)</span>
+									<input type="hidden" ion-datetime-picker date ng-model="data.tglLahirPembayarPremi" ng-blur="saveDataSpaj($scope)">
+										{{data.tglLahirPembayarPremi| date: "dd-MM-yyyy"}}
+									</input>
+								</label>
+								<label class="item item-input" id="dataTertanggung33-input23"
+									   name="tempatLahirPembayarPremi">
+									<span class="input-label">Tempat Lahir</span>
+									<input type="text" placeholder="__________________"
+										    ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.tempatLahirPembayarPremi" ng-blur="saveDataSpaj()">
+								</label>
+
+								<label class="item item-input" id="dataTertanggung33-input23"
+									   name="noNpwpPembayarPremi">
+									<span class="input-label">No. NPWP</span>
+									<input type="number" placeholder="___ ___ ___ ___ ___ ___"
+										    ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.noNpwpPembayarPremi" ng-blur="saveDataSpaj()">
+								</label>
+								<!--label class="item item-input" id="dataTertanggung33-input23"
+									   name="tinggiBadanPembayarPremi">
+									<span class="input-label">Tinggi Badan (CM)</span>
+									<input type="number" min="50" max="250" placeholder="50cm s/d 250cm"
+										   placeholder="____" ng-model="data.tinggiBadanPembayarPremi"
+										   ng-blur="saveDataSpaj()">
+								</label>
+								<label class="item item-input" id="dataTertanggung33-input23"
+									   name="beratBadanPembayarPremi">
+									<span class="input-label">Berat Badan (KG)</span>
+									<input type="number" min="10" max="300" placeholder="10kg s/d 300kg"
+										   ng-model="data.beratBadanPembayarPremi" ng-blur="saveDataSpaj()">
+								</label-->
+
+								<div class="item item-divider" style="margin-top:25px;"> Data Pekerjaan Pembayar Premi</div>
+								<!--div class="button-bar ">
+									<ion-radio class="radio radio-balanced " ng-blur="saveDataSpaj();" ng-hide=""
+											   ng-show="" id="produkDanManfaat12-radio2"
+											   name="PembayarPremiBekerja"
+											   ng-model="data.PembayarPremiBekerja" ng-value="true">YA
+									</ion-radio>
+									<ion-radio class="radio radio-balanced " ng-blur="saveDataSpaj();" ng-hide=""
+											   ng-show="" id="produkDanManfaat12-radio1"
+											   name="PembayarPremiBekerja"
+											   ng-model="data.PembayarPremiBekerja" ng-value="false">TIDAK
+									</ion-radio>
+								</div-->
+								<div ng-show="true">
+									<label class="item item-input" id="dataTertanggung33-input23"
+										   name="namaKantorPembayarPremi">
+										<span class="input-label">Nama kantor tempat bekerja</span>
+										<input type="text" placeholder="__________________"
+											    ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.namaKantorPembayarPremi"
+											   ng-blur="saveDataSpaj()">
+									</label>
+									<label class="item item-input" id="dataTertanggung33-input23"
+										   name="alamatKantorPembayarPremi">
+										<span class="input-label">Alamat kantor tempat bekerja</span>
+										<input type="text" placeholder="__________________"
+											    ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.alamatKantorPembayarPremi"
+											   ng-blur="saveDataSpaj()">
+									</label>
+								</div>
+					</div>
+					
+					<div id="dataTertanggung23-container3" ng-show="!data.pempolIsPembayarPremi" ng-show="data.pempolIsPembayarPremi">
+						<div class="item item-divider" style="margin-top:25px;">Kontak dan Telepon</div>
+						<form id="dataTertanggung23-form12" class="list">
+							<label class="item item-input" id="dataTertanggung23-input7"
+								   name="nomorHpPembayarPremi">
+								<span class="input-label">Nomor HP</span>
+								<input type="tel" placeholder="Nomor HP" ng-model="data.nomorHpPembayarPremi"  ng-pattern-restrict="^([ 0-9,.-]*|)$" 
+									   ng-blur="saveDataSpaj()">
+							</label>
+							<label class="item item-input" id="dataTertanggung23-input8"
+								   name="nomorTelptertanggung">
+								<span class="input-label">Nomor Telepon</span>
+								<input type="tel" placeholder="Nomor Telepon"
+									   ng-model="data.nomorTelpPembayarPremi"  ng-pattern-restrict="^([ 0-9,.-]*|)$"  ng-blur="saveDataSpaj()">
+							</label>
+							<label class="item item-input" id="dataTertanggung23-input43"
+								   name="emailtertanggung">
+								<span class="input-label">Email</span>
+								<input type="email" placeholder="Email" ng-model="data.emailPembayarPremi"  
+								ng-pattern-restrict="^([A-Za-z 0-9,.-@]*|)$" 
+									   ng-blur="saveDataSpaj()">
+							</label>
+						</form>
+					</div>
+					
+					
+				<!-- <div class="item item-divider" style="margin-top:25px;"> Data Rekening Pembayar Premi</div>	
+				<label class="item item-input" id="produkDanManfaat12-input37">
+                    <span class="input-label">Nama Bank</span>
+                    <input type="text" placeholder="__________"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.namaBankPembPremi" name="namaBankPembPremi" ng-blur="saveDataSpaj()">
+                </label>				
+				<label class="item item-input" id="produkDanManfaat12-input37">
+                    <span class="input-label">Cabang Bank</span>
+                    <input type="text" placeholder="__________"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.cabangBankPembPremi" name="cabangBankPembPremi" ng-blur="saveDataSpaj()">
+                </label>
+				<label class="item item-input" id="produkDanManfaat12-input37">
+                    <span class="input-label">No. Rekening</span>
+                    <input type="text" placeholder="__________"  ng-pattern-restrict="^([0-9,.-]*|)$" ng-model="data.nomorRekeningPembPremi" name="nomorRekeningPembPremi" ng-blur="saveDataSpaj()">
+                </label>					
+
+                <label class="item item-input" id="produkDanManfaat12-input38">
+                    <span class="input-label">Atas Nama</span>
+                    <input type="text" placeholder="__________" ng-pattern-restrict="^([A-Za-z 0-9'`,.-]*|)$" ng-model="data.namaRekeningPembPremi" name="namaRekeningPembPremi" ng-blur="saveDataSpaj()">
+                </label> -->
+
+
+                <div class="item item-divider" style="margin-top:25px;"> Pembayaran Premi</div>
+
+                <label class="item item-select" id="produkDanManfaat12-select39" name="bayarPremiSelanjutnya" ng-blur="saveDataSpaj()">
+                    <span class="input-label">Mekanisme Pembayaran</span>
+                    <select ng-model="data.bayarPremiSelanjutnya" ng-options="bayarPremiSelanjutnya.id as bayarPremiSelanjutnya.label for bayarPremiSelanjutnya in bayarBerikutnyas" ng-change="saveDataSpaj()"></select>
+                </label>
+                <ion-radio ng-blur="saveDataSpaj()" ng-show="(data.bayarPremiSelanjutnya == 'autodebet' || data.bayarPremiSelanjutnya == 'host2host')" id="produkDanManfaat12-radio2" name="bankName" ng-model="data.paymentBankName" ng-change="saveDataSpaj()" ng-value="'BANK_MANDIRI'">Bank Mandiri
+                </ion-radio>
+                <ion-radio ng-blur="saveDataSpaj()" ng-show="(data.bayarPremiSelanjutnya == 'autodebet' || data.bayarPremiSelanjutnya == 'virtualaccount')" id="produkDanManfaat12-radio1" name="bankName" ng-model="data.paymentBankName" ng-change="saveDataSpaj()" ng-value="'BANK_BNI'">BNI
+                </ion-radio>
+                <ion-radio ng-blur="saveDataSpaj()" ng-show="(data.bayarPremiSelanjutnya == 'autodebet' || data.bayarPremiSelanjutnya == 'host2host')" id="produkDanManfaat12-radio3" name="bankName" ng-model="data.paymentBankName" ng-change="saveDataSpaj()" ng-value="'BANK_BRI'">BRI
+                </ion-radio>
+                <ion-radio ng-blur="saveDataSpaj()" ng-show="( data.bayarPremiSelanjutnya == 'ccdebet')" id="produkDanManfaat12-radio4" name="bankName" ng-model="data.paymentBankName" ng-change="saveDataSpaj()" ng-value="'CREDIT_CARD_VISA'">Kartu Kredit Visa
+                </ion-radio>
+                <ion-radio ng-blur="saveDataSpaj()" ng-show="( data.bayarPremiSelanjutnya == 'ccdebet')" id="produkDanManfaat12-radio4" name="bankName" ng-model="data.paymentBankName" ng-change="saveDataSpaj()" ng-value="'CREDIT_CARD_MASTER'">Kartu Kredit Master Card
+                </ion-radio>
+                <ion-radio ng-blur="saveDataSpaj()" id="produkDanManfaat12-radio5" name="bankName" ng-model="data.paymentBankName" ng-change="saveDataSpaj()" ng-value="'LAINNYA'">Lainnya
+                </ion-radio>
+                <label class="item item-input" id="dataTertanggung33-paymentBankNameLainnya" name="paymentBankNameLainnya" ng-show="data.paymentBankName == 'LAINNYA'">
+                    <input type="text" placeholder="nama bank lainnya "  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ng-model="data.paymentBankNameLainnya" ng-blur="saveDataSpaj()">
+                </label>
+                <div class="spacer" style="width: 748px; height: 36px;"></div>
+                <div class="row">
+                    <div class="col col-75"><span class="input-label">Data Sudah Benar</span></div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-model="data.isPageProdukManfaat1Accepted" ng-change="saveDataSpaj();moveToNextPage()" toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+
+
+                <div class="spacer" style="height: 200px;"></div>
+            </form>
+        </div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+		<div class="row">
+			<div class="col">
+				<div id="produkDanManfaat12-button-bar10" class="button-bar">
+					<button id="produkDanManfaat12-button28" style="text-align:left;" class="button button-balanced button-medium button-block icon-right ion-document-text">1. PRODUK</button>
+					<a ui-sref="aplikasiSPAJOnline.produkDanManfaat22" id="produkDanManfaat12-button29" ng-click="isPageAccepted()" style="text-align:left;" class="button button-medium  button-light button-block button-light icon-right ion-bookmark">2. MANFAAT</a>
+				</div>
+			</div>
+		</div>
+
+    </div>
+</ion-view>

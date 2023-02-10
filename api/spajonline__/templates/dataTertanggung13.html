@@ -1,0 +1,215 @@
+<ion-view title="Identitas Pemegang Polis" nav-transition="none" id="page10" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+
+        <style>
+	input.fileUpload {
+	  display: inline-block;
+	  width: 100%;
+	  padding: 120px 0 0 0;
+	  height: 80px;
+	  overflow: hidden;
+	  position:relative;
+	  left:-50px;
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  background: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ3-CQeQdV14f3FeT2vpJylbYk36DdLCx-T3XozkooL156EaH0s') center center no-repeat #fff;
+	  border-radius: 20px;
+	  background-size: 60px 
+	}
+	        canvas {
+        image-rendering: optimizeSpeed;
+        image-rendering: crisp-edges;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -o-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+        -ms-interpolation-mode: nearest-neighbor;
+        }
+
+        </style>
+
+
+        <h4>
+            TENTANG PEMEGANG POLIS
+        </h4>
+        <form id="dataPemegangPolis13-form24" class="list">
+
+
+            <div class="row">
+                <div class="col col-75" style="font-size:1.1em;">Pemegang Polis adalah Tertanggung
+                </div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-change="pempolAdalahTertanggung(data.isTertanggungPempol)"
+                               ng-model="data.isTertanggungPempol" name="isTertanggungPempol"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+
+            <!--div class="row">
+                <div class="col col-75" style="font-size:1.1em;">Pemegang Polis adalah Pembayar Premi</div>
+                    <div class="col" style="text-align:right;">
+                    <md-toggle   ng-change="pempolAdalahPembayarPremi(data.isPempolPembayarPremi)"
+                        ng-model="data.isPempolPembayarPremi"  name="isPempolPembayarPremi"
+                         toggle-class="toggle-balanced" >
+                    </md-toggle>
+                    </div>
+            </div-->
+
+            <div ng-hide="true" ng-show="false" style="background:#ADADFF;">
+                <h3 id="namaLengkapPemPrem-heading10" style="color:#000000;font-weight:400;">
+                    Identitas Pembayar Premi</h3>
+                <label class="item item-input" id="namaLengkapPemPrem-input24"
+                       name="namaLengkapPemPrem">
+                    <span class="input-label">Nama Lengkap</span>
+                    <input type="text" placeholder="nama lengkap" ng-model="data.namaLengkapPemPrem"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="nomorKTPPemPrem-input25" name="nomorKTPPemPrem">
+                    <span class="input-label">Nomor KTP</span>
+                    <input type="number" placeholder="nomor KTP" ng-model="data.nomorKTPPemPrem"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+
+
+                <label class="item item-input" id="dataPempol13-input2" name="tglLahirPemPrem">
+                    <span class="input-label">Tgl. Lahir</span>
+                    <input type="date" ng-model-options="{timezone:'UTC'}"
+                           ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           placeholder="" ng-model="data.tglLahirPemPrem"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataPempol13-input2" name="nomorNPWPPemPrem">
+                    <span class="input-label">Nomor NPWP</span>
+                    <input type="number" placeholder="nomor NPWP" ng-model="data.nomorNPWPPempol"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-select" id="dataPemegangPolis13-select25"
+                       name="jenkelPemPrem">
+                    <span class="input-label">Jenis Kelamin</span>
+                    <select ng-model="data.jenkelPemPrem"
+                            ng-options="jenkelPemPrem.id as jenkelPemPrem.label for jenkelPemPrem in genders"
+                            ng-change="saveDataSpaj($scope)"></select>
+                </label>
+            </div>
+
+
+            <h3 id="dataPemegangPolis13-heading10" style="color:#000000;font-weight:400;">Identitas
+                Pemegang Polis</h3>
+            <label class="item item-input" id="dataPemegangPolis13-input24"
+                   name="namaLengkapPempol">
+                <span class="input-label">Nama Lengkap</span>
+                <input type="text" placeholder="nama lengkap" ng-model="data.namaLengkapPempol"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-input" id="dataPemegangPolis13-input25" name="nomorKTPPempol">
+                <span class="input-label">Nomor KTP</span>
+                <input type="number" placeholder="nomor KTP" ng-model="data.nomorKTPPempol"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+
+
+            <label class="item item-input" id="dataPempol13-input2" name="tglLahirPempol">
+                <span class="input-label">Tgl. Lahir</span>
+                <input type="date" ng-model-options="{timezone:'UTC'}"
+                       ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" placeholder=""
+                       ng-model="data.tglLahirPempol" ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-input" id="dataPempol13-input2" name="nomorNPWPPempol">
+                <span class="input-label">Nomor NPWP</span>
+                <input type="number" placeholder="nomor NPWP" ng-model="data.nomorNPWPPempol"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <label class="item item-select" id="dataPemegangPolis13-select25" name="jenkelPempol">
+                <span class="input-label">Jenis Kelamin</span>
+                <select ng-model="data.jenkelPempol"
+                        ng-options="jenkelPempol.id as jenkelPempol.label for jenkelPempol in genders"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <label class="item item-select" id="dataPemegangPolis13-select26" name="agamaPempol">
+                <span class="input-label">Agama</span>
+                <select ng-model="data.agamaPempol"
+                        ng-options="agamaPempol.id as agamaPempol.label for agamaPempol in agamas"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <center>
+                <div>
+                    <input type="file" class="fileUpload "
+                           accept="image/*" id="camKTPtertanggung"
+                           custom-on-change="changeImage">
+                    </input>
+                    <div style="width:100px;font-size:1.4em;font-weight:bolder;position:relative;top:-78px;right:-28px;">
+                        FOTO KTP
+                    </div>
+                </div>
+
+            </center>
+            <div class="spacer" style="width: 300px; height: 17px;"></div>
+            <div>
+
+                <center>
+                    <div class="canvasContainer"
+                         style="overflow:auto;max-width:500px;max-height:400px;">
+                        <canvas id="canvasKTPpempol" style="display:;" ng-model="imageKTPpempol"
+                                style="width:500px;height:400px;"></canvas>
+                    </div>
+                </center>
+                <!--img id="imgKTPtertanggung" src="https://cdn3.iconfinder.com/data/icons/business-office-1-2/256/Identity_Document-512.png" 
+					width="35%" height="auto" style="display: block; margin-left: auto; margin-right: auto;" 
+					ng-model="imageKTPpempol" ng-change="saveDataSpaj($scope)"-->
+            </div>
+        </form>
+        <!--button id="dataPemegangPolis13-button43" 
+			style="font-weight:500;" 
+			class="button button-balanced button-large button-block button-outline icon-right ion-android-camera">
+				FOTO KTP
+		</button-->
+
+
+        <form id="dataPemegangPolis13-form25" class="list">
+
+            <div class="row">
+                <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-change="saveDataSpaj($scope);moveToNextPage()"
+                               ng-model="data.isPagePempol1Accepted" name="isPagePempol1Accepted"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+
+            <div class="spacer" style="height: 100px;"></div>
+        </form>
+
+
+    </ion-content>
+
+    <div class="tabs tabs-positive " style="height:auto;">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div id="dataTertanggung13-button-bar1" class="button-bar">
+                            <div id="dataPemegangPolis13-button-bar5" class="button-bar">
+                                <button id="dataPemegangPolis13-button13"
+                                        style="font-weight:500;text-align:left;"
+                                        class="button button-balanced   icon-right ion-chevron-right">
+                                    1. Identitas
+                                </button>
+                                <a ui-sref="aplikasiSPAJOnline.dataPemegangPolis23({})"
+                                   ng-click="isPageAccepted()" id="dataPemegangPolis13-button14"
+                                   style="font-weight:500;text-align:left;"
+                                   class="button button-stable icon-right   ion-chevron-right">2.
+                                    Tempat Tinggal</a>
+                                <a ui-sref="aplikasiSPAJOnline.dataPemegangPolis33({})"
+                                   ng-click="isPageAccepted()" id="dataPemegangPolis13-button15"
+                                   style="font-weight:500;text-align:left;"
+                                   class="button button-stable icon-right">3. Pendukung</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-view>

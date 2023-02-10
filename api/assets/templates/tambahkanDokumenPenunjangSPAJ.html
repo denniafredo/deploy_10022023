@@ -1,0 +1,119 @@
+<ion-view title="Tambahkan Dokumen Penunjang SPAJ" id="page20" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <style>
+	input.fileUpload {
+	  display: inline-block;
+	  width: 100%;
+	  padding: 120px 0 0 0;
+	  height: 80px;
+	  overflow: hidden;
+	  position:relative;
+	  left:-50px;
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  background: url('img/ul.png') center center no-repeat #fff;
+	  border-radius: 20px;
+	  background-size: 60px 
+	}
+	canvas {
+		image-rendering: optimizeSpeed;
+		image-rendering: crisp-edges;
+		image-rendering: -moz-crisp-edges;
+		image-rendering: -o-crisp-edges;
+		image-rendering: -webkit-optimize-contrast;
+		-ms-interpolation-mode: nearest-neighbor;
+	}
+
+        </style>
+        <div id="tambahkanDokumenPenunjangSPAJ-container24">
+
+			
+			            <h3 id="tambahkanDokumenPenunjangSPAJ-heading32" style="color:#000000;font-weight:400;">
+                Tambah/Edit Dokumen</h3>
+
+            <form id="tambahkanDokumenPenunjangSPAJ-form14" class="list">
+                <label class="item item-select" id="tambahkanDokumenPenunjangSPAJ-select18"
+                       name="selectTipeDokumen">
+                    <span class="input-label">Tipe Dokumen</span>
+                    <select ng-model="data.selectTipeDokumen"
+                            ng-options="selectTipeDokumen.id_sae as selectTipeDokumen.label for selectTipeDokumen in tipeDokumen"
+                            ng-model="data.selectTipeDokumen"></select>
+                </label>
+                <label class="item item-input" id="tambahkanDokumenPenunjangSPAJ-textarea10"
+                       name="namaDokumen">
+                    <span class="input-label">Nama Dokumen</span><textarea
+                        placeholder="Nama dokumen/nama bank/KTP/KK/dll" ng-model="data.addNamaDokumen"></textarea>
+                </label>
+                <label class="item item-input" id="tambahkanDokumenPenunjangSPAJ-textarea10"
+                       name="keteranganDokumen">
+                    <span class="input-label">Keterangan</span><textarea
+                        placeholder="keterangan/sudah diterima/gambar buram/dll."
+                        ng-model="data.addKeteranganDokumen"></textarea>
+                </label>
+
+            </form>
+
+            <div id="tambahkanDokumenPenunjangSPAJ-markdown2" style="color:#000000;">
+                <p>Silahkan ambil gambar melalui kamera atau galeri pada telepon seluler Anda.</p>
+            </div>
+            <center>
+                <div>
+                    <input type="file" class="fileUpload "
+                           accept="application/pdf,image/*" id="camDokumen"
+                           custom-on-change="changeImage"
+                    >
+                    </input>
+                    <div style="width:160px;font-size:1.4em;font-weight:bolder;position:relative;top:-78px;right:-50px;">
+                        FOTO <br>DOKUMEN
+                    </div>
+                </div>
+
+            </center>
+            <div>
+
+                <center>
+                    <div class="canvasContainer"
+                         style="overflow:auto;max-width:500px;max-height:400px;">
+                        <img data-ng-src="{{data.camDokumen}}" ng-model="data.camDokumen"
+                             id="tempImgDokumen"/>
+                        <canvas id="canvasDokumen" ng-model="data.camDokumen"
+                                style="width:500px;height:400px;"></canvas>
+                    </div>
+                </center>
+            </div>
+        </div>
+
+
+        <div class="spacer" style="height: 200px;"></div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+
+                <a d="dokumenPendukungSPAJ-button35" style="font-weight:500;"
+                   class="button button-assertive  button-block icon-right ion-trash-b"
+                   ng-hide="indexDokumen==''" ng-show="indexDokumen!=''"
+                   ng-click="delDokumen(indexDokumen)">HAPUS DOKUMEN</a>
+
+
+                <div class="row">
+                    <div class="col">
+                        <div id="tambahkanDokumenPenunjangSPAJ-button-bar12" class="button-bar">
+                            <a ui-sref="aplikasiSPAJOnline.dokumenPendukungSPAJ"
+                               id="tambahkanDokumenPenunjangSPAJ-button36" style="font-weight:500;"
+                               class="button button-assertive icon-left ion-backspace">BATAL</a>
+                            <button id="tambahkanDokumenPenunjangSPAJ-button37"
+                                    ng-click="saveDokumen($scope)" style="font-weight:500;"
+                                    class="button button-balanced icon-right ion-android-add-circle">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-view>

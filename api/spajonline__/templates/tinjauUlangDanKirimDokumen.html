@@ -1,0 +1,343 @@
+<ion-view title="Tinjau Ulang dan Kirim Dokumen" nav-transition="none" id="page18"
+          cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <div class="list card" id="tinjauUlangDanKirimDokumen-card22">
+            <ion-item class="item-icon-left positive" id="tinjauUlangDanKirimDokumen-list-item3">
+                <i class="icon ion-android-checkmark-circle"></i>Checklist SPAJ
+            </ion-item>
+            <div id="tinjauUlangDanKirimDokumen-container13">
+                <div style="padding:0px;">
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataTertanggung"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Data Tertanggung Utama atau
+                        Tambahan
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataTertanggung"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Data Tertanggung Utama atau Tambahan
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced"
+                              ng-show="isValidDataPekerjaanTertanggung"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Data Pekerjaan Tertanggung
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive"
+                              ng-show="!isValidDataPekerjaanTertanggung"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Data Pekerjaan Tertanggung
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataPekerjaanPempol"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Data Pekerjaan Pemegang Polis
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataPekerjaanPempol"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Data Pekerjaan Pemegang Polis
+                    </ion-item>
+
+                    <!--
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataTertanggungTambahan" id="tinjauUlangDanKirimDokumen-list-item3"><i class="icon ion-ios-checkmark-empty"></i>Data Tertanggung Utama dan/atau Tambahan</ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataTertanggungTambahan" id="tinjauUlangDanKirimDokumen-list-item3"><i class="icon ion-alert"></i>Data Tertanggung Tambahan</ion-item>
+                    -->
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataPempol"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Data Pemegang Polis
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataPempol"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Data Pemegang Polis
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataProdukManfaat"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Data Produk dan Penerima
+                        Manfaat
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataProdukManfaat"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Data Produk dan Penerima Manfaat
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataSKKTU"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Surat Keterangan Kesehatan
+                        Tertanggung Utama
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataSKKTU"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Surat Keterangan Kesehatan Tertanggung Utama
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataSKKTT"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Surat Keterangan Kesehatan
+                        Tertanggung Tambahan
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataSKKTT"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Surat Keterangan Kesehatan Tertanggung
+                        Tambahan
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataDokumen"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Dokumen-dokumen
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataDokumen"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Dokumen-dokumen
+                    </ion-item>
+
+                    <ion-item class="item-icon-left balanced" ng-show="isValidDataPersetujuan"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-ios-checkmark-empty"></i>Persetujuan
+                    </ion-item>
+                    <ion-item class="item-icon-left assertive" ng-show="!isValidDataPersetujuan"
+                              id="tinjauUlangDanKirimDokumen-list-item3"><i
+                            class="icon ion-alert"></i>Persetujuan
+                    </ion-item>
+                </div>
+            </div>
+        </div>
+
+        <div class="list card" id="tinjauUlangDanKirimDokumen-card25">
+            <ion-item class="item-icon-left assertive" id="tinjauUlangDanKirimDokumen-list-item9">
+                <i class="icon ion-document-text"></i>Produk
+
+            </ion-item>
+
+            <div id="tinjauUlangDanKirimDokumen-container16">
+                <div style="padding:8px;">
+                    <div class="row">
+                        <div class="cols col-33">Nama Produk</div>
+                        <div class="cols col-33">Cara Bayar</div>
+                        <div class="cols col-33">
+                            <span ng-hide="true" ng-show="data_produk.isPremi">Premi</span>
+                            <span ng-hide="true" ng-show="data_produk.isPremi == false">Uang Asuransi</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cols col-33"><h4>{{data_produk.jenisAsuransi}}</h4></div>
+                        <div class="cols col-33"><h4>{{data_produk.caraBayar.toUpperCase()}}</h4>
+                        </div>
+                        <div class="cols col-33">
+                            <span ng-hide="true" ng-show="data_produk.isPremi"><h4>{{data_produk.premi | currency:"Rp. "}}</h4></span>
+                            <span ng-hide="true" ng-show="data_produk.isPremi == false"><h4>{{data_produk.uangAsuransi | currency:"Rp. "}}</h4></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cols col-33">Masa Bayar Premi</div>
+                        <div class="cols col-33">Jangka Waktu Asuransi</div>
+                        <div class="cols col-33">Metode bayar</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols col-33"><h5>{{data_produk.masaBayarPremi}} tahun</h5></div>
+                        <div class="cols col-33"><h5>{{data_produk.jangkaWaktuAsuransi}} tahun</h5>
+                        </div>
+                        <div class="cols col-33"><h5>
+                            {{data_produk.bayarPremiSelanjutnya.toUpperCase()}},
+                            {{data_produk.paymentBankName}},
+                            {{data_produk.paymentBankNameLainnya}} </h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="cols col-33">Rider Tambahan</div>
+                        <div class="cols col-66">Alokasi Dana (u/ unitlink)</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols col-33">
+                            <h5>
+                                <div ng-show="data_produk.isTermRider">✓ Term Rider,
+                                    UA:{{data_produk.termRiderUA | currency:"Rp. "}}
+                                </div>
+                                <div ng-show="data_produk.isADDB">✓ ADDB, UA:{{data_produk.addbUA |
+                                    currency:"Rp. "}}
+                                </div>
+                                <div ng-show="data_produk.isTPD">✓ TPD, UA:{{data_produk.tpdUA |
+                                    currency:"Rp. "}}
+                                </div>
+                                <div ng-show="data_produk.isCI53">✓ CI53, UA:{{data_produk.CI53UA |
+                                    currency:"Rp. "}}
+                                </div>
+                                <div ng-show="data_produk.hospitalCP">✓ HCP:
+                                    {{data_produk.hcpTypeSelect}}
+                                </div>
+                                <div ng-show="data_produk.isPBD">✓ PBD</div>
+                                <div ng-show="data_produk.isPBC151">✓ PBC151</div>
+                                <div ng-show="data_produk.isPBTPD">✓ PBTPD</div>
+                                <div ng-show="data_produk.isSPCI51">✓ SPCI5</div>
+                                <div ng-show="data_produk.isSPD">✓ SPD</div>
+                                <div ng-show="data_produk.isSPTBD">✓ SPTBD</div>
+                                <div ng-show="data_produk.isWPC151">✓ WPC151</div>
+                                <div ng-show="data_produk.isWPTPD">✓ WPTPD</div>
+                            </h5>
+                        </div>
+                        <div class="cols col-66">
+                            <h5>
+                                <div ng-show="data_produk.jenisAsuransi == 'UNITLINK' || data_produk.jenisAsuransi == 'JSPROIDAMAN' ||  data_produk.jenisAsuransi == 'JSPROMAPAN' ">
+                                    <div>Pasar Uang: {{data_produk.unitPasarUang}}%</div>
+                                    <div>Pendapatan Tetap: {{data_produk.pendapatanTetap}}%</div>
+                                    <div>Berimbang: {{data_produk.berimbang}}%</div>
+                                    <div>Ekuitas: {{data_produk.ekuitas}}%</div>
+                                    <div>&nbsp;</div>
+                                    <div>Total: 100%</div>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cols col-100">Nama Penerima Manfaat:</div>
+                    </div>
+                    <div class="row">
+                        <h5>
+                            <div class="cols col-100"
+                                 ng-repeat="item in data_penerima_manfaat track by $index">
+                                <ion-item><span>{{$index+1}}.</span> <span>{{item.namaPenerimaManfaat}}</span>,
+                                    <span>{{item.jenkelPenerimaManfaat}},
+							 <span>{{item.penerimaManfaatHubungan}}</span>, <span>{{item.tglLahirPenerimaManfaat.substring(0, 10);}}</span>, <span>{{item.tempatLahirPenerima}}</span>
+                                </ion-item>
+                            </div>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <ion-item class="item-icon-left assertive" id="tinjauUlangDanKirimDokumen-list-item10"
+                      ng-click="moveToProduk()">
+                <i class="icon ion-edit"></i>Tinjau Ulang Produk dan Manfaat
+            </ion-item>
+        </div>
+
+
+        <div class="list card" id="tinjauUlangDanKirimDokumen-card22">
+            <ion-item class="item-icon-left balanced" id="tinjauUlangDanKirimDokumen-list-item3">
+                <i class="icon ion-document-text"></i>Data Tertanggung Uama
+            </ion-item>
+            <div id="tinjauUlangDanKirimDokumen-container13" style="padding:8px">
+                <div>
+                    <div class="row">
+                        <div class="cols  col-20">Nama</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataTertanggung1.namaLengkapTertanggung}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols  col-20">Jenis Kelamin</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataTertanggung1.jenkelTertanggung}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols  col-20">No. KTP</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataTertanggung1.nomorKTPTertanggung}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols  col-20">Alamat</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataTertanggung2.alamatKTPtertanggung}}<br/>{{sumberDataTertanggung2.kabupatenKTPtertanggung}},
+                            {{sumberDataTertanggung2.kodeposKTPtertanggung}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 id="tinjauUlangDanKirimDokumen-heading22"
+                style="padding-left:8px;color:#000000;font-weight:300;">KTP Tertanggung Utama</h4>
+            <div style="margin: 0px;padding:8px; background-color: rgb(232, 235, 239); text-align: center;">
+                <img src="{{imageKtpTertanggung}}" style="width:50%;"/>
+            </div>
+
+
+            <ion-item class="item-icon-left balanced" id="tinjauUlangDanKirimDokumen-list-item4"
+                      ng-click="moveToTertanggung()">
+                <i class="icon ion-edit"></i>Ubah Data Tertanggung
+            </ion-item>
+            <ion-item class="item-icon-left positive" id="tinjauUlangDanKirimDokumen-list-item4"
+                      ng-click="moveToTertanggungTambahan()">
+                <i class="icon ion-edit"></i>Ubah Data Tertanggung Tambahan
+            </ion-item>
+            <ion-item class="item-icon-left positive" id="tinjauUlangDanKirimDokumen-list-item4"
+                      ng-click="moveToSKK()">
+                <i class="icon ion-document"></i>SKK (Surat Keterangan Kesehatan)
+            </ion-item>
+
+        </div>
+        <div class="list card" id="tinjauUlangDanKirimDokumen-card23">
+            <ion-item class="item-icon-left assertive" id="tinjauUlangDanKirimDokumen-list-item5">
+                <i class="icon ion-document-text"></i>Data Pemegang Polis
+            </ion-item>
+            <div id="tinjauUlangDanKirimDokumen-container14">
+                <div>
+                    <div class="row">
+                        <div class="cols  col-20">Nama</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataPempol1.namaLengkapPempol}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols  col-20">Jenis Kelamin</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataPempol1.jenkelPempol}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols  col-20">No. KTP</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataPempol1.nomorKTPPempol}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="cols  col-20">Alamat</div>
+                        <div class="cols">:</div>
+                        <div class="cols"> {{sumberDataPempol2.alamatKTPPempol}}<br/>{{sumberDataPempol2.kabupatenKTPPempol}},
+                            {{sumberDataPempol2.kodeposKTPPempol}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 id="tinjauUlangDanKirimDokumen-heading23" style="color:#000000;font-weight:400;">
+                Foto KTP Pemegang Polis</h4>
+            <div style="margin: 0px;padding:8px; background-color: rgb(232, 235, 239); text-align: center;">
+                <img src="{{imageKTPpempol}}" style="width:50%;"/>
+            </div>
+            <ion-item class="item-icon-left balanced" id="tinjauUlangDanKirimDokumen-list-item4"
+                      ng-click="moveToPemegangPolis()">
+                <i class="icon ion-edit"></i>Ubah Data Pemegang Polis
+            </ion-item>
+
+        </div>
+
+
+        <div class="list card" id="tinjauUlangDanKirimDokumen-card25">
+            <ion-item class="item-icon-left assertive" id="tinjauUlangDanKirimDokumen-list-item9">
+                <i class="icon ion-document-text"></i>Persetujuan SPAJ
+            </ion-item>
+            <div id="tinjauUlangDanKirimDokumen-container16">
+                <div>
+
+                </div>
+            </div>
+            <h4 id="tinjauUlangDanKirimDokumen-heading22" style="color:#000000;font-weight:300;">
+                Tandatangan</h4>
+            <div style="text-align:center;height:250px;">
+                <div class="" style="display:inline-block;">
+                    <div style="display:inline-block;width:250px;margin: 0px; background-color: rgb(232, 235, 239); text-align: center;">
+                        <img src="{{sign1image}}" style="width:100%;height:100%;min-height:200px;"/>
+                    </div>
+                </div>
+                <div class="" style="display:inline-block;">
+                    <div style="display:inline-block;width:250px;margin: 0px;  background-color: rgb(232, 235, 239); text-align: center;">
+                        <img src="{{sign2image}}" style="width:100%;height:100%;min-height:200px;"/>
+                    </div>
+                </div>
+            </div>
+            <ion-item class="item-icon-left assertive" id="tinjauUlangDanKirimDokumen-list-item10"
+                      ng-click="moveToPersetujuan()">
+                <i class="icon ion-edit"></i>Tinjau Ulang Persetujuan
+            </ion-item>
+        </div>
+        <div class="spacer" style="height: 100px;"></div>
+        <button id="tinjauUlangDanKirimDokumen-button32"
+                class="button button-positive button-large button-block  button-block"
+                ng-click="submitToServer()">KIRIM SPAJ
+        </button>
+        <div class="spacer" style="height: 100px;"></div>
+    </ion-content>
+</ion-view>

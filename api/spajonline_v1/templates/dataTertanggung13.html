@@ -1,0 +1,153 @@
+<ion-view title="Identitas Tertanggung" cache-view="false" nav-transition="none" id="page5" style="background-color:#FFFFFF;">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+
+    <style>
+        input.fileUpload {
+            display: inline-block;
+            width: 100%;
+            padding: 120px 0 0 0;
+            height: 80px;
+            overflow: hidden;
+            position:relative;
+            left:-50px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background: url('img/ul.png') center center no-repeat #fff;
+            border-radius: 20px;
+            background-size: 60px 
+        }
+        canvas {
+            image-rendering: optimizeSpeed;
+            image-rendering: crisp-edges;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -o-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            -ms-interpolation-mode: nearest-neighbor;
+        }
+    </style>
+
+        <form id="dataTertanggung13-form2" class="list">
+            <div class="item item-divider" style="margin-top:25px;">1. Mengisi Identitas Tertanggung Utama</div>
+                <label class="item item-input" id="dataTertanggung13-input3" name="namaLengkapTertanggung">
+                    <span class="input-label">Nama Lengkap</span>
+                    <input type="text" placeholder="nama lengkap" ng-model="data.namaLengkapTertanggung" ng-blur="saveDataSpaj($scope)" ng-readonly="true">
+                </label>
+                <label class="item item-input" id="dataTertanggung13-input3" name="namaAliasTertanggung">
+                    <span class="input-label">Nama Alias</span>
+                    <input type="text" placeholder="nama alias" ng-model="data.namaAliasTertanggung" ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataTertanggung13-input2" name="nomorKTPTertanggung">
+                    <span class="input-label">Nomor KTP</span>
+                    <input type="text" placeholder="nomor KTP" ng-model="data.nomorKTPTertanggung" ng-blur="saveDataSpaj($scope)" ng-pattern-restrict="^([0-9]*|)$" maxlength="15" ng-readonly="true">
+                </label>
+
+            <!--label class="item item-input" id="dataTertanggung13-input2" name="tglLahirTertanggung">
+                <span class="input-label">Tgl. Lahir</span>
+                <input type="date" ng-model-options="{timezone:'UTC'}"
+                       ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" placeholder=""
+                       ng-model="data.tglLahirTertanggung" ng-blur="saveDataSpaj($scope)">
+            </label-->
+
+                <label class="item item-input" id="dataTertanggung13-input2" name="tglLahirTertanggung">
+                    <span class="input-label">Tgl. Lahir (d-m-y)</span>
+                    <input type="hidden"  ng-model="data.tglLahirTertanggung" ng-blur="saveDataSpaj($scope)" readonly="readonly" />
+                    {{data.tglLahirTertanggung| date: "dd-MM-yyyy"}}
+                    <!-- <input type="hidden" ng-blur="saveDataSpaj($scope)" ion-datetime-picker date ng-model="data.tglLahirTertanggung" ng-readonly="true">
+                        {{data.tglLahirTertanggung| date: "dd-MM-yyyy"}}
+                    </input> -->
+                </label>
+			
+                <label class="item item-input" id="dataTertanggung13-input3" name="tempatLahirTertanggung">
+                    <span class="input-label">Tempat Lahir</span>
+                    <input type="text" placeholder="tempat lahir" ng-model="data.tempatLahirTertanggung"
+                        ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataTertanggung13-input2" name="nomorKTPTertanggung">
+                    <span class="input-label">Nomor NPWP</span>
+                    <input type="text" placeholder="nomor NPWP" ng-model="data.nomorNPWPTertanggung" ng-blur="saveDataSpaj($scope)" ng-pattern-restrict="^([0-9]*|)$" maxlength="15">
+                </label>
+                <label class="item item-select" id="dataTertanggung13-select2" name="jenkelTertanggung">
+                    <span class="input-label">Jenis Kelamin</span>
+                        <select ng-model="data.jenkelTertanggung" ng-options="jenkelTertanggung.id as jenkelTertanggung.label for jenkelTertanggung in genders" ng-change="saveDataSpaj($scope)" disabled></select>
+                </label>
+                <label class="item item-select" id="dataTertanggung13-select1" name="agamaTertanggung">
+                    <span class="input-label">Agama</span>
+                    <select ng-model="data.agamaTertanggung"
+                            ng-options="agamaTertanggung.id as agamaTertanggung.label for agamaTertanggung in agamas"
+                            ng-change="saveDataSpaj($scope)"></select>
+                </label>
+            <div class="spacer" style="width: 300px; height: 17px;"></div>
+            <center>
+                <div>
+                    <input type="file" class="fileUpload "
+					   accept="image/*" id="camKTPtertanggung" capture="camera"
+					   custom-on-change="changeImage">
+                    </input>
+                    <div style="width:150px;font-size:1.2em;font-weight:bolder;position:relative;top:-78px;right:-52px;">
+                        Swafoto Dengan KTP
+                    </div>
+                </div>
+
+            </center>
+			
+            <div>
+                <center>
+					<div class="canvasContainer" style="overflow:none;max-width:500px;">
+						<canvas id="canvasKTP" ng-model="data.imageKTPTertanggung"></canvas>
+                    </div>
+                </center>
+            </div>
+
+            <div class="spacer" style="height: 50px;"></div>
+            <div class="row">
+                <div class="col col-75"><span class="input-label">Data Sudah Benar</span></div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-model="data.isPageTertanggung1Accepted"
+                               name="isPageTertanggung1Accepted"
+                               ng-change="saveDataSpaj();moveToNextPage()"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+			
+			
+			
+			
+			<sub>GUID: {{data.spaj_guid}}<br /><br /><br /><br /><br />BuildID: {{data.build_id}}<br /></sub>
+            <div class="spacer" style="min-height: 100px;"></div>
+        </form>
+
+
+
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+
+                        <div id="dataTertanggung13-button-bar1" class="button-bar">
+                            <button id="dataTertanggung13-button1"
+                                    style="font-weight:500;text-align:left;"
+                                    class="button button-balanced   icon-right ion-chevron-right">1.
+                                Identitas
+                            </button>
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung23({})"
+                               ng-click="isPageAccepted()" id="dataTertanggung13-button2"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">2. Tempat
+                                Tinggal</a>
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung33({})"
+                               ng-click="isPageAccepted()" id="dataTertanggung13-button3"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right">3. Pendukung</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-view>

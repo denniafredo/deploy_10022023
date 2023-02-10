@@ -1,0 +1,198 @@
+<ion-view title="Daftar SPAJ Online" hide-back-button="true" cache-view="false"
+          nav-transition="none" id="page22">
+    <div class="tabs tabs-outline tabs-top" style="height:100px;position:relative;">
+        <div>
+            <img src="img/qTYcSxSjeLujHxQ0FwaH_logo_jws.png" width="160px" height="auto"
+                 style="display: block; margin-left: auto; margin-right: auto;">
+        </div>
+    </div>
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+       <div class="spacer" style=" height: 120px;"></div>
+
+        <h3 id="daftarSPAJOnline-heading311" style="color:#000000;">Prospek</h3>
+        <ion-item ng-show='dataProspek == null'>
+            <img src="img/loading.png">
+        </ion-item>
+
+        <ion-list id="daftarSPAJOnline-list751">
+            <ion-item ng-repeat="iten in dataProspek track by $index"
+                      class="item-thumbnail-left item-icon-right "
+                      item="iten"
+                      href="#/{{iten}}"
+                      id="daftarSPAJOnline-list-item251">
+                <img src="img/Ring_Binders-256.png" width="160px" height="auto"
+                     style="display: block; margin-left: auto; margin-right: auto;">
+                <div class="row">
+                    <div class="cols" style="padding-right:2px;">
+                        <p>Build ID:
+                        <h2>{{iten.build_id}}</h2></p>
+                        <p>No. Prospek:
+                        <h2>{{iten.no_prospek}}</h2></p>
+                    </div>
+                    <div class="cols" style="padding-left:10px;">
+                        <p>Cr. Bayar:
+                        <h2>{{iten.cara_bayar}}</h2></p>
+                        <p>Premi Rp.:
+                        <h2>{{iten.jumlah_premi}}</h2></p>
+                    </div>
+                    <div class="cols" style="padding-left:10px;">
+                        <p>Tgl. Entri:
+                        <h2>{{iten.tgl_rekam}}</h2></p>
+                        <p>Id Produk:
+                        <h2>{{iten.id_produk}}</h2></p>
+                    </div>                   
+					<div class="cols" style="padding-left:10px;">
+                        <p>Nama Prospek:
+                        <h2>{{iten.nama}}</h2></p>                        
+						<p>Alamat:
+                        <h2>{{iten.alamat}}</h2></p>
+                    </div>
+                </div>
+
+                <h2> &nbsp;<!--{{iten.BUILD_ID}}--> </h2>
+
+				<a class="button button-positive button-large button-inline button-outline icon-right ion-ios-bookmarks-outline"
+                   ng-click=""
+				   href="https://jaim.jiwasraya.co.id/simulasi/files/pdf/{{iten.file_pdf}}"
+				   target="_BLANK"
+				   >PDF</a>
+				<a class="button button-positive button-large button-inline button-outline icon-right ion-ios-color-wand-outline"
+                   ng-click="newSpaj('{{iten.build_id}}')">SPAJOL</a>
+            </ion-item>
+        </ion-list>
+
+
+
+        <!--a ui-sref="sPAJOnlineJiwasraya" id="daftarSPAJOnline-button8" ng-click="doNewSPAJ()"
+        style="font-weight:500;" class="button button-positive button-large button-block button-outline icon-right ion-android-add-circle">Buat SPAJ Baru</a-->
+        <div class="spacer" style=" height: 120px;"></div>
+        <a class="button button-assertive button-large button-inline button-outline icon-right ion-ios-trash-outline"
+           ng-click="deleteData()">DEBUG RESET DATA</a>
+        <h3 id="daftarSPAJOnline-heading31" style="color:#000000;">SPAJ Baru</h3>
+        <ion-item ng-show='unsavedList == null'>
+            Belum ada SPAJ Baru, silahkan klik tombol SPAJ BARU
+        </ion-item>
+        <ion-list id="daftarSPAJOnline-list75">
+            <ion-item ng-repeat="iten in unsavedList track by $index"
+                      class="item-thumbnail-left item-icon-right "
+                      item="iten"
+                      href="#/{{iten}}"
+                      id="daftarSPAJOnline-list-item25">
+                <img src="img/Ring_Binders-256.png" width="160px" height="auto"
+                     style="display: block; margin-left: auto; margin-right: auto;">
+                <div class="row">
+                    <div class="cols">
+                        <p>Nama Tertanggung:
+                        <h2>{{iten.namaLengkapTertanggung}}</h2></p>
+                        <p>No. KTP:
+                        <h2>{{iten.nomorKTPTertanggung}}</h2></p>
+                    </div>
+                    <div class="cols">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="cols">
+                        <p>Produk:
+                        <h2>{{iten.produk}}</h2></p>
+                        <p>Premi:
+                        <h2>{{iten.premi | currency:"Rp. "}}</h2></p>
+                    </div>
+                </div>
+
+                <h2> &nbsp;<!--{{iten.spaj_guid}}--> </h2>
+                <a class="button button-assertive button-large button-inline button-outline icon-right ion-ios-trash-outline"
+                   ng-click="deleteUnsavedSpaj(iten.spaj_guid)">HAPUS</a>
+                <a class="button button-positive button-large button-inline button-outline icon-right ion-ios-color-wand-outline"
+                   ng-click="editUnsavedSpaj(iten.spaj_guid)">EDIT</a>
+            </ion-item>
+        </ion-list>
+
+        <h3 id="daftarSPAJOnline-heading31" style="color:#000000;">SPAJ Dalam Proses</h3>
+        <ion-item ng-show='dataUnprocessed == null'>
+            Belum ada SPAJ Terkirim.
+        </ion-item>
+        <ion-list id="daftarSPAJOnline-list74">
+            <ion-item ng-repeat="item in dataUnprocessed"
+                      class="item-thumbnail-left item-icon-right"
+                      item="item"
+                      href="#/{{item}}"
+                      id="daftarSPAJOnline-list-item25">
+                <img src="img/Grey_Sent_Icon.png" width="160px" height="auto"
+                     style="display: block; margin-left: auto; margin-right: auto;">
+                <div class="row">
+                    <div class="cols">
+                        <h2>Submit Date <h2>{{item.tanggal_submit}}</h2></h2>
+                        <p>Nama Tertanggung:
+                        <h2>{{item.nama_tertanggung}}</h2> </p>
+                        <p>Nama Pemegang Polis:
+                        <h2>{{item.nama_pemegang_polis}}</h2> </p>
+                    </div>
+                    <div class="cols">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="cols">
+                        <p>Produk:
+                        <h2>{{item.nama_produk}}</h2> </p>
+                        <p>Premi:
+                        <h2>{{item.premi | currency:"Rp. "}}</h2> </p>
+                    </div>
+                    <div class="cols">
+
+                    </div>
+                    <div class="cols">
+                    </div>
+                </div>
+
+                <!--h2>{{item.spaj_guid}} </h2-->
+                <!--a class="button button-assertive button-large button-inline button-outline icon-right ion-ios-trash-outline"  ng-click="editSpaj(iten)">HAPUS</a>
+				<a class="button button-positive button-large button-inline button-outline icon-right ion-ios-bolt-outline"  ng-click="editSpaj(iten)">VIEW</a-->
+            </ion-item>
+        </ion-list>
+
+        <h3 id="daftarSPAJOnline-heading31" style="color:#000000;">Proses Underwriting</h3>
+        <ion-item ng-show='dataUnprocessedUnderwriting == null'>
+            Belum ada SPAJ dalam proses.
+        </ion-item>
+        <ion-list id="daftarSPAJOnline-list73">
+            <ion-item ng-repeat="item in dataUnprocessedUnderwriting"
+                      class="item-thumbnail-left item-icon-right"
+                      item="item"
+                      href="#/{{item}}"
+                      id="daftarSPAJOnline-list-item25">
+                <img src="img/approved.png" width="160px" height="auto"
+                     style="display: block; margin-left: auto; margin-right: auto;">
+                <h2>{{item.spaj_guid}} </h2>
+                <h2>Submit Date {{item.tanggal_submit}} </h2>
+                <p>Nama Tertanggung: {{item.nama_tertanggung}}</p>
+                <p>Nama Pemegang Polis: {{item.nama_pemegang_polis}}</p>
+                <p>Produk: {{item.nama_produk}}</p>
+                <p>Premi: {{item.premi | currency:"Rp. "}}</p>
+            </ion-item>
+        </ion-list>
+
+
+        <div class="spacer" style="height: 100px;"></div>
+
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <button
+                                style="font-weight:500;"
+                                class="button button-block  button-large button-balanced icon-right ion-ios-plus-outline"
+                                ui-sref="sPAJOnlineJiwasraya">SPAJ BARU
+                        </button>                       
+						<button
+                                style="font-weight:500;"
+                                class="button button-block  button-large button-balanced icon-right ion-ios-plus-outline"
+                                ui-sref="viewPrintSPAJ">CETAK SPAJ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-view>

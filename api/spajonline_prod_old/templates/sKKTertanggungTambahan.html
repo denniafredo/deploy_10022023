@@ -1,0 +1,163 @@
+<ion-view title="SKK Tertanggung Tambahan" nav-transition="none" id="page26" cache-view="false">
+    <ion-content padding="true" class="has-header">
+        <h2 id="sKKTertanggungTambahan-heading34" style="color:#000000;font-weight:400;">SKK
+            Tertanggung Tambahan</h2>
+        <div class="item item-body" id="sKKTertanggungTambahan-list-item-container1">
+            <div id="sKKTertanggungTambahan-markdown5" style="margin-top:0px;color:#000000;">
+                <ol>
+                    <li>Apakah ada diantara Ayah, Ibu atau Saudara kandung (meninggal/hidup) yang
+                        pernah menderita diabetes, sakit jantung, tekanan darah tinggi, stroke,
+                        sakit ginjal, kelainan psikologis, hepatitis, kanker atau penyakit keturunan
+                        lainnya?
+                    </li>
+                </ol>
+            </div>
+            <form id="sKKTertanggungTambahan-form17" class="list">
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle25" name="skkIsPenyakitKeturunan"
+                            ng-model="data.skkIsPenyakitKeturunan">Ya / Tidak
+                </ion-toggle>
+                <label class="item item-input" id="sKKTertanggungTambahan-input45"
+                       name="skkJenisPenyakitKeturunan">
+                    <span class="input-label">Jenis penyakit</span>
+                    <input type="text" placeholder="Isian jenis penyakit keturunan"
+                           ng-blur="saveDataSpaj($scope)" ng-model="data.skkJenisPenyakitKeturunan">
+                </label>
+                <div class="spacer" style="width: 716px; height: 18px;"></div>
+                <div id="sKKTertanggungTambahan-markdown6" style="margin-top:0px;color:#000000;">
+                    <ol>
+                        <li>Apakah calon Tertanggung pernah mengalami gejala-gejala, diperiksa,
+                            menderita, didiagnosa, mendapat pengobatan, disarankan atau menjalani
+                            rawat inap, menjalani operasi, dianjurkan untuk mendapat nasihat medis,
+                            telah mendapat nasihat
+                            medis, atau dirujuk ke dokter spesialis, untuk penyakit dibawah ini
+                        </li>
+                    </ol>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle26" name="skkIsRawatinap"
+                            ng-model="data.skkIsRawatinap">Ya / Tidak
+                </ion-toggle>
+                <div class="spacer" style="width: 716px; height: 42px;"></div>
+                <div id="sKKTertanggungTambahan-markdown8" style="margin-top:0px;color:#000000;">
+                    <ol>
+                        <li>Merokok?</li>
+                    </ol>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle27" name="skkIsMerokok"
+                            ng-model="data.skkIsMerokok">Ya / Tidak
+                </ion-toggle>
+                <label class="item item-input" id="sKKTertanggungTambahan-input47"
+                       name="skkRokokBatangSehari">
+                    <span class="input-label">Jumlah batang perhari</span>
+                    <input type="text" ng-blur="saveDataSpaj($scope)"
+                           placeholder="Isian jumlah rokok perhari"
+                           ng-model="data.skkRokokBatangSehari">
+                </label>
+                <div class="spacer" style="width: 716px; height: 42px;"></div>
+                <div id="sKKTertanggungTambahan-markdown9" style="margin-top:0px;color:#000000;">
+                    <ol>
+                        <li>Pernah/sedang menggunakan obat-obatan terlarang, narkoba atau bahan
+                            adiktif lainnya?
+                        </li>
+                    </ol>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle28" name="skkIsNarkoba"
+                            ng-model="data.skkIsNarkoba">Ya / Tidak
+                </ion-toggle>
+                <div class="spacer" style="width: 716px; height: 42px;"></div>
+                <div id="sKKTertanggungTambahan-markdown10" style="margin-top:0px;color:#000000;">
+                    <ol>
+                        <li>Meminum minuman berakohol lebih dari 750ml perminggu</li>
+                    </ol>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle29" name="skkIsAlkohol"
+                            ng-model="data.skkIsAlkohol">Ya / Tidak
+                </ion-toggle>
+            </form>
+        </div>
+        <div class="spacer" style="width: 716px; height: 22px;"></div>
+        <div class="item item-body" id="sKKTertanggungTambahan-list-item-container2"
+             ng-model="data.isWanita">
+            <h2 id="sKKTertanggungTambahan-heading36" style="color:#000000;font-weight:600;">SKK
+                Wanita</h2>
+            <div id="sKKTertanggungTambahan-markdown11" style="margin-top:0px;color:#000000;">
+                <p>a. Pernah melakukan Pap Smear?</p>
+            </div>
+            <form id="sKKTertanggungTambahan-form18" class="list">
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle30" name="skkWanitaIsPapSmear"
+                            ng-model="data.skkWanitaIsPapSmear">Ya / Tidak
+                </ion-toggle>
+                <label class="item item-input" id="sKKTertanggungTambahan-input48"
+                       name="skkTertanggungWanitaHasilPapSmear">
+                    <span class="input-label">Hasil Pap Smear</span>
+                    <input type="text" placeholder="bagaimana hasilnya?"
+                           ng-blur="saveDataSpaj($scope)"
+                           ng-model="data.skkTertanggungWanitaHasilPapSmear">
+                </label>
+                <div class="spacer" style="width: 716px; height: 18px;"></div>
+                <div id="sKKTertanggungTambahan-markdown12" style="margin-top:0px;color:#000000;">
+                    <p>b. Haid (menstruasi) terganggu?</p>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle31" name="skkWanitaIsHaidTerganggu"
+                            ng-model="data.skkWanitaIsHaidTerganggu">Ya / Tidak
+                </ion-toggle>
+                <div class="spacer" style="width: 716px; height: 18px;"></div>
+                <div id="sKKTertanggungTambahan-markdown13" style="margin-top:0px;color:#000000;">
+                    <p>c. Dalam keadaan Hamil?</p>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle32" name="skkWanitaIsHamil"
+                            ng-model="data.skkWanitaIsHamil">Ya / Tidak
+                </ion-toggle>
+                <div class="spacer" style="width: 716px; height: 18px;"></div>
+                <div id="sKKTertanggungTambahan-markdown14" style="margin-top:0px;color:#000000;">
+                    <p>d. Pernah melahirkan dengan cara operasi (sectio caesarea)?</p>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle33" name="skkWanitaIsCesar"
+                            ng-model="data.skkWanitaIsCesar">Ya / Tidak
+                </ion-toggle>
+                <div class="spacer" style="width: 716px; height: 18px;"></div>
+                <div id="sKKTertanggungTambahan-markdown15" style="margin-top:0px;color:#000000;">
+                    <p>e. pernah keguguran?</p>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle35" name="skkWanitaIsKeguguran"
+                            ng-model="data.skkWanitaIsKeguguran">Ya / Tidak
+                </ion-toggle>
+                <div id="sKKTertanggungTambahan-markdown16" style="margin-top:0px;color:#000000;">
+                    <p>f. Pernah mengalami kesulitan / komplikasi saat hamil atau melahirkan</p>
+                </div>
+                <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                            id="sKKTertanggungTambahan-toggle34" name="skkWanitaSulitLahir"
+                            ng-model="data.skkWanitaSulitLahir">Ya / Tidak
+                </ion-toggle>
+                <div class="spacer" style="width: 716px; height: 18px;"></div>
+            </form>
+        </div>
+        <form id="sKKTertanggungTambahan-form40" class="list">
+            <ion-toggle toggle-class="toggle-balanced" ng-change="saveDataSpaj($scope)"
+                        id="sKKTertanggungTambahan-toggle45" name="isSkkTambahanOk"
+                        ng-model="data.isSkkTambahanOk">Data Sudah Benar
+            </ion-toggle>
+        </form>
+        <div class="spacer" style="height: 100px;"></div>
+    </ion-content>
+
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+                <a ui-sref="aplikasiSPAJOnline.dataTertanggung33({})"
+                   id="sKKTertanggungTambahan-button42" style="font-weight:500;"
+                   class="button button-light button-large button-block icon-right ion-checkmark-round">OK</a>
+
+            </div>
+        </div>
+</ion-view>

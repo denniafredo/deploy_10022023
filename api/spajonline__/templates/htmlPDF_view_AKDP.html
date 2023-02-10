@@ -1,0 +1,89 @@
+<html>
+<head>
+	    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+<script src='../../js/jquery-min.js'></script>
+SPAJ AKDP
+<div id="wrapper" style="text-align: left; width: 100%; height: 100%; 
+	overflow: auto; -webkit-overflow-scrolling: touch;">
+
+
+<div id="divCsv1" style="min-height:3508px;width:100%;max-width:2480px;
+		min-width:2480px;background:url(../img/SPAJ_PA_AKDP_001.jpg);background-size: contain;background-repeat:no-repeat;">
+	<canvas id="page1" style="position:relative;top:0px;left:0px;z-index:99;">
+	</canvas>
+</div>
+
+<div style="min-height:1115px;width:100%;max-width:2480px;
+		min-width:788px;background:url(../img/SPAJ_PA_AKDP_002.jpg);background-size: contain;background-repeat:no-repeat;">
+<canvas id="page2" style="position:relative;top:0px;left:0px;">
+</canvas>
+</div>
+<!--img width="100%" src="../img/SPAJ_PA_AKDP_001.jpg" >
+<img width="100%" src="../img/SPAJ_PA_AKDP_002.jpg" -->
+</div>
+<script>
+var canvas = document.getElementById("page1");
+canvas.width  = 2480;
+canvas.height = 3508;
+var ctx = canvas.getContext("2d");
+var scls = null;
+ctx.font = "1.5em Arial";
+ctx.fillText("YELRISMAN",775,475); //nama agen
+ctx.fillText("B   A",775,555); //no agen A
+ctx.fillText("0    0    0     0    0     0     1      4      1    6",900,555); //no agen B
+ctx.fillText("C   A    B   A    N    G           K    A     L       I     M   A    N     T     A    N",775,625); //no agen B
+ctx.fillText("JAJANG SUJANA",775,965); //no agen B
+
+ rescale();
+  function getAspectRatio(width, height) {
+    var ratio = width / height;
+    return ( Math.abs( ratio - 4 / 3 ) < Math.abs( ratio - 16 / 9 ) ) ? 'normal' : 'wide';
+}
+
+  function rescale(){
+
+		var aspect = getAspectRatio($(window).width(),$(window).height());
+
+		var w = $(window).width();
+		var h = $(window).height();
+		
+		if(aspect == 'wide'){
+			if(w > 700 && h >500){
+				scls = 'scale(.5,.5)  translate(0px, 0px)';
+			} else if( (w > 500 && w <700) && (h > 300 && h<500)  ){
+				scls = 'scale(.5,.5)  translate(0px, 0px)';
+			} else if( w < 500 && h <300  ){
+				scls = 'scale(.5,.5)  translate(0px, 0px)';
+			}
+			
+			cls = 'vertical';
+			rmcls = 'horizontal';
+		} else if(aspect == 'normal'){
+			if(h > 700 && w >500){
+				scls = 'scale(.5,.5)  translate(0px, 0px)';
+			} else if( (h > 500 && h <700) && (w > 300 && w<500)  ){
+				scls = 'scale(.5,.5)  translate(0px, 0px)';
+			} else if( h < 500 && w <300  ){
+				scls = 'scale(.5,.5)  translate(0px, 0px)';
+			}
+			
+			cls = 'horizontal'
+			rmcls = 'vertical';
+		}
+		$('#divCsv1').css('transform',scls);
+		$('#divCsv1').css('position','relative');
+		$('#divCsv1').css('top','0px');
+		$('#divCsv1').css('left','0px');
+		$('#page1').css('position','absolute');
+		$('#page1').css('top','0px');
+		$('#page1').css('left','0px');
+  }
+</script>
+<style>
+
+</style>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<ion-view title="Pekerjaan Tertanggung" nav-transition="none" id="page7" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+
+        <div id="pekerjaanTertanggung-container4">
+            <form id="pekerjaanTertanggung-form16" class="list">
+                <div class="item item-divider" style="margin-top:25px;">Pekerjaan Tertanggung</div>
+                <label class="item item-select" id="pekerjaanTertanggung-select10"
+                       name="pekerjaanTertanggung">
+                    <span class="input-label">Pekerjaan</span>
+                    <select ng-model="data.pekerjaanTertanggung"
+                            ng-options="pekerjaanTertanggung.id as pekerjaanTertanggung.label for pekerjaanTertanggung in pekerjaans"
+                            onChange=""
+                            ng-change="getKelasPekerjaan(data.pekerjaanTertanggung);saveDataSpaj();" disabled></select>
+                    Klasifikasi Pekerjaan: <b style="font-size:1.3em;">{{data.klasifikasiPekerjaanTertanggung}}</b>
+                </label>
+                <label class="item item-input" ng-hide="data.pekerjaanTertanggung!='otherpekerjaan'"
+                       currency-input id="pekerjaanTertanggung-input58" name="pekerjaanLainnya">
+                    <span class="input-label">Lainnya</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.pekerjaanLainnya" ng-blur="saveDataSpaj()" >
+                </label>
+                <label class="item item-select" id="pekerjaanTertanggung-select12"
+                       name="pangkatTertanggung">
+                    <span class="input-label">Pangkat/Golongan</span>
+                    <select ng-model="data.pangkatTertanggung"
+                            ng-options="pangkatTertanggung.id as pangkatTertanggung.label for pangkatTertanggung in pangkats"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+				<br />
+				<div class="item item-divider" style="margin-top:25px;">
+                                   Pendapatan Setahun
+                                   <div class="row">
+                                          <div class="col" style="text-align: left;">
+                                                 
+                                                 <p style="font-size: small;">Active Income : {{ data.penghasilanTertanggung | currency:"Rp "}}</p>
+                                          </div>
+                                          <div class="col item-select" style="text-align: right;">
+                                                 <select ng-model="data.jenisPendapatan" ng-options="jenisPendapatan.id as jenisPendapatan.label for jenisPendapatan in jenisPendapatans"
+                                                        ng-change="selectJenisPendapatans(data.jenisPendapatan)">
+                                                 </select>
+                                          </div>
+                                   </div>
+                                   
+                            </div>
+                <label class="item item-select" id="pekerjaanTertanggung-select124"
+                       name="rangeGajiTertanggung">
+                    <span class="input-label">a. Gaji</span>
+                    <select ng-model="data.rangeGajiTertanggung"
+                            ng-options="rangeGajiTertanggung.id as rangeGajiTertanggung.label for rangeGajiTertanggung in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" ng-hide="data.rangeGajiTertanggung=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="rangeGajiTertanggungJmlLainnya">
+                    <span class="input-label">Jumlah Gaji</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                            ng-pattern-restrict="^([0-9,.-]*|)$"  ng-model="data.rangeGajiTertanggungJmlLainnya" ng-blur="saveDataSpaj()" ui-number-mask="0" >
+                </label>
+                <label class="item item-select" id="pekerjaanTertanggung-select125"
+                       name="rangePendapatanPasangan">
+                    <span class="input-label">b. Penghasilan suami/istri</span>
+                    <select ng-model="data.rangePendapatanPasangan"
+                            ng-options="rangePendapatanPasangan.id as rangePendapatanPasangan.label for rangePendapatanPasangan in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" ng-hide="data.rangePendapatanPasangan=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="rangePendapatanPasanganLainnya">
+                    <span class="input-label">Jumlah Pend. Pasangan</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.rangePendapatanPasanganLainnya" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+                <label class="item item-input" ng-hide="data.rangePendapatanPasangan=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="usiaProduktifPasangan">
+                    <span class="input-label">Usia Produktif Pasangan</span>
+                    <input type="text" placeholder="___"
+                           ng-model="data.usiaProduktifPasangan" ng-blur="saveDataSpaj()" ng-pattern-restrict="^([0-9,.-]*|)$">
+                </label>
+                <label class="item item-select" id="pekerjaanTertanggung-select125"
+                       name="rangeHasilInvestasi">
+                    <span class="input-label">c. Hasil Investasi</span>
+                    <select ng-model="data.rangeHasilInvestasi"
+                            ng-options="rangeHasilInvestasi.id as rangeHasilInvestasi.label for rangeHasilInvestasi in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" ng-hide="data.rangeHasilInvestasi=='0'"
+                       currency-input id="pekerjaanTertanggung-input58" name="rangeHasilInvestasi">
+                    <span class="input-label">Jumlah Hasil Investasi</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.rangeHasilInvestasiLainnya" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+                <label class="item item-select" id="pekerjaanTertanggung-select125"
+                       name="rangeBisnis">
+                    <span class="input-label">d. Bisnis Pribadi</span>
+                    <select ng-model="data.rangeBisnis"
+                            ng-options="rangeBisnis.id as rangeBisnis.label for rangeBisnis in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+
+                <label class="item item-input" ng-hide="data.rangeBisnis=='0'" currency-input
+                       id="pekerjaanTertanggung-input58" name="rangeBisnis">
+                    <span class="input-label">Pendapatan Hasil Bisnis</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.rangeBisnisLainnya" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+
+                <label class="item item-select" id="pekerjaanTertanggung-select125"
+                       name="rangeBonus">
+                    <span class="input-label">e. Bonus/Insentif/Komisi</span>
+                    <select ng-model="data.rangeBonus"
+                            ng-options="rangeBonus.id as rangeBonus.label for rangeBonus in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+
+                <label class="item item-input" ng-hide="data.rangeBonus=='0'" currency-input
+                       id="pekerjaanTertanggung-input58" name="rangeBonus">
+                    <span class="input-label">Jumlah Bonus/komisi</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.rangeBonusLainnya" ng-blur="saveDataSpaj()" ui-number-mask="0">
+                </label>
+
+                <label class="item item-select" id="pekerjaanTertanggung-select125"
+                       name="rangePendapatanOrangTua">
+                    <span class="input-label">f. Pendapatan Orang Tua</span>
+                    <select ng-model="data.rangePendapatanOrangTua"
+                            ng-options="rangePendapatanOrangTua.id as rangePendapatanOrangTua.label for rangePendapatanOrangTua in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" ng-hide="data.rangePendapatanOrangTua=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="rangePendapatanOrangTuaLainnya">
+                    <span class="input-label">Jumlah Pendapatan Orang Tua</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.rangePendapatanOrangTuaLainnya"
+                           ng-blur="saveDataSpaj()"  ui-number-mask="0">
+                </label>
+                <label class="item item-input" ng-hide="data.rangePendapatanOrangTua=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="usiaProduktifOrangTua">
+                    <span class="input-label">Usia Produktif Orang Tua</span>
+                    <input type="text" placeholder="___"
+                           ng-model="data.usiaProduktifOrangTua" ng-blur="saveDataSpaj()" ng-pattern-restrict="^([0-9,.-]*|)$">
+                </label>
+                <label class="item item-select" id="pekerjaanTertanggung-select125"
+                       name="rangePendapatanTertanggung">
+                    <span class="input-label">g. Pendapatan Lainnya</span>
+                    <select ng-model="data.rangePendapatanTertanggung"
+                            ng-options="rangePendapatanTertanggung.id as rangePendapatanTertanggung.label for rangePendapatanTertanggung in rangegajitertanggungs"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+                <label class="item item-input" ng-hide="data.rangePendapatanTertanggung=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="rangePendapatanTertanggungLainnya">
+                    <span class="input-label">Jumlah Pendapatan Lainnya</span>
+                    <input type="text" placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+                           ng-model="data.rangePendapatanTertanggungLainnya"
+                           ng-blur="saveDataSpaj()"  ui-number-mask="0">
+                </label>
+                <label class="item item-input"
+                       ng-hide="data.rangePendapatanTertanggung=='tidakada' || data.rangePendapatanTertanggung=='0'"
+                       currency-input id="pekerjaanTertanggung-input58"
+                       name="sumberPendapatanLainnya">
+                    <span class="input-label">Sumber Pendapatan Lainnya</span>
+                    <input type="text" placeholder="cth. Hibah, Hadiah, Warisan"
+                           ng-model="data.sumberPendapatanLainnya" ng-blur="saveDataSpaj()">
+                </label>
+                <label ng-hide="true" class="item item-select" id="pekerjaanTertanggung-select15"
+                       name="klasifikasiPekerjaanTertanggung">
+                    <span class="input-label">Klasifikasi Pekerjaan</span>
+                    <select ng-model="data.klasifikasiPekerjaanTertanggung"
+                            ng-options="klasifikasiPekerjaanTertanggung.id as klasifikasiPekerjaanTertanggung.label for klasifikasiPekerjaanTertanggung in kelaspekerjaans"
+                            ng-change="saveDataSpaj()"></select>
+                </label>
+            </form>
+        </div>
+
+        <div class="spacer" style="width: 300px; height: 11px;"></div>
+        <form id="pekerjaanTertanggung-form19" class="list" ng-hide="false">
+              <!--ng-show="data.pekerjaanTertanggung == 'WIR'-->
+            <!--h3 id="pekerjaanTertanggung-heading41" style="color:#000000;font-weight:400;">Wirausaha</h3-->
+            <div class="item item-divider" style="margin-top:16px;">
+              <span style="position:relative;top:10px;">Silahkan geser tombol, Jika pekerjaan Wiraswasta atau tidak bekerja </span>
+              <span  style="float:right;">
+                  <md-toggle ng-change="tertanggungAdalahWiraswasta(data.isTertanggungWiraswasta)"
+                             ng-model="data.isTertanggungWiraswasta" name="isTertanggungWiraswasta"
+                             toggle-class="toggle-balanced">
+                  </md-toggle>
+              </span>
+          </div>  
+		<div class="item item-divider" style="margin-top:25px;">Jika usaha sendiri (Wiraswasta)</div>
+            <label class="item item-input" id="pekerjaanTertanggung-input58"
+                   name="pemilikWirausahaTertanggung">
+                <span class="input-label">Kepemilikan Usaha</span>
+                <input type="text" placeholder="Cth. Perorangan/Patungan/Join Venture dll."
+                       ng-model="data.pemilikWirausahaTertanggung" ng-blur="saveDataSpaj()">
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input26"
+                   name="bidangWirausahaTertanggung">
+                <span class="input-label">Bidang Usaha</span>
+                <input type="text" placeholder="Cth. Niaga/Konstruksi/Jasa/Keuangan dll."
+                       ng-model="data.bidangWirausahaTertanggung" ng-blur="saveDataSpaj()">
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input60"
+                   name="namaWirausahaTertanggung">
+                <span class="input-label">Nama Usaha</span>
+                <input type="text" placeholder="__________________"
+                       ng-model="data.namaWirausahaTertanggung" ng-blur="saveDataSpaj()">
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input61"
+                   name="alamatWirausahaTertanggung">
+                <span class="input-label">Alamat Usaha</span>
+                <input type="text" placeholder="__________________"
+                       ng-model="data.alamatWirausahaTertanggung" ng-blur="saveDataSpaj()">
+            </label>
+        </form>
+
+        <form id="pekerjaanTertanggung-form15" class="list">
+            <div class="item item-divider" style="margin-top:25px;">Data Perusahaan Tempat Bekerja</div>
+            <label class="item item-select" id="pekerjaanTertanggung-select9"
+                   name="jenisPerusahaanTertanggung">
+                <span class="input-label">Jenis Perusahaan</span>
+                <select ng-model="data.jenisPerusahaanTertanggung"
+                        ng-options="jenisPerusahaanTertanggung.id as jenisPerusahaanTertanggung.label for jenisPerusahaanTertanggung in jenisperusahaans"
+                        ng-change="saveDataSpaj()"></select>
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input12"
+                   name="namaPerusahaanTertanggung">
+                <span class="input-label">Nama Perusahaan</span>
+                <input type="text" placeholder="" ng-model="data.namaPerusahaanTertanggung"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" 
+                       ng-blur="saveDataSpaj()">
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-textarea3"
+                   name="alamatPerusahaanTertanggung">
+                <span class="input-label">Alamat Perusahaan</span><textarea placeholder=""
+					ng-blur="saveDataSpaj()"
+					ng-model="data.alamatPerusahaanTertanggung"  ng-pattern-restrict="^([A-Za-z 0-9,.-]*|)$" ></textarea>
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input13"
+                   name="kodeposPerusahaanTertanggung">
+                <span class="input-label">Kode Pos Perusahaan</span>
+                <input type="text" placeholder="" ng-blur="saveDataSpaj()" ng-pattern-restrict="^([0-9,.-]*|)$"
+                       ng-model="data.kodeposPerusahaanTertanggung" maxlength="5">
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input14">
+                <span class="input-label">Nomor Telepon Perusahaan</span>
+                <input type="tel" placeholder="" ng-model="data.nomorTeleponPerusahaanTertanggung"
+                       ng-blur="saveDataSpaj()">
+            </label>
+            <label class="item item-input" id="pekerjaanTertanggung-input15"
+                   name="nomorEkstensiPerusahaanTertanggung">
+                <span class="input-label">Nomor Ekstensi</span>
+                <input type="text" placeholder="" ng-blur="saveDataSpaj()" ng-pattern-restrict="^([0-9,.-]*|)$"
+                       ng-model="data.nomorEkstensiPerusahaanTertanggung">
+            </label>
+        </form>
+        <div class="spacer" style="width: 300px; height: 18px;"></div>
+        <div class="row">
+            <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+            <div class="col" style="text-align:right;">
+                <md-toggle ng-model="data.isPagePekerjaanTertanggung1Accepted"
+                           name="isPagePekerjaanTertanggung1Accepted"
+                           ng-change="saveDataSpaj();moveToNextPage()"
+                           toggle-class="toggle-balanced">
+                </md-toggle>
+            </div>
+        </div>
+
+        <div class="spacer" style="height: 100px;"></div>
+
+    </ion-content>
+
+    <!--div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+                <a ui-sref="aplikasiSPAJOnline.dataTertanggung33({})"
+                   id="pekerjaanTertanggung-button38"
+                   class="button button-light button-large button-block icon-right ion-checkmark">OK</a>
+
+            </div>
+        </div>
+
+    </div-->
+</ion-view>

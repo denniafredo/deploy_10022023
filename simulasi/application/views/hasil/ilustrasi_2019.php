@@ -1,0 +1,1013 @@
+<?php
+
+	$buildid = $_GET['buildid'];
+	$filepdf = $_GET['filepdf'];
+	$kodeprospek = $_GET['kodeprospek'];
+
+	$sql = 'select A.*,
+				(SELECT NAMAPEKERJAAN FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= A.KDJNSPEKERJAAN) NAMA_PEKERJAAN_CPP,
+				(SELECT LIFEEXTRA FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= A.KDJNSPEKERJAAN) EKSTRALIFE_CPP,
+				(SELECT PAEXTRA FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= A.KDJNSPEKERJAAN) EKSTRAPA_CPP,
+				(SELECT TPDEXTRA FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= A.KDJNSPEKERJAAN) EKSTRATPD_CPP	
+			from PRO_PEMPOL A 
+			where build_id = '.$buildid;
+	$query = $this->db->query($sql);
+
+	$sql2 = 'select B.*, 
+				(SELECT NAMAPEKERJAAN FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= B.KDJNSPEKERJAAN) NAMA_PEKERJAAN_CTT,
+				(SELECT LIFEEXTRA FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= B.KDJNSPEKERJAAN) EKSTRALIFE_CTT,
+				(SELECT PAEXTRA FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= B.KDJNSPEKERJAAN) EKSTRAPA_CTT,
+				(SELECT TPDEXTRA FROM JAIM_400_JENIS_PEKERJAAN WHERE KDJENISPEKERJAAN= B.KDJNSPEKERJAAN) EKSTRATPD_CTT	
+			from PRO_TERTANGGUNG B
+			where build_id = '.$buildid;
+	$query2 = $this->db->query($sql2);
+
+	$sql3 = 'select * from PRO_ASURANSI_POKOK where build_id = '.$buildid;
+	$query3 = $this->db->query($sql3);
+
+	$sql4 = 'select A.*,
+				   (SELECT FUNDALOCNAME FROM PRO_ALOKASI_FUND WHERE FUNDALOCID = A.NAMA_ALOKASI1) NAMA_ALOKASI1
+			 from PRO_ALOKASI_DANA_NEW A 
+			 where build_id = '.$buildid;
+	$query4 = $this->db->query($sql4);
+
+	$sql5 = 'select * from JAIM.PRO_DATA_RIDER_NEW where build_id = '.$buildid;
+	$query5 = $this->db->query($sql5);
+
+	$sql11 = "SELECT *
+	          FROM PRO_REDAKSI_PEMERIKSAAN
+	          WHERE JENIS_PEMERIKSAAN = (select PEMERIKSAAN from PRO_ASURANSI_POKOK where build_id = '$buildid') ";
+	$query11 = $this->db->query($sql11);
+
+?>
+<style>
+	table, td, th {
+	    border: 1px solid black;
+	}
+
+	table {
+	    border-collapse: collapse;
+	    width: 100%;
+	}
+
+	th {
+	    height: 50px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="" id="Testis">
+	<div class="row" align="center">
+		<div class="col-xs-12">
+			<div class="well">
+				<address>
+				Illustrasi ini hanya merupakan pendekatan/proyeksi dari jumlah dana yang diinvestasikan dan bukan merupakan bagian dari kontrak asuransi
+				<address>
+			</div>
+		</div>
+	 </div>
+	<div class="row invoice-logo">
+		<div class="col-xs-5" align="justify">
+			<p>
+				 <h4>PT. ASURANSI JIWASRAYA (PERSERO)</h4>
+
+			</p>
+		</div>
+		Jl. Ir. H. Juanda No. 34 Jakarta - 10120
+		<div class="col-xs-7 invoice-logo-space" align="right">
+			<img src="<?php echo base_url(); ?>/assets/img/logo-js.png" alt=""/>
+		</div>
+	</div>
+	&nbsp;
+	<div class="row" align="center">
+		<div class="col-xs-12">
+			<input id="buildid" name="buildid" value="<?=$_GET['buildid'] ?>" style="display: none"></input>
+			<div class="well" style="font-weight:bold;font-size:16px">
+				JS PROMAPAN (Jiwasraya Proteksi Masa Depan Aman)
+			</div>
+		</div>
+	 </div>
+	<hr/>
+	<div class="row">
+		<div class="col-xs-12">			
+			<?php
+				foreach ($query->result_array() as $row)
+				{	
+					$usia_cpp = $row['USIA_TH'];
+					$jeniskelamincpp = $row['JENIS_KELAMIN'];
+					$nilaiekstrapremilife_cpp = $row['EKSTRALIFE_CPP'];
+					$nilaiekstrapremipa_cpp = $row['EKSTRAPA_CPP'];
+					$nilaiekstrapremitpd_cpp = $row['EKSTRATPD_CPP'];
+			?>
+			<div class="well" style="font-weight:bold;font-size:18px">
+				CALON PEMEGANG POLIS
+			</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">			
+						<tbody>
+							<tr>
+								<td align="justify" style="font-size:18px" width="180px">Nama Pemegang Polis </td>
+								<td align="center" style="font-size:18px" width="10px">:</td>
+								<td align="left" style="font-size:18px" width="60px"><?=$row['NAMA'];?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Tanggal Lahir </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=date('d/m/Y',strtotime($row['TGL_LAHIR']));?></td>
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Jenis Kelamin </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=($row['JENIS_KELAMIN'] == 'M' ? 'Laki-Laki' : 'Perempuan');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Status Perokok </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=($row['IS_PEROKOK'] == 'T' ? 'Tidak' : 'Ya');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Pekerjaan </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=$row['NAMA_PEKERJAAN_CPP'];?></td>						
+							</tr>
+						<tbody>
+					</table>
+				</div>			
+			<?php
+				}
+
+				/* Fungsi untuk menyimpan extra resiko CPP - Teguh 24/03/2020 */
+				$sqli_cpp= "INSERT INTO JAIM.PRO_EXTRA_RESIKO
+									(BUILD_ID, STATUS, LIFEEXTRA, PAEXTRA, TPDEXTRA, TGLREKAM)
+								VALUES
+									('$buildid', 'CPP', '$nilaiekstrapremilife_cpp', '$nilaiekstrapremipa_cpp', '$nilaiekstrapremitpd_cpp', SYSDATE)";
+				$queryinsert = $this->db->query($sqli_cpp);
+				/* End */
+			?>							
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-xs-12">			
+			<?php
+				foreach ($query2->result_array() as $row)
+				{
+					$usia_ctt = $row['USIA_TH'];
+					$jeniskelaminctt = $row['JENIS_KELAMIN'];
+					$perokokcalontertanggung = $row['IS_PEROKOK'];
+					$nilaiekstrapremilife_ctt = $row['EKSTRALIFE_CTT'];
+					$nilaiekstrapremipa_ctt = $row['EKSTRAPA_CTT'];
+					$nilaiekstrapremitpd_ctt = $row['EKSTRATPD_CTT'];
+			?>
+			<div class="well" style="font-weight:bold;font-size:18px">
+				CALON TERTANGGUNG
+			</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">			
+						<tbody>
+							<tr>
+								<td align="justify" style="font-size:18px" width="180px">Nama Tertanggung </td>
+								<td align="center" style="font-size:18px" width="10px">:</td>
+								<td align="left" style="font-size:18px" width="60px"><?=$row['NAMA'];?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Tanggal Lahir </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=date('d/m/Y',strtotime($row['TGL_LAHIR']));?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Jenis Kelamin </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=($row['JENIS_KELAMIN'] == 'M' ? 'Laki-Laki' : 'Perempuan');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Status Perokok </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=($row['IS_PEROKOK'] == 'T' ? 'Tidak' : 'Ya');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Pekerjaan </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px"><?=$row['NAMA_PEKERJAAN_CTT'];?></td>						
+							</tr>
+						<tbody>
+					</table>
+				</div>			
+			<?php
+				}
+
+				/* Fungsi untuk menyimpan extra resiko CTT - Teguh 24/03/2020 */
+				$sqli_ctt= "INSERT INTO JAIM.PRO_EXTRA_RESIKO
+									(BUILD_ID, STATUS, LIFEEXTRA, PAEXTRA, TPDEXTRA, TGLREKAM)
+								VALUES
+									('$buildid', 'CTT', '$nilaiekstrapremilife_ctt', '$nilaiekstrapremipa_ctt', '$nilaiekstrapremitpd_ctt', SYSDATE)";
+				$queryinsert = $this->db->query($sqli_ctt);
+				/* End */
+			?>							
+		</div>
+	</div>			
+	<hr>
+	<div class="row">
+		<div class="col-xs-12">			
+			<?php
+				foreach ($query3->result_array() as $row)
+				{
+					$total_premi	= $row['PREMI_BERKALA'] + $row['TOPUP_BERKALA'];
+					$carabayar 		= $row['CARA_BAYAR'];
+					$topup_sekaligus= $row['TOPUP_SEKALIGUS'];
+					$periode_topup_sekaligus = $row['PERIODE_TOPUP'];
+					$makstopup		= $usia_ctt + $periode_topup_sekaligus;
+
+			?>
+			<div class="well" style="font-weight:bold;font-size:18px">
+				DATA PERTANGGUNGAN
+			</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">			
+						<tbody>
+							<tr>
+								<td align="justify" style="font-size:18px" width="180px">Cara Bayar </td>
+								<td align="center" style="font-size:18px" width="10px">:</td>
+								<?php 
+									if($row['CARA_BAYAR']=='1')
+									{
+										$row['CARA_BAYAR'] = 'Bulanan';	
+									}
+									else if ($row['CARA_BAYAR']=='2')
+									{
+										$row['CARA_BAYAR'] = 'Tahunan';	
+									}
+									else if ($row['CARA_BAYAR']=='3')
+									{
+										$row['CARA_BAYAR'] = 'Kuartalan';
+									}
+									else if ($row['CARA_BAYAR']=='4')
+									{
+										$row['CARA_BAYAR'] = 'Semesteran';	
+									}
+								?>
+								
+								<td align="left" style="font-size:18px" width="60px">&nbsp;&nbsp;<?=$row['CARA_BAYAR'];?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Uang Pertanggungan </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px">&nbsp;&nbsp;<?= number_format($row['UA'],0,',','.');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Premi Berkala </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px">&nbsp;&nbsp;<?= number_format($row['PREMI_BERKALA'],0,',','.');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Top Up Berkala </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px">&nbsp;&nbsp;<?= number_format($row['TOPUP_BERKALA'],0,',','.');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Top Up Sekaligus </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px">&nbsp;&nbsp;<?= number_format($row['TOPUP_SEKALIGUS'],0,',','.');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Total Premi yang dibayar </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px">&nbsp;&nbsp;<?= number_format($row['PREMI_BERKALA']+$row['TOPUP_BERKALA']+$row['TOPUP_SEKALIGUS'],0,',','.');?></td>						
+							</tr>
+							<tr>
+								<td align="justify" style="font-size:18px">Medical </td>
+								<td align="center" style="font-size:18px">:</td>
+								<td align="left" style="font-size:18px">&nbsp;&nbsp;<?= ($row['PEMERIKSAAN'] == '' ? 'Tidak' : 'Ya') ;?></td>						
+							</tr>							
+						<tbody>
+					</table>
+				</div>			
+			<?php
+				}
+			?>							
+		</div>
+	</div>
+	
+	<hr>
+	<div class="row">
+		<div class="col-xs-12">			
+			<div class="well" style="font-weight:bold;font-size:18px">
+				ALOKASI DANA INVESTASI (%)
+			</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">			
+						<tbody>
+						<?php
+						foreach ($query4->result_array() as $row)
+						{
+							if($row['NAMA_ALOKASI1'] == 'JS LINK PASAR UANG'){
+								$bunga_rendah	= 0.03;
+								$bunga_sedang	= 0.05;
+								$bunga_tinggi	= 0.08;
+							}else if($row['NAMA_ALOKASI1'] == 'JS LINK PENDAPATAN TETAP'){
+								$bunga_rendah	= 0.04;
+								$bunga_sedang	= 0.07;
+								$bunga_tinggi	= 0.12;
+							}else if($row['NAMA_ALOKASI1'] == 'JS LINK BERIMBANG'){
+								$bunga_rendah	= 0.04;
+								$bunga_sedang	= 0.08;
+								$bunga_tinggi	= 0.13;
+							}else if($row['NAMA_ALOKASI1'] == 'JS LINK EKUITAS'){
+								$bunga_rendah	= 0.05;
+								$bunga_sedang	= 0.10;
+								$bunga_tinggi	= 0.16;
+							}else{
+								$bunga_rendah	= 0;
+								$bunga_sedang	= 0;
+								$bunga_tinggi	= 0;
+							}
+						?>		
+								<?php
+									if ($row['NAMA_ALOKASI1'] != '')
+									{	
+								?>
+							<tr>
+								<td align="justify" style="font-size:18px" width="50px"><?=$row['NAMA_ALOKASI1'];?></td>
+								<td align="center" style="font-size:18px" width="1px">:</td>
+								<td align="left" style="font-size:18px" width="30px">
+								<?php if ($row['ALOKASI1']<1) {
+									echo str_replace(',','',$row['ALOKASI1'])*10;
+								}
+								else
+								{
+									echo str_replace(',','',$row['ALOKASI1'])*100;
+								}
+								?>%
+								</td>						
+							</tr>
+								<?php
+									}
+								?>	
+								<?php
+									if ($row['NAMA_ALOKASI2'] != '')
+									{	
+								?>	
+							<tr>
+								<td align="justify" style="font-size:18px" width="50px"><?=$row['NAMA_ALOKASI2'];?></td>
+								<td align="center" style="font-size:18px" width="1px">:</td>
+								<td align="left" style="font-size:18px" width="50px">
+								<?php if ($row['ALOKASI2']<1) {
+									echo str_replace(',','',$row['ALOKASI2'])*10;
+								}
+								else
+								{
+									echo str_replace(',','',$row['ALOKASI2'])*100;
+								}
+								?>%
+								</td>						
+							</tr>	
+								<?php
+									}
+								?>	
+						<?php
+						}
+						?>	
+					</tbody>
+				</table>
+			</div>	
+		</div>
+	</div>	
+
+	<hr>
+	<div class="row">
+		<div class="col-xs-12">			
+			<div class="well" style="font-weight:bold;font-size:18px">
+				BIAYA ASURANSI
+			</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">			
+						<tbody>
+							<tr>
+								<td align="center" style="font-size:18px;font-weight:bold; " width="280px">NAMA ASURANSI</td>
+								<td align="center" style="font-size:18px;font-weight:bold; " width="280px">SAMPAI USIA TERTANGGUNG</td>
+								<td align="center" style="font-size:18px;font-weight:bold; " width="280px">UANG ASURANSI</td>
+								<td align="center" style="font-size:18px;font-weight:bold; " width="280px">BIAYA ASURANSI PER BULAN</td>
+							</tr>
+						<?php
+						foreach ($query5->result_array() as $row)
+						{
+							$ua_dasar	= $row['UADASAR'];
+							$ua_ci53	= $row['CI53'];
+							$ua_addb	= $row['ADDB'];
+							$ua_adb		= $row['ADB'];
+							$ua_hcp		= $row['IS_HCP'];
+							$ua_tpd		= $row['TPD'];
+							$ua_tr		= $row['TR'];
+							$ua_pbd		= $row['PBD'];
+							$ua_pbci	= $row['PBCI'];
+							$ua_pbtpd	= $row['PBTPD'];
+							$ua_spd		= $row['SPD'];
+							$ua_spci	= $row['SPCI'];
+							$ua_sptpd	= $row['SPTPD'];
+							$ua_wpci51	= $row['WPCI51'];
+							$ua_wptpd	= $row['WPTPD'];
+
+							if($row['IS_UADASAR']==1){
+								echo "<tr>
+										<td>Asuransi Dasar</td>
+										<td align='center'>99</td>
+										<td align='right'>".number_format($row['UADASAR'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_UADASAR'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_CI53']!=0){
+								echo "<tr>
+										<td>JS CI 53</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['CI53'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_CI53'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_ADDB']!=0){
+								echo "<tr>
+										<td>JS Accidental Death and Dismemberment</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['ADDB'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_ADDB'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_ADB']!=0){
+								echo "<tr>
+										<td>JS Accidental Death Benefit</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['ADB'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_ADB'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_HCP']!=0){
+								echo "<tr>
+										<td>JS HCP + Surgery</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['HCP'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_HCP'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_TPD']!=0){
+								echo "<tr>
+										<td>JS TPD</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['TPD'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_TPD'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_TR']!=0){
+								echo "<tr>
+										<td>JS Term Life</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['TR'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_TR'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_PBD']!=0){
+								echo "<tr>
+										<td>JS Payor Death</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['PBD'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_PBD'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_PBCI']!=0){
+								echo "<tr>
+										<td>JS Payor CI</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['PBCI'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_PBCI'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_PBTPD']!=0){
+								echo "<tr>
+										<td>JS Payor TPD</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['PBTPD'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_PBTPD'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_SPD']!=0){
+								echo "<tr>
+										<td>JS Spouse Payor Death</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['SPD'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_SPD'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_SPCI']!=0){
+								echo "<tr>
+										<td>JS Spouse Payor CI</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['SPCI'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_SPCI'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_SPTPD']!=0){
+								echo "<tr>
+										<td>JS Spouse Payor TPD</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['SPTPD'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_SPTPD'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_WPCI51']!=0){
+								echo "<tr>
+										<td>JS Waiver Of Premium CI</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['WPCI51'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_WPCI51'],0,',','.')."</td>
+									</tr>";
+							}
+							if($row['IS_WPTPD']!=0){
+								echo "<tr>
+										<td>JS Waiver Of Premium TPD</td>
+										<td align='center'>65</td>
+										<td align='right'>".number_format($row['WPTPD'],0,',','.')."</td>
+										<td align='right'>".number_format($row['BIAYA_WPTPD'],0,',','.')."</td>
+									</tr>";
+							}
+
+						?>	
+
+						<?php
+						}
+						?>		
+
+					</tbody>
+				</table>
+			</div>	
+		</div>
+	</div>	
+	
+	<hr>
+	<div>
+						<table class="table table-responsive-sm table-bordered">
+                          <tr>
+                            <th>Tahun Ke</th>
+                            <th>Usia CTT</th>
+                            <th>Usia CPP</th>
+                            <th>Bulan Ke</th>
+                            <th>Akuisisi Premi Dasar</th>
+                            <th>Akuisisi Top Up</th>
+							<th>Akuisisi Top Up X</th>	
+                            <th>Alokasi Premi Dasar</th>
+                            <th>Alokasi Top Up</th>
+                            <th>Alokasi Topup X</th>
+                            <th>Alokasi Total</th>
+                            <th>Akumulasi</th>
+                            <th>Iuran</th>
+                            <th>COA</th>
+                            <th>COI</th>
+                            <th>JS ADB</th>
+                            <th>JS CI53</th>
+                            <th>JS WPCI51</th>
+                            <th>JS TR</th>
+                            <th>JS HCP</th>
+                            <th>JS TPD</th>
+                            <th>JS WPTPD</th>
+                            <th>JS ADDB</th>
+                            <th>JS PB-D</th>
+                            <th>JS PB-CI</th>
+                            <th>JS PB-TPD</th>
+                            <th>JS SP-D</th>
+                            <th>JS SP-CI</th>
+                            <th>JS SP-TPD</th>
+                            <th>TOTAL BIAYA</th>
+                            <th>Investasi - Rendah</th>
+                            <th>Investasi - Sedang</th>
+                            <th>Investasi - Tinggi</th>
+                            <th>Meninggal - Rendah</th>
+                            <th>Meninggal - Sedang</th>
+                            <th>Meninggal - Tinggi</th>
+                          </tr>
+                        <?php
+                        	$coa = 27500;
+							$usia= $usia_ctt;
+							$premi_dasar=0.7*$total_premi;
+							$topup_dasar=0.3*$total_premi;
+							$tahun_ke = 1;
+ 
+						  while($usia <= 99) {
+
+							$sqltarif = 'select * from JAIM.JAIM_300_TARIF_PROMAPAN_NEW where usia = '.$usia;
+							$querytarif = $this->db->query($sqltarif);
+							foreach ($querytarif->result_array() as $tarif){
+								if($perokokcalontertanggung == 'T'){
+									$tariftermlife = str_replace(',', '.', $tarif['TERMLIFE_NONSMOKER']);
+									$tariftermrider = str_replace(',', '.', $tarif['TERMRIDER_NONSMOKER']);
+								}else{
+									$tariftermlife = str_replace(',', '.', $tarif['TERMLIFE_SMOKER']);
+									$tariftermrider = str_replace(',', '.', $tarif['TERMRIDER_SMOKER']);
+								}
+								if($ua_hcp == 1 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_100'];
+								}else if($ua_hcp == 2 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_200'];
+								}else if($ua_hcp == 3 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_300'];
+								}else if($ua_hcp == 4 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_400'];
+								}else if($ua_hcp == 5 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_500'];
+								}else if($ua_hcp == 6 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_600'];
+								}else if($ua_hcp == 7 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_700'];
+								}else if($ua_hcp == 8 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_800'];
+								}else if($ua_hcp == 9 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_900'];
+								}else if($ua_hcp == 10 && $jeniskelaminctt == 'M'){
+									$tarifriderjshcp = $tarif['HCP_L_1000'];
+								}else if($ua_hcp == 1 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_100'];
+								}else if($ua_hcp == 2 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_200'];
+								}else if($ua_hcp == 3 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_300'];
+								}else if($ua_hcp == 4 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_400'];
+								}else if($ua_hcp == 5 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_500'];
+								}else if($ua_hcp == 6 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_600'];
+								}else if($ua_hcp == 7 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_700'];
+								}else if($ua_hcp == 8 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_800'];
+								}else if($ua_hcp == 9 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_900'];
+								}else if($ua_hcp == 10 && $jeniskelaminctt == 'F'){
+									$tarifriderjshcp = $tarif['HCP_P_1000'];
+								}else if($ua_hcp == 0){
+									$tarifriderjshcp = "0,0";
+								}
+								$tarifriderjshcp_	= str_replace(',', '.', $tarifriderjshcp);
+								$tarifriderjsadb 	= str_replace(',', '.', $tarif['ADB']);
+								$tarifriderjsci53	= str_replace(',', '.', $tarif['CI53']);
+								$tarifriderjswpci51 = str_replace(',', '.', $tarif['WPCI']);
+								$tarifriderjstpd 	= str_replace(',', '.', $tarif['TPD']);
+								$tarifriderjswptpd 	= str_replace(',', '.', $tarif['WPTPD']);
+								$tarifriderjsaddb 	= str_replace(',', '.', $tarif['ADDB']);
+							}
+
+							$sqltarif_cpp = 'select * from JAIM.JAIM_300_TARIF_PROMAPAN_NEW where usia = '.$usia_cpp;
+							$querytarif_cpp = $this->db->query($sqltarif_cpp);
+							foreach ($querytarif_cpp->result_array() as $tarif_cpp){
+								$tarifriderjspbd 	= str_replace(',', '.', $tarif_cpp['PBDEATH']);
+								$tarifriderjspbci 	= str_replace(',', '.', $tarif_cpp['PBCI']);
+								$tarifriderjspbtpd 	= str_replace(',', '.', $tarif_cpp['PBTPD']);
+								$tarifriderjsspd 	= str_replace(',', '.', $tarif_cpp['SPDEATH']);
+								$tarifriderjsspci 	= str_replace(',', '.', $tarif_cpp['SPCI']);
+								$tarifriderjssptpd 	= str_replace(',', '.', $tarif_cpp['SPTPD']);
+							}
+								
+								for ($y = 1; $y <= 12; $y++) {
+
+									if($tahun_ke == 1){
+										$biaya_coa 		= 0;
+										$biaya_dasar	= 0;
+										$biaya_dasar_	= $ua_dasar*$tariftermlife/12/1000*(1+($nilaiekstrapremilife_ctt/1000));
+										$biaya_ci53		= 0;
+										$biaya_ci53_	= $ua_ci53*$tarifriderjsci53/12/1000;
+										$biaya_addb		= 0;
+										$biaya_addb_	= $ua_addb*$tarifriderjsaddb/12/1000*(1+($nilaiekstrapremipa_ctt/100));
+										$biaya_adb		= 0;
+										$biaya_adb_		= $ua_adb*$tarifriderjsadb/12/1000*(1+($nilaiekstrapremipa_ctt/100));
+										$biaya_hcp		= 0;
+										$biaya_hcp_		= $tarifriderjshcp_ / 12;
+										$biaya_tpd		= 0;
+										$biaya_tpd_		= $ua_tpd*$tarifriderjstpd/12/1000*(1+($nilaiekstrapremitpd_ctt/100));
+										$biaya_jstr		= 0;
+										$biaya_jstr_	= $ua_tr*$tariftermrider/12/1000*(1+($nilaiekstrapremilife_ctt/1000));
+										$biaya_pbd		= 0;
+										$biaya_pbd_		= $ua_pbd*$tarifriderjspbd/12/100*(1+($nilaiekstrapremilife_cpp/100));
+										$biaya_pbci		= 0;
+										$biaya_pbci_	= $ua_pbci*$tarifriderjspbci/12/100;
+										echo "Biaya Asuransi PB-CI : ".$biaya_pbci_;
+										$biaya_pbtpd	= 0;
+										$biaya_pbtpd_	= $ua_pbtpd*$tarifriderjspbtpd/12/100*(1+($nilaiekstrapremitpd_cpp/100));
+										$biaya_spd		= 0;
+										$biaya_spd_		= $ua_spd*$tarifriderjsspd/12/100*(1+($nilaiekstrapremilife_cpp/100));
+										$biaya_spci		= 0;
+										$biaya_spci_	= $ua_spci*$tarifriderjsspci/12/100;
+										$biaya_sptpd	= 0;
+										$biaya_sptpd_	= $ua_sptpd*$tarifriderjssptpd/12/100*(1+($nilaiekstrapremitpd_cpp/100));
+										$biaya_wpci51	= 0;
+										$biaya_wpci51_	= $ua_wpci51*$tarifriderjswpci51/12/100;
+										$biaya_wptpd	= 0;
+										$biaya_wptpd_	= $ua_wptpd*$tarifriderjswptpd/12/100*(1+($nilaiekstrapremitpd_ctt/100));
+                                	}else if($tahun_ke == 2){
+                                		$biaya_coa 		= $coa * 2;
+										$biaya_dasar	= ($ua_dasar * $tariftermlife /12 / 1000 * (1 + ($nilaiekstrapremilife_ctt/1000))) + $biaya_dasar_;
+										$biaya_ci53		= ($ua_ci53*$tarifriderjsci53/12/1000) + $biaya_ci53_;
+										$biaya_addb		= ($ua_addb*$tarifriderjsaddb/12/1000*(1+($nilaiekstrapremipa_ctt/100))) + $biaya_addb_;
+										$biaya_adb		= ($ua_adb*$tarifriderjsadb/12/1000*(1+($nilaiekstrapremipa_ctt/100))) + $biaya_adb_;
+										$biaya_hcp		= ($tarifriderjshcp_ / 12) + $biaya_hcp_;
+										$biaya_tpd		= ($ua_tpd*$tarifriderjstpd/12/1000*(1+($nilaiekstrapremitpd_ctt/100))) + $biaya_tpd_;
+										$biaya_jstr		= ($ua_tr*$tariftermrider/12/1000*(1+($nilaiekstrapremilife_ctt/1000))) + $biaya_jstr_;
+										$biaya_pbd		= ($ua_pbd*$tarifriderjspbd/12/100*(1+($nilaiekstrapremilife_cpp/100))) + $biaya_pbd_;
+										$biaya_pbci 	= ($ua_pbci*$tarifriderjspbci/12/100) + $biaya_pbci_;
+										$biaya_pbtpd	= ($ua_pbtpd*$tarifriderjspbtpd/12/100*(1+($nilaiekstrapremitpd_cpp/100))) + $biaya_pbtpd_;
+										$biaya_spd		= ($ua_spd*$tarifriderjsspd/12/100*(1+($nilaiekstrapremilife_cpp/100))) + $biaya_spd_;
+										$biaya_spci		= ($ua_spci*$tarifriderjsspci/12/100) + $biaya_spci_;
+										$biaya_sptpd	= ($ua_sptpd*$tarifriderjssptpd/12/100*(1+($nilaiekstrapremitpd_cpp/100))) + $biaya_sptpd_;
+										$biaya_wpci51	= ($ua_wpci51*$tarifriderjswpci51/12/100) + $biaya_wpci51_;
+										$biaya_wptpd	= ($ua_wptpd*$tarifriderjswptpd/12/100*(1+($nilaiekstrapremitpd_ctt/100))) + + $biaya_wptpd_;
+										$total_biaya	= $biaya_coa + $biaya_dasar + $biaya_ci53 + $biaya_adb + $biaya_addb + $biaya_hcp + $biaya_tpd + $biaya_jstr + $biaya_pbd + $biaya_pbci + $biaya_pbtpd + $biaya_spd + $biaya_spci + $biaya_sptpd + $biaya_wpci51 + $biaya_wptpd;
+                                	}else{
+                                		$biaya_coa 		= $coa;
+                                		$biaya_dasar	= $ua_dasar * $tariftermlife / 12 / 1000 * (1 + ($nilaiekstrapremilife_ctt/1000));
+                                		$biaya_ci53		= $ua_ci53*$tarifriderjsci53/12/1000;	
+                                		$biaya_adb		= $ua_adb*$tarifriderjsadb/12/1000*(1+($nilaiekstrapremipa_ctt/100));
+                                		$biaya_addb 	= $ua_addb*$tarifriderjsaddb/12/1000*(1+($nilaiekstrapremipa_ctt/100));
+                                		$biaya_hcp		= $tarifriderjshcp_ / 12;
+                                		$biaya_tpd		= $ua_tpd*$tarifriderjstpd/12/1000*(1+($nilaiekstrapremitpd_ctt/100));
+                                		$biaya_jstr		= $ua_tr*$tariftermrider/12/1000*(1+($nilaiekstrapremilife_ctt/1000));
+                                		$biaya_pbd		= $ua_pbd*$tarifriderjspbd/12/100*(1+($nilaiekstrapremilife_cpp/100));
+										$biaya_pbci 	= $ua_pbci*$tarifriderjspbci/12/100;
+										$biaya_pbtpd	= $ua_pbtpd*$tarifriderjspbtpd/12/100*(1+($nilaiekstrapremitpd_cpp/100));
+										$biaya_spd		= $ua_spd*$tarifriderjsspd/12/100*(1+($nilaiekstrapremilife_cpp/100));
+										$biaya_spci		= $ua_spci*$tarifriderjsspci/12/100;
+										$biaya_sptpd	= $ua_sptpd*$tarifriderjssptpd/12/100*(1+($nilaiekstrapremitpd_cpp/100));
+										$biaya_wpci51	= $ua_wpci51*$tarifriderjswpci51/12/100;
+										$biaya_wptpd	= $ua_wptpd*$tarifriderjswptpd/12/100*(1+($nilaiekstrapremitpd_ctt/100));
+										$total_biaya	= $biaya_coa + $biaya_dasar + $biaya_ci53 + $biaya_adb + $biaya_addb + $biaya_hcp + $biaya_tpd + $biaya_jstr + $biaya_pbd + $biaya_pbci + $biaya_pbtpd + $biaya_spd + $biaya_spci + $biaya_sptpd + $biaya_wpci51 + $biaya_wptpd;
+                                	}
+
+                                  if($y==12){
+                                    if($carabayar==1){
+                                      $iuran = 12*$total_premi;
+                                    }else{
+                                      $iuran = $total_premi;
+                                    }
+                                    $background = "style='background-color: yellow'";
+                                    
+                                    if($usia < $makstopup){
+                                    	$topup_x= $topup_sekaligus;
+                                    	
+                                    }else{
+                                    	$topup_x = 0;
+                                    }
+                                  }else{
+                                    $iuran = 0;
+                                    $topup_x = 0;
+                                    $background = "";
+                                  }
+
+                                  if($carabayar ==1){
+                                    $akuisisi_topup = 0.05*$topup_dasar;
+                                    $alokasi_topup = 0.95*$topup_dasar;
+
+                                    if($y==1){
+                                    	if($usia < $makstopup){
+	                                    	$akuisisi_topup_x = 0.05*$topup_sekaligus;
+	                                    	$alokasi_topup_x = 0.95*$topup_sekaligus;
+	                                    }else{
+	                                    	$akuisisi_topup_x = 0;
+	                                    	$alokasi_topup_x = 0;
+	                                    }
+                                    }else{
+                                    	$akuisisi_topup_x = 0;
+	                                    $alokasi_topup_x = 0;
+                                    }
+
+                                    if($tahun_ke == 1){
+                                      $akuisisi_premi_dasar = 0.9*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.1*$premi_dasar;
+                                    }
+                                    else if($tahun_ke == 2){
+                                      $akuisisi_premi_dasar = 0.5*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.5*$premi_dasar;
+                                      
+                                    }else if($tahun_ke == 3){
+                                      $akuisisi_premi_dasar = 0.4*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.6*$premi_dasar;
+                                      
+                                    }else if($tahun_ke == 4){
+                                      $akuisisi_premi_dasar = 0.3*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.7*$premi_dasar;
+                                      
+                                    }else if($tahun_ke == 5){
+                                      $akuisisi_premi_dasar = 0.1*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.9*$premi_dasar;
+                                    }
+                                    else{
+                                      $akuisisi_premi_dasar = 0*$premi_dasar;
+                                      $alokasi_premi_dasar = 1*$premi_dasar;
+                                    }
+
+                                    $alokasi_total = $alokasi_premi_dasar + $alokasi_topup + $alokasi_topup_x;
+                                    if($tahun_ke == 1 && $y==1){
+                                      $akumulasi = 0;
+                                      $akumulasi_total = $akumulasi + $alokasi_total;
+                                      $akumulasi = $akumulasi_total;
+                                      $investasi_rendah = $alokasi_total * (1+($bunga_rendah/12));
+                                      $investasi_sedang = $alokasi_total * (1+($bunga_sedang/12));
+                                      $investasi_tinggi = $alokasi_total * (1+($bunga_tinggi/12));
+                                      $hasil_invetasi_rendah_old = $investasi_rendah;
+                                      $hasil_invetasi_sedang_old = $investasi_sedang;
+                                      $hasil_invetasi_tinggi_old = $investasi_tinggi;
+                                      $meninggal_rendah = $ua_dasar + $investasi_rendah;
+                                      $meninggal_sedang = $ua_dasar + $investasi_sedang;
+                                      $meninggal_tinggi = $ua_dasar + $investasi_tinggi;
+                                    }else{
+                                      $akumulasi_total = $akumulasi + $alokasi_total;
+                                      $akumulasi = $akumulasi_total;
+                                      $investasi_rendah = ($alokasi_total+$hasil_invetasi_rendah_old-$total_biaya) * (1+($bunga_rendah/12));
+                                      $investasi_sedang = ($alokasi_total+$hasil_invetasi_sedang_old-$total_biaya) * (1+($bunga_sedang/12));
+                                      $investasi_tinggi = ($alokasi_total+$hasil_invetasi_tinggi_old-$total_biaya) * (1+($bunga_tinggi/12));
+                                      $hasil_invetasi_rendah_old = $investasi_rendah;
+                                      $hasil_invetasi_sedang_old = $investasi_sedang;
+                                      $hasil_invetasi_tinggi_old = $investasi_tinggi;
+                                      $meninggal_rendah = $ua_dasar + $investasi_rendah;
+                                      $meninggal_sedang = $ua_dasar + $investasi_sedang;
+                                      $meninggal_tinggi = $ua_dasar + $investasi_tinggi;
+                                    }
+                                  }else if($carabayar ==2 && $y == 1){
+                                    $akuisisi_topup = 0.05*$topup_dasar;
+                                    $alokasi_topup = 0.95*$topup_dasar;
+                                    if($usia < $makstopup){
+                                    	$akuisisi_topup_x = 0.05*$topup_sekaligus;
+                                    	$alokasi_topup_x = 0.95*$topup_sekaligus;
+                                    }else{
+                                    	$akuisisi_topup_x = 0;
+                                    	$alokasi_topup_x = 0;
+                                    }
+
+                                    
+
+
+
+                                    if($tahun_ke == 1){
+                                      $akuisisi_premi_dasar = 0.9*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.1*$premi_dasar;
+                                    }
+                                    else if($tahun_ke == 2){
+                                      $akuisisi_premi_dasar = 0.5*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.5*$premi_dasar;
+                                      
+                                    }else if($tahun_ke == 3){
+                                      $akuisisi_premi_dasar = 0.4*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.6*$premi_dasar;
+                                      
+                                    }else if($tahun_ke == 4){
+                                      $akuisisi_premi_dasar = 0.3*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.7*$premi_dasar;
+                                      
+                                    }else if($tahun_ke == 5){
+                                      $akuisisi_premi_dasar = 0.1*$premi_dasar;
+                                      $alokasi_premi_dasar = 0.9*$premi_dasar;
+                                    }
+                                    else{
+                                      $akuisisi_premi_dasar = 0*$premi_dasar;
+                                      $alokasi_premi_dasar = 1*$premi_dasar;
+                                    }
+
+                                    $alokasi_total = $alokasi_premi_dasar + $alokasi_topup + $alokasi_topup_x;
+                                    if($tahun_ke == 1 && $y==1){
+										$akumulasi = 0;
+										$akumulasi_total = $akumulasi + $alokasi_total;
+										$akumulasi = $akumulasi_total;
+										$investasi_rendah = $alokasi_total * (1+($bunga_rendah/12));
+	                                    $investasi_sedang = $alokasi_total * (1+($bunga_sedang/12));
+	                                    $investasi_tinggi = $alokasi_total * (1+($bunga_tinggi/12));
+	                                    $hasil_invetasi_rendah_old = $investasi_rendah;
+	                                    $hasil_invetasi_sedang_old = $investasi_sedang;
+	                                    $hasil_invetasi_tinggi_old = $investasi_tinggi;
+	                                    $meninggal_rendah = $ua_dasar + $investasi_rendah;
+	                                    $meninggal_sedang = $ua_dasar + $investasi_sedang;
+	                                    $meninggal_tinggi = $ua_dasar + $investasi_tinggi;
+                                    }else{
+                                      $akumulasi_total = $akumulasi + $alokasi_total ;
+                                      $akumulasi = $akumulasi_total;
+                                      $investasi_rendah = ($alokasi_total+$hasil_invetasi_rendah_old-$total_biaya) * (1+($bunga_rendah/12));
+                                      $investasi_sedang = ($alokasi_total+$hasil_invetasi_sedang_old-$total_biaya) * (1+($bunga_sedang/12));
+                                      $investasi_tinggi = ($alokasi_total+$hasil_invetasi_tinggi_old-$total_biaya) * (1+($bunga_tinggi/12));
+                                      $hasil_invetasi_rendah_old = $investasi_rendah;
+                                      $hasil_invetasi_sedang_old = $investasi_sedang;
+                                      $hasil_invetasi_tinggi_old = $investasi_tinggi;
+                                      $meninggal_rendah = $ua_dasar + $investasi_rendah;
+                                      $meninggal_sedang = $ua_dasar + $investasi_sedang;
+                                      $meninggal_tinggi = $ua_dasar + $investasi_tinggi;
+
+                                    }
+                                  }else{
+                                    $akuisisi_topup = 0;
+                                    $alokasi_topup = 0;
+                                    $akuisisi_premi_dasar = 0;
+                                    $alokasi_premi_dasar = 0;
+                                    $akuisisi_topup_x = 0;
+                                    $alokasi_topup_x = 0;
+
+                                    $alokasi_total = $alokasi_premi_dasar + $alokasi_topup + $alokasi_topup_x;
+                                    if($tahun_ke == 1 && $y==1){
+                                      $akumulasi = 0;
+                                      $akumulasi_total = $akumulasi + $alokasi_total;
+                                      $akumulasi = $akumulasi_total;
+                                      $investasi_rendah = $alokasi_total * (1+($bunga_rendah/12));
+                                      $investasi_sedang = $alokasi_total * (1+($bunga_sedang/12));
+                                      $investasi_tinggi = $alokasi_total * (1+($bunga_tinggi/12));
+                                      $hasil_invetasi_rendah_old = $investasi_rendah;
+                                      $hasil_invetasi_sedang_old = $investasi_sedang;
+                                      $hasil_invetasi_tinggi_old = $investasi_tinggi;
+                                      $meninggal_rendah = $ua_dasar + $investasi_rendah;
+                                      $meninggal_sedang = $ua_dasar + $investasi_sedang;
+                                      $meninggal_tinggi = $ua_dasar + $investasi_tinggi;
+                                      
+                                    }else{
+                                      $akumulasi_total = $akumulasi + $alokasi_total;
+                                      $akumulasi = $akumulasi_total;
+                                      $investasi_rendah = ($alokasi_total+$hasil_invetasi_rendah_old-$total_biaya) * (1+($bunga_rendah/12));
+                                      $investasi_sedang = ($alokasi_total+$hasil_invetasi_sedang_old-$total_biaya) * (1+($bunga_sedang/12));
+                                      $investasi_tinggi = ($alokasi_total+$hasil_invetasi_tinggi_old-$total_biaya) * (1+($bunga_tinggi/12));
+                                      $hasil_invetasi_rendah_old = $investasi_rendah;
+                                      $hasil_invetasi_sedang_old = $investasi_sedang;
+                                      $hasil_invetasi_tinggi_old = $investasi_tinggi;
+                                      $meninggal_rendah = $ua_dasar + $investasi_rendah;
+                                      $meninggal_sedang = $ua_dasar + $investasi_sedang;
+                                      $meninggal_tinggi = $ua_dasar + $investasi_tinggi;
+                                    }
+                                  }
+								  echo "<tr ".$background.">";
+									echo "<td>$tahun_ke</td> ";
+									echo "<td>$usia</td>";
+									echo "<td>$usia_cpp</td>";
+									echo "<td>$y</td>";    
+									echo "<td> $akuisisi_premi_dasar </td>";
+									echo "<td> $akuisisi_topup </td>";
+									echo "<td> $akuisisi_topup_x </td>";
+									echo "<td> $alokasi_premi_dasar </td>";
+									echo "<td> $alokasi_topup </td>";
+									echo "<td> $alokasi_topup_x </td>";
+									echo "<td> $alokasi_total </td>";
+									echo "<td> $akumulasi_total </td>";
+									echo "<td> $iuran </td>";
+									echo "<td> $biaya_coa</td>";
+									echo "<td> ".round($biaya_dasar)."</td>";
+									echo "<td> ".round($biaya_adb)."</td>";
+									echo "<td> ".round($biaya_ci53)." </td>";
+									echo "<td> ".round($biaya_wpci51)." </td>";
+									echo "<td> ".round($biaya_jstr)." </td>";
+									echo "<td> ".round($biaya_hcp)." </td>";
+									echo "<td> ".round($biaya_tpd)." </td>";
+									echo "<td> ".round($biaya_wptpd)." </td>";
+									echo "<td> ".round($biaya_addb)." </td>";
+									echo "<td> ".round($biaya_pbd)." </td>";
+									echo "<td> ".round($biaya_pbci)." </td>";
+									echo "<td> ".round($biaya_pbtpd)." </td>";
+									echo "<td> ".round($biaya_spd)." </td>";
+									echo "<td> ".round($biaya_spci)." </td>";
+									echo "<td> ".round($biaya_sptpd)." </td>";
+									echo "<td> ".round($total_biaya)." </td>";
+									echo "<td> ".round($investasi_rendah) ."</td>";
+									echo "<td> ".round($investasi_sedang)." </td>";
+									echo "<td> ".round($investasi_tinggi)." </td>";
+									echo "<td> ".round($meninggal_rendah) ."</td>";
+									echo "<td> ".round($meninggal_sedang)." </td>";
+									echo "<td> ".round($meninggal_tinggi)." </td>";
+								  echo "</tr>";
+								  if($y==12){
+								  	$premi_dasar_insert = $premi_dasar/1000;
+									$topup_dasar_insert = $topup_dasar/1000;
+									$topup_sekaligus_insert = $topup_x/1000;
+									$invlow 	= $investasi_rendah/1000;
+									$invmed 	= $investasi_sedang/1000;
+									$invhigh 	= $investasi_tinggi/1000;
+									$juainvlow 	= $meninggal_rendah/1000;
+									$juainvmed 	= $meninggal_sedang/1000;
+									$juainvhigh = $meninggal_tinggi/1000;
+									// $sqlinsert = "insert into JAIM.PRO_TOTAL_INVESTASI1
+									// 				(BUILD_ID, TAHUN, PREMI, TOPUPB, TOPUPX, INVLOW, INVMED, INVHIGH, JUAINVLOW, JUAINVMED, JUAINVHIGH, USIA_TT)
+									//  				Values
+									//  				('$buildid', $tahun_ke, $premi_dasar_insert, $topup_dasar_insert, $topup_sekaligus_insert, $invlow, $invmed, $invhigh, $juainvlow, $juainvmed, $juainvhigh, $usia) ";
+									//echo $sqlinsert; echo "</br>";
+									//$queryinsert = $this->db->query($sqlinsert);
+								  }else{
+
+								  }
+								  
+                                }
+                            $usia++;
+                            $usia_cpp++;
+                            $tahun_ke++;
+                          } 
+                        ?>
+                        </table>
+	</div>
+	
+</div>
+
+</div>
+<!-- END PAGE CONTENT-->
+</div>
+</div>
+<!-- END CONTENT -->
+
+<script>
+
+
+</script>

@@ -1,0 +1,62 @@
+<style>
+
+</style>
+<ion-view title="Daftar SPAJ Print" hide-back-button="true" cache-view="false"
+          nav-transition="none" id="page23">
+    <div class="tabs tabs-outline tabs-top" style="height:100px;position:relative;">
+        <div>
+            <img src="img/qTYcSxSjeLujHxQ0FwaH_logo_jws.png" width="160px" height="auto"
+                 style="display: block; margin-left: auto; margin-right: auto;">
+        </div>
+    </div>
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+	 <div class="spacer" style=" height: 120px;"></div>
+	Cetak SPAJ Yang sudah terkirim
+	
+ <ion-item ng-show='dataUnprocessed == null'>
+            Belum ada SPAJ Terkirim.
+        </ion-item>
+        <ion-list id="daftarSPAJOnline-list74">
+            <ion-item ng-repeat="item in dataUnprocessed"
+                      class="item-thumbnail-left item-icon-right"
+                      item="item"
+                      href="#/{{item}}"
+                      id="daftarSPAJOnline-list-item25">
+                <img src="img/idcard.grey.png" width="140px" height="auto"
+                     style="display: block; margin-left: auto; margin-right: auto;" />
+                <div class="row">
+				 <div class="cols">
+				    </div>
+				                    <div class="cols">
+                        <p>Produk:
+                        <h2>{{item.nama_produk}}</h2> </p>
+                        <p>Premi:
+                        <h2>{{item.premi | currency:"Rp. "}}</h2> </p>
+						<p>
+						<a class="button button-balanced header-item ion-document button-small"
+								style="padding:8px;" ng-click="openModal(item.spaj_guid)"> VIEW DATA </a>
+
+						</p>
+                    </div>
+                    <div class="cols">
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="cols">
+                        <h2>Submit Date <h2>{{item.tanggal_submit}}</h2></h2>
+                        <p>Nama Tertanggung:
+                        <h2>{{item.nama_tertanggung}}</h2> </p>
+                        <p>Nama Pemegang Polis:
+                        <h2>{{item.nama_pemegang_polis}}</h2> </p>
+                    </div>
+
+                </div>
+                <!--h2>{{item.spaj_guid}} </h2-->
+                <!--a class="button button-assertive button-large button-inline button-outline icon-right ion-ios-trash-outline"  ng-click="editSpaj(iten)">HAPUS</a>
+				<a class="button button-positive button-large button-inline button-outline icon-right ion-ios-bolt-outline"  ng-click="editSpaj(iten)">VIEW</a-->
+            </ion-item>
+        </ion-list>
+
+		
+	 </ion-content>
+</ion-view>

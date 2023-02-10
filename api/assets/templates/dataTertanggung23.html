@@ -1,0 +1,201 @@
+<ion-view title="Tempat Tinggal Tertanggung" nav-transition="none" id="page6" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+		<div class="item item-divider" style="margin-top:25px;">2. Identitas Tertanggung</div>
+			
+			
+        <form id="dataTertanggung23-form5" class="list">
+            <label class="item item-select" id="dataTertanggung23-select7"
+                   name="statusTinggalKTPtertanggung">
+                <span class="input-label">Status Tempat Tinggal</span>
+                <select ng-model="data.statusTinggalKTPtertanggung"
+                        ng-options="statusTinggalKTPtertanggung.id as statusTinggalKTPtertanggung.label for statusTinggalKTPtertanggung in statustempattinggals"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <label class="item item-input" id="dataTertanggung23-textarea1"
+                   name="alamatKTPtertanggung">
+                <span class="input-label">Alamat KTP</span><textarea
+                    placeholder="__________________" ng-model="data.alamatKTPtertanggung"
+                    ng-blur="saveDataSpaj($scope)"></textarea>
+            </label>
+            <label class="item item-select" id="dataTertanggung23-select3"
+                   name="provinsiKTPtertanggung">
+                <span class="input-label">Provinsi</span>
+                <select ng-model="data.provinsiKTPtertanggung"
+                        ng-options="provinsiKTPtertanggung.id as provinsiKTPtertanggung.label for provinsiKTPtertanggung in provinsis"
+                        ng-change="setKabupatensValues(data.provinsiKTPtertanggung);saveDataSpaj($scope);"></select>
+            </label>
+            <label class="item item-select" id="dataTertanggung23-select9"
+                   name="kabupatenKTPtertanggung">
+                <span class="input-label">Kabupaten/Kota</span>
+                <select ng-model="data.kabupatenKTPtertanggung"
+                        ng-options="kabupatenKTPtertanggung.id as kabupatenKTPtertanggung.label for kabupatenKTPtertanggung in kabupatens"
+                        ng-change="saveDataSpaj($scope)"></select>
+            </label>
+            <!--label class="item item-input" id="dataTertanggung23-input11"
+                   name="kabupatenKTPtertanggung">
+                <span class="input-label">Kabupaten/Kota</span>
+                <input type="text" placeholder="__________________"
+                       ng-model="data.kabupatenKTPtertanggung" ng-blur="saveDataSpaj($scope)">
+            </label-->
+            <label class="item item-input" id="dataTertanggung23-input4"
+                   name="kodeposKTPtertanggung">
+                <span class="input-label">Kode Pos</span>
+                <input type="number" placeholder="kode pos" ng-model="data.kodeposKTPtertanggung"
+                       ng-blur="saveDataSpaj($scope)">
+            </label>
+            <div class="spacer" style="height: 50px;"></div>
+            <div class="row">
+                <div class="col col-75" style="font-size:1.2em;">Alamat Surat menyurat sama dengan
+                    KTP
+                </div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-model="data.isAlamatKTPtertanggungSama"
+                               name="isAlamatKTPtertanggungSama"
+                               ng-change="saveDataSpaj();" toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+
+
+        </form>
+        <div id="dataTertanggung23-container2" ng-hide=" data.isAlamatKTPtertanggungSama ">
+            <form id="dataTertanggung23-form9" class="list">
+                <div class="item item-divider" style="margin-top:25px;">Alamat Surat</div>
+                <label class="item item-select" id="dataTertanggung23-select8"
+                       name="statusTinggalSurattertanggung">
+                    <span class="input-label">Status Tempat Tinggal</span>
+                    <select ng-model="data.statusTinggalSurattertanggung"
+                            ng-options="statusTinggalSurattertanggung.id as statusTinggalSurattertanggung.label for statusTinggalSurattertanggung in statustempattinggals"
+                            ng-change="saveDataSpaj($scope)"></select>
+                </label>
+
+                <label class="item item-input" id="dataTertanggung23-textarea2"
+                       name="alamatSurattertanggung">
+                    <span class="input-label">Alamat Surat</span><textarea
+                        placeholder="__________________" ng-model="data.alamatSurattertanggung"
+                        ng-blur="saveDataSpaj($scope)"></textarea>
+                </label>
+                <label class="item item-select" id="dataTertanggung23-select5"
+                       name="provinsiSurattertanggung">
+                    <span class="input-label">Provinsi</span>
+					<select ng-model="data.provinsiSurattertanggung"
+                            ng-options="provinsiSurattertanggung.id as provinsiSurattertanggung.label for provinsiSurattertanggung in provinsis"
+                            ng-change="setKabupatensValues1(data.provinsiSurattertanggung);saveDataSpaj($scope);"></select>
+                </label>
+				
+				<label class="item item-select" id="dataTertanggung23-select9"
+					   name="kabupatenSurattertanggung">
+					<span class="input-label">Kabupaten/Kota</span>
+					<select ng-model="data.kabupatenSurattertanggung"
+							ng-options="kabupatenSurattertanggung.id as kabupatenSurattertanggung.label for kabupatenSurattertanggung in kabupatens1"
+							ng-change="saveDataSpaj($scope)"></select>
+				</label>
+				
+                <!--label class="item item-input" id="dataTertanggung23-input27"
+                       name="kabupatenSurattertanggung">
+                    <span class="input-label">Kabupaten/Kota</span>
+                    <input type="text" placeholder="__________________"
+                           ng-model="data.kabupatenSurattertanggung" ng-blur="saveDataSpaj($scope)">
+                </label-->
+                <label class="item item-input" id="dataTertanggung23-input6"
+                       name="kodeposSurattertanggung">
+                    <span class="input-label">Kode Pos</span>
+                    <input type="number" placeholder="__________________"
+                           ng-model="data.kodeposSurattertanggung" ng-blur="saveDataSpaj($scope)">
+                </label>
+
+            </form>
+        </div>
+        <div id="dataTertanggung23-container3">
+            <div class="item item-divider" style="margin-top:25px;">Kontak dan Telepon</div>
+            <form id="dataTertanggung23-form12" class="list">
+                <label class="item item-input" id="dataTertanggung23-input7"
+                       name="nomorHptertanggung">
+                    <span class="input-label">Nomor HP</span>
+                    <input type="tel" placeholder="Nomor HP" ng-model="data.nomorHptertanggung"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataTertanggung23-input8"
+                       name="nomorTelptertanggung">
+                    <span class="input-label">Nomor Telepon</span>
+                    <input type="tel" placeholder="Nomor Telepon"
+                           ng-model="data.nomorTelptertanggung" ng-blur="saveDataSpaj($scope)">
+                </label>
+                <label class="item item-input" id="dataTertanggung23-input43"
+                       name="emailtertanggung">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="Email" ng-model="data.emailtertanggung"
+                           ng-blur="saveDataSpaj($scope)">
+                </label>
+				<div class="item item-divider" style="margin-top:25px;">Persetujuan agar dapat dihubungi</div>
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Setuju Ditelepon Melalui HP/Telepon?
+                    </div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-model="data.isSetujuHPtertanggung"
+                                   name="isSetujuHPtertanggung"
+                                   ng-change="saveDataSpaj();" toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Setuju Dihubungi Melalui Email?
+                    </div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-model="data.isSetujuEmailtertanggung"
+                                   name="isSetujuEmailtertanggung"
+                                   ng-change="saveDataSpaj();" toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                    <div class="col" style="text-align:right;">
+                        <md-toggle ng-model="data.isPageTertanggung2Accepted"
+                                   name="isPageTertanggung2Accepted"
+                                   ng-change="saveDataSpaj();moveToNextPage()"
+                                   toggle-class="toggle-balanced">
+                        </md-toggle>
+                    </div>
+                </div>
+                <div class="spacer" style="height: 100px;"></div>
+
+
+                <!--on-toggle toggle-class="toggle-balanced" id="dataTertanggung23-toggle6" name="isSetujuHPtertanggung" ng-model="data.isSetujuHPtertanggung" ng-change="saveDataSpaj($scope)">Setuju Ditelepon</ion-toggle>
+                <ion-toggle toggle-class="toggle-balanced" id="dataTertanggung23-toggle23" name="isSetujuEmailtertanggung" ng-model="data.isSetujuEmailtertanggung" ng-change="saveDataSpaj($scope)">Setuju Dikirimi Email</ion-toggle>
+                <ion-toggle toggle-class="toggle-balanced" id="dataTertanggung23-toggle8" name="isPageTertanggung2Accepted" ng-model="data.isPageTertanggung2Accepted" ng-change="saveDataSpaj($scope);moveToNextPage();">Data Sudah Benar</ion-toggle>
+                <div class="spacer" style="height: 100px;"></div>-->
+            </form>
+        </div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+
+                        <div id="dataTertanggung23-button-bar2" class="button-bar">
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung13"
+                               ng-click="isPageAccepted()" id="dataTertanggung23-button4"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right   ion-chevron-right">1.
+                                Identitas</a>
+                            <button id="dataTertanggung23-button5"
+                                    style="font-weight:500;text-align:left;"
+                                    class="button button-balanced   icon-right ion-chevron-right">2.
+                                Tempat Tinggal
+                            </button>
+                            <a ui-sref="aplikasiSPAJOnline.dataTertanggung33({})"
+                               ng-click="isPageAccepted()" id="dataTertanggung23-button6"
+                               style="font-weight:500;text-align:left;"
+                               class="button button-stable icon-right ">3. Pendukung</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ion-view>

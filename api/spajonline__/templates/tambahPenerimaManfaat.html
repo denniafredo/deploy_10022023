@@ -1,0 +1,73 @@
+<ion-view title="Tambah Penerima Manfaat" id="page25" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <div id="tambahPenerimaManfaat-container27">
+            <h3 id="tambahPenerimaManfaat-heading38" style="color:#000000;font-weight:400;">Tambah
+                Penerima Manfaat</h3>
+            <form id="tambahPenerimaManfaat-form37" class="list">
+                <label class="item item-select" id="tambahPenerimaManfaat-select16"
+                       name="penerimaManfaatHubungan">
+                    <span class="input-label">Hubungan Dengan Tertanggung</span>
+                    <select ng-model="data.penerimaManfaatHubungan"
+                            ng-options="penerimaManfaatHubungan.id as penerimaManfaatHubungan.label for penerimaManfaatHubungan in hubunganKeluargas"></select>
+                </label>
+                <label class="item item-input" id="tambahPenerimaManfaat-input51"
+                       name="namaPenerimaManfaat">
+                    <span class="input-label">Nama</span>
+                    <input type="text" placeholder="__________" name="namaPenerimaManfaat"
+                           ng-model="data.namaPenerimaManfaat">
+                </label>
+            </form>
+        </div>
+        <form id="tambahPenerimaManfaat-form38" class="list">
+
+            <label class="item item-select" id="tambahPenerimaManfaat-select41"
+                   name="jenkelPenerimaManfaat">
+                <span class="input-label">Jenis Kelamin</span>
+                <select ng-model="data.jenkelPenerimaManfaat"
+                        ng-options="jenkelPenerimaManfaat.id as jenkelPenerimaManfaat.label for jenkelPenerimaManfaat in genders"></select>
+            </label>
+            <label class="item item-input" id="tambahPenerimaManfaat-input54"
+                   name="tglLahirPenerimaManfaat">
+                <span class="input-label">Tanggal Lahir</span>
+                <input type="date" ng-model-options="{timezone:'UTC'}"
+                       ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" placeholder=""
+                       name="tglLahirPenerimaManfaat" ng-model="data.tglLahirPenerimaManfaat">
+            </label>
+            <label class="item item-input" id="tambahPenerimaManfaat-input53"
+                   name="tempatLahirPenerima">
+                <span class="input-label">Tempat Lahir</span>
+                <input type="text" placeholder="__________" name="tempatLahirPenerima"
+                       ng-model="data.tempatLahirPenerima">
+            </label>
+            <label class="item item-select" id="tambahPenerimaManfaat-select42"
+                   name="statusPenerimaManfaat">
+                <span class="input-label">Status</span>
+                <select ng-model="data.statusPenerimaManfaat"
+                        ng-options="statusPenerimaManfaat.id as statusPenerimaManfaat.label for statusPenerimaManfaat in statuss"></select>
+            </label>
+        </form>
+
+        <div class="spacer" style="height: 100px;"></div>
+    </ion-content>
+    <div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+
+                <div id="tambahPenerimaManfaat-button-bar8" class="button-bar">
+                    <a ui-sref="aplikasiSPAJOnline.produkDanManfaat22"
+                       id="tambahPenerimaManfaat-button26" style="font-weight:500;"
+                       class="button button-assertive button-block button icon-left ion-backspace">BATAL</a>
+                    <button id="tambahPenerimaManfaat-button27"
+                            ng-click="savePenerimaManfaat($scope)" style="font-weight:500;"
+                            class="button button-balanced button-block button icon-right ion-android-add-circle">
+                        TAMBAH
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+</ion-view>

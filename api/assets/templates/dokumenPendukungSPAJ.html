@@ -1,0 +1,58 @@
+<ion-view title="Dokumen Pendukung SPAJ" nav-transition="none" id="page19" cache-view="false">
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        <div id="dokumenPendukungSPAJ-container20">
+			
+            <ion-list id="daftarSPAJOnline-list71">
+               <div class="item item-divider" style="margin-top:25px;">Daftar Dokumen</div>
+                <ion-item ng-show='daftarDokumens.length == 0'>
+                    Belum ada Dokumen yang dilampirkan.<br />Silahkan klik tombol TAMBAH DOKUMEN
+                </ion-item>
+				<ion-scroll scrollY="true" style="max-height:400px;border:solid #dddddd 1px;">
+                <ion-item ng-repeat="item in daftarDokumens"
+                          class="item item-avatar item-thumbnail-left item-icon-right"
+                          href=""
+                          id="daftarSPAJOnline-list-item25">
+                    <img style="width:50%;" data-ng-src="{{item.camDokumen}}"
+                         ng-model="item.camDokumen" id="tempImgDokumen" src=""/>
+                    <h2>Nama Dokumen: {{item.addNamaDokumen}}</h2>
+                    <p>Keterangan: {{item.addKeteranganDokumen}}</p>
+
+                    <i class="icon ion-edit" ng-click="editDokumen({{$index}})"></i>
+                </ion-item>
+				</ion-scroll>
+            </ion-list>
+			      <a ui-sref="aplikasiSPAJOnline.tambahkanDokumenPenunjangSPAJ"
+                           id="dokumenPendukungSPAJ-button35" style="font-weight:500;"
+                           class="button button-balanced button-large button-block button-outline icon-right ion-android-add-circle">TAMBAH  DOKUMEN</a>
+        </div>
+        <div class="spacer" style="height: 25px;"></div>
+        <form id="dataPemegangPolis13-form25" class="list">
+            <div class="row">
+                <div class="col col-75" style="font-size:1.1em;">Data Sudah Benar</div>
+                <div class="col" style="text-align:right;">
+                    <md-toggle ng-change="saveDataSpaj();moveToNextPage()"
+                               ng-model="data.isPageDocumentAccepted" name="isPageDocumentAccepted"
+                               toggle-class="toggle-balanced">
+                    </md-toggle>
+                </div>
+            </div>
+
+       
+        </form>
+        <div class="spacer" style="height: 600px;"></div>
+    </ion-content>
+    <!--div class="tabs tabs-positive " style="height:auto;">
+
+        <div class="row">
+            <div class="col">
+
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div-->
+</ion-view>

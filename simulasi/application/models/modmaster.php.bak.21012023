@@ -1,0 +1,160 @@
+<?php
+
+class Modmaster extends CI_Model {
+	private $sql;
+
+    /* ===== fungsi untuk menyaring data dalam query =====
+	 * operator -> operator pencarian WHERE, AND, OR
+	 * open_wrap -> untuk kurung buka (
+	 * text -> nama kolom pada tabel
+	 * comparison -> pembanding antara text dengan value =, >, <, LIKE
+	 * value -> nilai pada sebuah kolom yang ingin dicari
+	 * close_wrap -> untuk kurung tutup )
+	 */
+    private function where($f) {
+        $this->sql = null;
+
+        if (isset($f) && count($f) > 0) {
+            foreach ($f as $i => $v) {
+                $openwrap = isset($v['openwrap']) ? $v['openwrap'] : null;
+                $comparison2 = isset($v['comparison2']) ? $v['comparison2'] : null;
+                $value2 = isset($v['value2']) ? $v['value2'] : null;
+                $closewrap = isset($v['closewrap']) ? $v['closewrap'] : null;
+
+                $this->sql .= " $v[operator] $openwrap $v[text] $v[comparison] $v[value] $comparison2 $value2 $closewrap ";
+            }
+        }
+    }
+	
+	
+	/*===== daftar pekerjaan =====*/
+	function get_list_pekerjaan($f = array()) {
+		$data = array();
+        $this->where($f);
+
+        $db = $this->db
+            ->query("SELECT *
+                     FROM jaim_301_pekerjaan
+                     $this->sql");
+
+        if ($db->num_rows() > 0)
+            $data = $db->result_array();
+
+        $db->free_result();
+
+        return $data;
+	}
+	
+	
+	/*===== daftar provinsi =====*/
+	function get_list_provinsi($f = array()) {
+		$data = array();
+        $this->where($f);
+
+        $db = $this->db
+            ->query("SELECT *
+                     FROM jaim_001_provinsi
+                     $this->sql");
+
+        if ($db->num_rows() > 0)
+            $data = $db->result_array();
+
+        $db->free_result();
+
+        return $data;
+	}
+	
+	
+	/*===== daftar hobi =====*/
+	function get_list_hobi($f = array()) {
+		$data = array();
+        $this->where($f);
+
+        $db = $this->db
+            ->query("SELECT *
+                     FROM jaim_301_hobi
+                     $this->sql");
+
+        if ($db->num_rows() > 0)
+            $data = $db->result_array();
+
+        $db->free_result();
+
+        return $data;
+	}
+	
+	
+	/*===== data pekerjaan =====*/
+    function get_pekerjaan($f = array()) {
+        $data = array();
+        $this->where($f);
+
+        $db = $this->db
+            ->query("SELECT *
+                     FROM jaim_400_jenis_pekerjaan
+                     $this->sql");
+
+        if ($db->num_rows() > 0)
+            $data = $db->row_array();
+
+        $db->free_result();
+
+        return $data;
+    }
+	
+	
+	/*===== data hobi =====*/
+    function get_hobi($f = array()) {
+        $data = array();
+        $this->where($f);
+
+        $db = $this->db
+            ->query("SELECT *
+                     FROM jaim_400_hobi
+                     $this->sql");
+
+        if ($db->num_rows() > 0)
+            $data = $db->row_array();
+
+        $db->free_result();
+
+        return $data;
+    }
+	
+	
+	/*===== data tarif =====*/
+	function get_tarif($f = array()) {
+		$data = array();
+		$this->where($f);
+		
+		$db = $this->db
+			->query("SELECT *
+					 FROM jaim_400_tarif
+					 $this->sql");
+		
+		if ($db->num_rows() > 0)
+			$data = $db->row_array();
+		
+		$db->free_result();
+		
+		return $data;
+	}
+
+    /*===== data user =====*/
+    function get_user($f = array()) {
+        $data = array();
+        $this->where($f);
+
+        $db = $this->db
+            ->query("SELECT *
+                     FROM jaim_900_user
+                     $this->sql");
+
+        if ($db->num_rows() > 0)
+            $data = $db->row_array();
+
+        $db->free_result();
+
+        return $data;
+    }
+}
