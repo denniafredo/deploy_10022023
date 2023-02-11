@@ -7,14 +7,17 @@
 <!-- END PAGE LEVEL STYLES -->
 
 <?php 
+require 'application/config/credential.php';
 
-$conn = oci_connect('jaim', 'ifg#dbs#jaim#2020', '10.170.65.84/STAGING');
+$conn = oci_connect($config['db_username'], $config['db_password'], 'database.ifg-life.id/IFGAGENCY');
 if (!$conn) {
     $e = oci_error();
     trigger_error(htmlentities($e['message'], 
 ENT_QUOTES), E_USER_ERROR);
 }
 
+
+$filename = "ftp://storage.ifg-life.id/VOLUME1/JLINDO/WELCOME/";
 
 $query= "SELECT meta_files from JAIM_302_DOKUMEN where buildid='$build' and noid='$noid' and jenis_dokumen_id='4' ";
 $query2= "SELECT meta_files from JAIM_302_DOKUMEN where buildid='$build' and noid='$noid' and jenis_dokumen_id='1' ";
@@ -135,7 +138,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= base_url().$rows->META_FILES ?>" >File Needed Assesment</a>
+											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Needed Assesment</a>
                                         <?php endif; ?>
 										<?php } ?>
                                         </span>   
@@ -205,7 +208,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= base_url().$rows->META_FILES ?>" >File Pernyataan Pemahaman</a>
+											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Pernyataan Pemahaman</a>
                                         <?php endif; ?>
 										<?php } ?>   
                                         </span>   
@@ -274,7 +277,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= base_url().$rows->META_FILES ?>" >File Profil Resiko</a>
+											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Profil Resiko</a>
                                         <?php endif; ?>
 										<?php } ?>
                                            
@@ -343,7 +346,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= base_url().$rows->META_FILES ?>" >File Recording Pernyataan</a>
+											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Recording Pernyataan</a>
                                         <?php endif; ?>
 										<?php } ?>
                                         </span>
