@@ -167,7 +167,7 @@
 															</span></label>
 															
 															<div class="col-md-4">
-																<input readonly class="form-control form-control-inline input-small date-picker" id="tanggallahirpemegangpolis" name="tanggallahirpemegangpolis" size="16" type="text" value="<?= date("m/d/Y", strtotime($DataAgen['TANGGALLAHIR'])); ?>"/>
+																<input readonly class="form-control form-control-inline input-small date-picker" id="tanggallahirpemegangpolis" name="tanggallahirpemegangpolis" size="16" type="text" value="<?= date("m/d/Y", strtotime($DataAgen['TGLLAHIR'])); ?>"/>
 															</div>
 											            </div>
 														<!-- Input tanggal lahir -->
