@@ -1,0 +1,65 @@
+<?php 
+
+	function getData($prefix,$noper)
+	{
+
+		$DB = new Database($DBUser,$DBPass,$DBName);
+
+		$sql = "SELECT A.PREFIXPERTANGGUNGAN, 
+						A.NOPERTANGGUNGAN,
+						A.KDBENEFIT,
+						A.PREMI,
+						(SELECT JUAMAINPRODUK FROM TABEL_200_PERTANGGUNGAN 
+							WHERE PREFIXPERTANGGUNGAN = A.PREFIXPERTANGGUNGAN
+								AND NOPERTANGGUNGAN = A.NOPERTANGGUNGAN)NILAIBENEFIT,
+						A.KDJENISBENEFIT,
+						B.NAMABENEFIT,
+						NVL(C.NILAI, 0) NILAI_BASISCOICOR,
+						NVL(C.NILAI_BASISJUA, 0) NILAI_BASISJUA,
+						NVL(C.NILAI_BASISHOBI, 0) NILAI_BASISHOBI
+					FROM TABEL_223_TRANSAKSI_PRODUK A
+					LEFT JOIN tabel_207_kode_benefit B ON B.KDBENEFIT = A.KDBENEFIT
+					LEFT JOIN TABEL_223_EXTRA_PREMI C ON A.PREFIXPERTANGGUNGAN = C.PREFIXPERTANGGUNGAN AND A.NOPERTANGGUNGAN = C.NOPERTANGGUNGAN AND A.KDBENEFIT = C.KDBENEFIT
+					WHERE A.PREFIXPERTANGGUNGAN = '$prefix'
+						AND A.NOPERTANGGUNGAN = '$noper'
+						AND A.KDBENEFIT = 'COI'
+				UNION 
+					SELECT A.PREFIXPERTANGGUNGAN, 
+						A.NOPERTANGGUNGAN,
+						A.KDBENEFIT,
+						A.PREMI,
+						A.NILAIBENEFIT,
+						A.KDJENISBENEFIT,
+						B.NAMABENEFIT,
+						NVL(C.NILAI, 0) NILAI_BASISCOICOR,
+						NVL(C.NILAI_BASISJUA, 0) NILAI_BASISJUA,
+						NVL(C.NILAI_BASISHOBI, 0) NILAI_BASISHOBI
+					FROM TABEL_223_TRANSAKSI_PRODUK A
+					LEFT JOIN tabel_207_kode_benefit B ON B.KDBENEFIT = A.KDBENEFIT 
+					LEFT JOIN TABEL_223_EXTRA_PREMI C ON A.PREFIXPERTANGGUNGAN = C.PREFIXPERTANGGUNGAN AND A.NOPERTANGGUNGAN = C.NOPERTANGGUNGAN AND A.KDBENEFIT = C.KDBENEFIT
+					WHERE A.PREFIXPERTANGGUNGAN = '$prefix'
+						AND A.NOPERTANGGUNGAN = '$noper'
+						AND A.KDJENISBENEFIT = 'R' 
+						AND A.PREMI IS NOT NULL";
+		$DB->parse($sql);
+		$DB->execute();
+		return $arrx=$DB->result();
+	}
+
+
+	function getTaripPremi($kdtarif, $filterusia, $filterjnsklm)
+	{
+		$DB = new Database($DBUser,$DBPass,$DBName);
+		$sqltarif=" SELECT * FROM tabel_205_tarip_premi WHERE kdproduk = 'JL4BPRO' AND kdtarif = '".$kdtarif."' AND kdbasis = 'TU-05/00' 
+					AND usia = ".$filterusia."
+					".$filterjnsklm."
+									";
+
+		$DB->parse($sqltarif);
+		$DB->execute();
+		return $tarif=$DB->nextrow();
+	}
+
+
+
+?>
