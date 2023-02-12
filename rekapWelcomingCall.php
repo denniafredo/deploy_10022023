@@ -11,6 +11,11 @@
 	$pilihtanggal = $pilihtanggal ? $pilihtanggal : date('d');
 	$pilihbulan = $pilihbulan ? $pilihbulan : date('n');
 	$pilihtahun = $pilihtahun ? $pilihtahun : date('Y');
+
+	$pilihtanggal2 = $pilihtanggal2 ? $pilihtanggal2 : date('d');
+	$pilihbulan2 = $pilihbulan2 ? $pilihbulan2 : date('n');
+	$pilihtahun2 = $pilihtahun2 ? $pilihtahun2 : date('Y'); 
+
 	$hari_array = array(
         'Minggu',
         'Senin',
@@ -149,21 +154,21 @@
 						<select name='pilihtanggal2' id="pilihtanggal2">
 							<?php $tanggal = date('d');
 							for ($i=1;$i<=31;$i++) {
-								$selected = $pilihtanggal == $i ? 'selected' : '';
+								$selected = $pilihtanggal2 == $i ? 'selected' : '';
 								echo "<option value='$i' $selected>$i</option>";
 							} ?>
 						</select>
 						<select name='pilihbulan2' id="pilihbulan2">
 							<?php
 							foreach ($bulan_array as $i => $v) {
-								$selected = $pilihbulan == $i ? 'selected' : '';
+								$selected = $pilihbulan2 == $i ? 'selected' : '';
 								echo "<option value='$i' $selected>$v</option>";
 							} ?>
 						</select>
 						<select name='pilihtahun2' id="pilihtahun2">
 							<?php $tahun = date('Y')+1;
 							for ($i=$tahun-5;$i<=$tahun;$i++) {
-								$selected = $pilihtahun == $i ? 'selected' : '';
+								$selected = $pilihtahun2 == $i ? 'selected' : '';
 								echo "<option value='$i' $selected>$i</option>";
 							} ?>
 						</select>
@@ -243,26 +248,36 @@
 				?>
 				<?php 
 					$no = 1; 
-					foreach($results as $data) {
-						$date 		= date_create($data->AGENDA_DATE);
-						$hr 		= date('w', strtotime($data->AGENDA_DATE));
-						$bl 		= date('n', strtotime($data->AGENDA_DATE));
-						$tahun 		= date('Y', strtotime($data->AGENDA_DATE));
-						$jam 		= date('H:i:s', strtotime($data->AGENDA_DATE));
-						$tanggal 	= date('j', strtotime($data->AGENDA_DATE));
-						$hari 		= $hari_array[$hr];
-						$bulan 		= $bulan_array[$bl];
 
-				?>
-				<tr>			
-					<td align="center"><?= $no++; ?>.</td>
-					<td align="center"><?= $data->PREFIXPERTANGGUNGAN.$data->NOPERTANGGUNGAN ?></td>
-					<td align="center"><?= $hari.', '.$tanggal.' '.$bulan.' '.$tahun ?></td>
-					<td align="center"><?= $jam ?></td>
-					<td align="left"><?= $data->KETERANGANMUTASI ?></td>
-				</tr>
+					$dataCount = count($results);
 
-				<?php } ?>
+					if($dataCount > 0){
+
+						foreach($results as $data) {
+								$date 		= date_create($data->AGENDA_DATE);
+								$hr 		= date('w', strtotime($data->AGENDA_DATE));
+								$bl 		= date('n', strtotime($data->AGENDA_DATE));
+								$tahun 		= date('Y', strtotime($data->AGENDA_DATE));
+								$jam 		= date('H:i:s', strtotime($data->AGENDA_DATE));
+								$tanggal 	= date('j', strtotime($data->AGENDA_DATE));
+								$hari 		= $hari_array[$hr];
+								$bulan 		= $bulan_array[$bl];
+
+						?>
+						<tr>			
+							<td align="center"><?= $no++; ?>.</td>
+							<td align="center"><?= $data->PREFIXPERTANGGUNGAN.$data->NOPERTANGGUNGAN ?></td>
+							<td align="center"><?= $hari.', '.$tanggal.' '.$bulan.' '.$tahun ?></td>
+							<td align="center"><?= $jam ?></td>
+							<td align="left"><?= $data->KETERANGANMUTASI ?></td>
+						</tr>
+					
+					<?php }?>
+				<?php } else { ?>
+					<tr>
+						<td align="center" colspan="5">Tidak ada data</td>
+					</tr>
+				<?php }?>
 			</table>
 		</div>
 
