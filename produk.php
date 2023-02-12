@@ -32,9 +32,9 @@ class Produk extends CI_Controller {
 			if ($this->kdproduk == 'JL4BLN') { 
 				$this->_lifeprime();
 			}
-			// Jika produk IFG Life Protection Platinum
-			else if ($this->kdproduk == 'JL4BPRO') {
-				$this->_lifeprotect();
+			// Jika produk IFG Life Prime Protection (IFG Group)
+			else if ($this->kdproduk == 'JL4BIFG') {
+				$this->_lifeprimeifg();
 			}
 			// Jika produk IFG Ultimate Protection
 			else if ($this->kdproduk == 'JL4XN') { 
@@ -90,20 +90,19 @@ class Produk extends CI_Controller {
 		$this->load->view('produk/lifeprime', $data);
 	}
 	
-	// Produk IFG Life Protection Platinum
-	function _lifeprotect() {
+	// Produk IFG Life Prime Protection Khusus Group IFG alokasi investasi 100%
+	function _lifeprimeifg() {
 		$buildid = $this->ModSimulasi->getBuildID();
 		$this->session->set_userdata('build_id', $buildid['BUILDID']);
 		
 		$data['noprospek'] = $this->noprospek;
-
 		$data['provinsis'] = $this->provinsis;
 		$data['pekerjaans'] = $this->pekerjaans;
 		$data['hobi'] = api_curl("/master/hobi", 'GET');
 		$data['session_id'] = $this->session->userdata('session_id');
 		$data['DataAgen'] = $this->ModSimulasi->GetDataAgen_new($this->noprospek);
 		
-		$this->load->view('produk/lifeprotect', $data);
+		$this->load->view('produk/lifeprimeifg', $data);
 	}
 	
 	function lifeprime() {
