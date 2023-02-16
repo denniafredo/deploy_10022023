@@ -1,0 +1,111 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Life by IFG: Pernyataan Nasabah</title>
+
+  <link href="https://unpkg.com/video.js@7.20.1/dist/video-js.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/videojs-record/dist/css/videojs.record.min.css" rel="stylesheet">
+
+  <script src="https://unpkg.com/video.js@7.20.1/dist/video.min.js"></script>
+  <script src="https://unpkg.com/recordrtc/RecordRTC.js"></script>
+  <script src="https://unpkg.com/webrtc-adapter/out/adapter.js"></script>
+
+  <script src="https://unpkg.com/videojs-record/dist/videojs.record.min.js"></script>
+
+  <script src="browser-workarounds.js"></script>
+
+  <style>
+  /* change player background color */
+  #myVideo {
+      background-color: #7a9ab8;
+  }
+  </style>
+</head>
+<body>
+
+<video id="myVideo" playsinline class="video-js vjs-default-skin">
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, or consider upgrading to a
+    web browser that
+    <a href="https://videojs.com/html5-video-support/" target="_blank">
+      supports HTML5 video.
+    </a>
+  </p>
+</video>
+
+<script>
+var options = {
+    controls: true,
+    bigPlayButton: false,
+    width: 1280,
+    height: 720,
+    plugins: {
+        record: {
+            audio: true,
+            video: true,
+            maxLength: 120,
+            displayMilliseconds: false,
+			videoBitRate: 300,
+			videoFrameRate: 15,
+			audioSampleRate: 32000,
+			audioBitRate:64,
+			audioChannels:1,
+            debug: true
+        }
+    }
+};
+
+// apply some workarounds for certain browsers
+applyVideoWorkaround();
+
+var player = videojs('myVideo', options, function() {
+    // print version information at startup
+    var msg = 'Using video.js ' + videojs.VERSION +
+        ' with videojs-record ' + videojs.getPluginVersion('record') +
+        ' and recordrtc ' + RecordRTC.version;
+    videojs.log(msg);
+});
+
+// error handling
+player.on('deviceError', function() {
+    console.log('device error:', player.deviceErrorCode);
+});
+
+player.on('error', function(element, error) {
+    console.error(error);
+});
+
+// user clicked the record button and started recording
+player.on('startRecord', function() {
+    console.log('started recording!');
+});
+
+player.on('finishRecord', function() {
+    // the blob object contains the recorded data that
+    // can be downloaded by the user, stored on server etc.
+    console.log('finished recording:', player.recordedData);
+
+    var data = player.recordedData;
+    var serverUrl = '/upload';
+    var formData = new FormData();
+    formData.append('file', data, data.name);
+
+    console.log('uploading recording:', data.name);
+
+    fetch(serverUrl, {
+        method: 'POST',
+        body: formData
+    }).then(
+        success => console.log('recording upload complete.')
+    ).catch(
+        error => console.error('an upload error occurred!')
+    );
+});
+
+
+</script>
+
+</body>
+</html>
