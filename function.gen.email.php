@@ -19,7 +19,7 @@
                     NVL(B.EMAILTAGIH, B.EMAILTETAP) EMAIL
                 FROM TABEL_200_PERTANGGUNGAN A 
                 INNER JOIN TABEL_100_KLIEN B ON A.NOPEMEGANGPOLIS = B.NOKLIEN
-                WHERE A.KDPRODUK IN ('JL4BPRO')";
+                WHERE A.KDPRODUK IN ('JL4BPRO') AND A.KDPERTANGGUNGAN = '2'";
     $DBx->parse($sql_e);
     $DBx->execute();
     $data = $DBx->result();
