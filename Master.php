@@ -875,6 +875,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 			 'massage' => 'Successfully get file uploaded',
 			 'data' => $document,
 		];
+        $this->ftp->close();
+        
 		$http = 201;
 		$this->response($response, $http);
 		
@@ -891,7 +893,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 			force_download(str_replace("/VOLUME1/JLINDO/WELCOME/", '', $val), $data);
 			unlink($local);
 		}
-		$this->ftp->close();
+		
         */
 	}
 	
