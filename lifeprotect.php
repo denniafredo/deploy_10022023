@@ -1362,6 +1362,7 @@
 
 			var today = new Date();
 			var birthday = new Date(document.getElementById("tanggallahirpemegangpolis").value);
+
 			if (today.getMonth() < birthday.getMonth()) {
 				var year = 1;
 			}else if ((today.getMonth() == birthday.getMonth()) && today.getDate() < birthday.getDate()) {
@@ -1375,18 +1376,11 @@
 				Date : 28 09 2022
 				Note : For nearest Birthday
 			========================================*/				
-			let x = 0;
 
-			if(today.getMonth() - birthday.getMonth() >= 6){
-				x = 1;
-			}else{
-				x = 0;
-			}
-
-			var usiacalonpemegangpolis = today.getFullYear() - birthday.getFullYear() - year + x;
+			// var usiacalonpemegangpolis = today.getFullYear() - birthday.getFullYear() - year + x;
+			var usiacalonpemegangpolis = $('#usiapemegangpolis').val();
 			// document.getElementById("usiapemegangpolis").value = Math.floor(usiacalonpemegangpolis);
 			let usiacalonpempol = document.getElementById("usiapemegangpolis").value
-			console.log('disini pempol:', usiacalonpempol)
 
 			/*Fungsi tambahan untuk mencegah perbedaan karena agen back saat sudah submit - Teguh 03/12/2019*/
 			var usiasekarangctt = document.getElementById("usiacalontertanggung").value;
@@ -1435,7 +1429,7 @@
    					Created by : Rizal Jihadudin
 					Date : 28 09 2022
 					Note : For nearest Birthday
-				========================================*/				
+				========================================*/	
 				let x = 0;
 				let ageInMilliseconds = hariini - birthday_ctt;
 				let ageInSeconds = ageInMilliseconds / 1000;

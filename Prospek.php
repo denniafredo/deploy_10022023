@@ -98,7 +98,7 @@ class Prospek extends CI_Controller {
 		];
 
 		$this->template->title = 'Upload File Proposal';
-        $this->template->content->view("prospek/uploadfile", $data);
+        $this->template->content->view("prospek/uploadfile_recording", $data);
         $this->template->publish();
     }
 	

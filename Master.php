@@ -1395,7 +1395,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				$keyTab = date('dmYHis');
                 
                 $support['NOAGEN'] = preg_replace("/[^a-zA-Z0-9]/", "", $support['NOAGEN']);
-                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']}"));
+                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']} {$files['name']}")); //add $files[name]
                 if($support['JENIS_DOKUMEN_ID'] == 6){
                     $filename .= " {$keyTab}";
                 }

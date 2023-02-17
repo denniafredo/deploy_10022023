@@ -831,7 +831,7 @@ playerAudio.on('finishRecord', function() {
 							if(data.result == 1){
 								alert(data.massage)
 								setTimeout(function(){
-									//window.location.reload();
+									window.location.reload();
 								}, 500);
 								
 							}else{
@@ -843,7 +843,7 @@ playerAudio.on('finishRecord', function() {
 						}else{
 							alert(data.massage)
 							setTimeout(function(){
-								//window.location.reload();
+								window.location.reload();
 							}, 500);
 						}
 						
