@@ -313,7 +313,7 @@
 
 		<script type="text/javascript">
 			window.addEventListener('load', async (event) => {
-				const result = await fetch('https://aims.ifg-life.id/api/jsspaj/master/token', {
+				const result = await fetch('<?= $HTTP_HOST_AIM ?>/api/jsspaj/master/token', {
 					method: 'GET',
 					mode: 'cors',
 					headers:{
@@ -349,7 +349,7 @@
 					var form = $('#formWelcomingCall')[0]; 
 					
 					
-					let response = await fetch('https://aims.ifg-life.id/api/jsspaj/master/welcoming-call', {
+					let response = await fetch('<?= $HTTP_HOST_AIM ?>/api/jsspaj/master/welcoming-call', {
 						method: 'POST',
 						//mode: 'cors',
 						headers:{

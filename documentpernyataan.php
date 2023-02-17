@@ -30,7 +30,7 @@ function makeRequest($url, $callDetails = false)
 
 }
 
-$url = "https://aims.ifg-life.id/api/jsspaj/master/bundle-document-ftp?&nosp=$PER->nosp&noid=$KLN->noid";
+$url = "$HTTP_HOST_AIM/api/jsspaj/master/bundle-document-ftp?&nosp=$PER->nosp&noid=$KLN->noid";
 
 $response = makeRequest($url, true);
 
