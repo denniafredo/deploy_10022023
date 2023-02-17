@@ -9,9 +9,8 @@ sudo mv ./proposal/ulink/cektinggiberat.php ./proposal/ulink/cektinggiberat.php.
 sudo mv ./proposal/ulink/chainselectors.php ./proposal/ulink/chainselectors.php.rollback.16022023 && \
 sudo mv ./proposal/ulink/get_data_rider.php ./proposal/ulink/get_data_rider.php.rollback.16022023 && \
 sudo mv ./proposal/ulink/hitungusia1.php ./proposal/ulink/hitungusia1.php.rollback.16022023 && \
-sudo mv ./proposal/ulink/includes/ntryprop.js ./proposal/ulink/includes/ntryprop.js.rollback.16022023 && \
+sudo mv ./proposal/ulink/includes/entryprop.js ./proposal/ulink/includes/entryprop.js.rollback.16022023 && \
 sudo mv ./proposal/ulink/insprop.php ./proposal/ulink/insprop.php.rollback.16022023 && \
-sudo mv ./proposal/ulink/lapcabang.php ./proposal/ulink/lapcabang.php.rollback.16022023 && \
 sudo mv ./proposal/ulink/ntryprop_ulink.php ./proposal/ulink/ntryprop_ulink.php.rollback.16022023 && \
 sudo mv ./proposal/ulink/spajlist.php ./proposal/ulink/spajlist.php.rollback.16022023 && \
 sudo mv ./proposal/ulink/test.cetak.polis.linknew.php ./proposal/ulink/test.cetak.polis.linknew.php.rollback.16022023 && \
@@ -29,9 +28,8 @@ sudo mv ./proposal/ulink/cektinggiberat.php.bak.16022023 ./proposal/ulink/cektin
 sudo mv ./proposal/ulink/chainselectors.php.bak.16022023 ./proposal/ulink/chainselectors.php && \
 sudo mv ./proposal/ulink/get_data_rider.php.bak.16022023 ./proposal/ulink/get_data_rider.php && \
 sudo mv ./proposal/ulink/hitungusia1.php.bak.16022023 ./proposal/ulink/hitungusia1.php && \
-sudo mv ./proposal/ulink/includes/ntryprop.js ./proposal/ulink/includes/ntryprop.js && \
+sudo mv ./proposal/ulink/includes/entryprop.js ./proposal/ulink/includes/entryprop.js && \
 sudo mv ./proposal/ulink/insprop.php.bak.16022023 ./proposal/ulink/insprop.php && \
-sudo mv ./proposal/ulink/lapcabang.php.bak.16022023 ./proposal/ulink/lapcabang.php && \
 sudo mv ./proposal/ulink/ntryprop_ulink.php.bak.16022023 ./proposal/ulink/ntryprop_ulink.php && \
 sudo mv ./proposal/ulink/spajlist.php.bak.16022023 ./proposal/ulink/spajlist.php && \
 sudo mv ./proposal/ulink/test.cetak.polis.linknew.php.bak.16022023 ./proposal/ulink/test.cetak.polis.linknew.php && \
