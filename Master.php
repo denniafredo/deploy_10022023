@@ -880,7 +880,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 		
 		
 
-
+        /*
 		foreach ($list as $val) {
 
 			$local = $temp_file = tempnam(sys_get_temp_dir(), $val);
@@ -892,6 +892,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 			unlink($local);
 		}
 		$this->ftp->close();
+        */
 	}
 	
 	//method validate image yang nantinya akan di panggil dalam validasi form menggunakan callback
