@@ -914,7 +914,7 @@
 				$this->ln();
 			}
 			
-			
+
 			$this->SetFont('Arial','B',9);
 			$this->Cell($this->num_space, $height, NULL, 0, 0, 'C');
 			$this->Cell(($this->pg_w-($this->num_space*2))*7/25, $height, "Nama Pemegang Polis", 0, 0, 'L');
@@ -2176,7 +2176,7 @@
 						$tarif = getTaripPremi($kdtarif, $filterusia, $filterjnsklm);
 
 						if(in_array($row["KDBENEFIT"], $produk1)){
-							$biaya_dasar = $tarif["TARIF"] * 12;
+							$biaya_dasar = $tarif["TARIF"] / 12;
 						}else{
 							$biaya_dasar = $tarif["TARIF"] * $row["NILAIBENEFIT"] / $pembagi / 12;
 						}
