@@ -258,13 +258,15 @@
 
 					<?php 
 
-						if(intval($arr['USIA_BL_NOW']) >= 6 ){
-							$arr['USIA_TH_NOW'] += 1;
-						}
+						if($arr['KDPRODUK'] == 'JL4BPRO'){
+							if(intval($arr['USIA_BL_NOW']) >= 6 ){
+								$arr['USIA_TH_NOW'] += 1;
+							}
 
-						if(intval($arr['USIA_BL_NOW_PP']) >= 6){
-							$arr['USIA_TH_NOW_PP'] += 1;
-						} 
+							if(intval($arr['USIA_BL_NOW_PP']) >= 6){
+								$arr['USIA_TH_NOW_PP'] += 1;
+							} 
+						}
 
 					?>
 
@@ -364,13 +366,15 @@
 								}
 
 
-								/** Tambahan 08122022 by Rizal */
-								if($kdtarif == 'COI'){
+								if($arr['KDPRODUK'] == 'JL4BPRO'){
+									/** Tambahan 08122022 by Rizal */
+									if($kdtarif == 'COI'){
 
-									if($arr['JENISKELAMIN_TU'] == 'L'){
-										$filterjnsklm = "AND BK = '1' ";
-									}else{
-										$filterjnsklm = "AND BK = '0' ";
+										if($arr['JENISKELAMIN_TU'] == 'L'){
+											$filterjnsklm = "AND BK = '1' ";
+										}else{
+											$filterjnsklm = "AND BK = '0' ";
+										}
 									}
 								}
 
@@ -383,17 +387,18 @@
 												AND usia = ".$filterusia."
 												".$filterjnsklm."
 											";
-								// echo $sqltarif;
+
 								$DB3->parse($sqltarif);
 								$DB3->execute();
 								$tarif=$DB3->nextrow();
 
 
 								if(in_array($arr_b["KDBENEFIT"], array('CP19100RWI', 'CP19200RWI', 'CP19300RWI', 'CP19400RWI', 'CP19500RWI', 'CP19600RWI', 'CP19700RWI', 'CP19800RWI', 'CP19900RWI', 'CP191000RWI'))){
-									$biaya_dasar = $tarif["TARIF"] * 12;
+									$biaya_dasar = $tarif["TARIF"] / 12;
 								}else{
 									$biaya_dasar = $tarif["TARIF"] * $arr_b["NILAIBENEFIT"] / $pembagi / 12;
 								}
+								
 
 						?>
 								<form name="porm3" method="post" action="<?echo $PHP_SELF;?>">
