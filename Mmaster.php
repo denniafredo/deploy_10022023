@@ -420,9 +420,9 @@ class Mmaster extends MY_Model {
 	function get_history_mutasi($where, $order = '', $orderWhere = 'asc'){
 		$dba = $this->load->database('jlindo', TRUE);
 		$this->db->select("a.NOSPAJ, a.BUILDID, b.PREFIXPERTANGGUNGAN, b.NOPERTANGGUNGAN, b.NOPOLBARU, c.*, to_char(c.TGLMUTASI, 'dd-mm-yyyy hh24:mi:ss' ) as tgl_mutasi, to_char(c.AGENDA_DATE, 'dd-mm-yyyy hh24:mi:ss' ) as AGENDA_DATE");
-		$this->db->from('TABEL_SPAJ_ONLINE@nadm a');
-		$this->db->join('TABEL_200_PERTANGGUNGAN@nadm b', 'a.NOSPAJ = b.NOSP', 'inner');
-		$this->db->join('TABEL_600_HISTORIS_MUTASI_PERT@nadm c', 'b.PREFIXPERTANGGUNGAN = c.PREFIXPERTANGGUNGAN AND b.NOPERTANGGUNGAN = c.NOPERTANGGUNGAN', 'inner');
+		$this->db->from('TABEL_SPAJ_ONLINE@JLINDO a');
+		$this->db->join('TABEL_200_PERTANGGUNGAN@JLINDO b', 'a.NOSPAJ = b.NOSP', 'inner');
+		$this->db->join('TABEL_600_HISTORIS_MUTASI_PERT@JLINDO c', 'b.PREFIXPERTANGGUNGAN = c.PREFIXPERTANGGUNGAN AND b.NOPERTANGGUNGAN = c.NOPERTANGGUNGAN', 'inner');
 		$this->db->where($where);
 		
 		if(@$order != ''){
@@ -437,8 +437,8 @@ class Mmaster extends MY_Model {
 		$dba = $this->load->database('jlindo', TRUE);
         $sql = "SELECT c.*, z.*, to_char(z.TGLMUTASI, 'dd-mm-yyyy hh24:mi:ss' ) as tgl_mutasi, to_char(z.AGENDA_DATE, 'dd-mm-yyyy hh24:mi:ss' ) as AGENDA_DATE FROM 
 				(SELECT distinct a.NOSPAJ, a.BUILDID, b.PREFIXPERTANGGUNGAN, b.NOPERTANGGUNGAN, b.NOPOLBARU 
-				FROM TABEL_SPAJ_ONLINE@nadm a INNER JOIN TABEL_200_PERTANGGUNGAN@nadm b ON a.NOSPAJ = b.NOSP) c 
-				INNER JOIN TABEL_600_HISTORIS_MUTASI_PERT@nadm z ON c.PREFIXPERTANGGUNGAN||c.NOPERTANGGUNGAN = z.PREFIXPERTANGGUNGAN||z.NOPERTANGGUNGAN 
+				FROM TABEL_SPAJ_ONLINE@JLINDO a INNER JOIN TABEL_200_PERTANGGUNGAN@JLINDO b ON a.NOSPAJ = b.NOSP) c 
+				INNER JOIN TABEL_600_HISTORIS_MUTASI_PERT@JLINDO z ON c.PREFIXPERTANGGUNGAN||c.NOPERTANGGUNGAN = z.PREFIXPERTANGGUNGAN||z.NOPERTANGGUNGAN 
 				WHERE z.KDMUTASI = {$where['KDMUTASI']} AND z.KDSTATUS = {$where['KDSTATUS']}";
 				
 		if(@$where['AGENDA_DATE']){
@@ -461,8 +461,8 @@ class Mmaster extends MY_Model {
 	function get_polis_mutasi($where){
 		$dba = $this->load->database('jlindo', TRUE);
 		$this->db->select("a.NOSPAJ, a.BUILDID, b.PREFIXPERTANGGUNGAN, b.NOPERTANGGUNGAN, b.NOPOLBARU");
-		$this->db->from('TABEL_SPAJ_ONLINE@nadm a');
-		$this->db->join('TABEL_200_PERTANGGUNGAN@nadm b', 'a.NOSPAJ = b.NOSP', 'inner');
+		$this->db->from('TABEL_SPAJ_ONLINE@JLINDO a');
+		$this->db->join('TABEL_200_PERTANGGUNGAN@JLINDO b', 'a.NOSPAJ = b.NOSP', 'inner');
 		$this->db->where($where);
 		
 		return $this->db->get();
@@ -497,8 +497,9 @@ class Mmaster extends MY_Model {
             return [];
         }
         
-        return $this->db->get_where('TABEL_SPAJ_ONLINE@nadm', $where);
+        return $this->db->get_where('TABEL_SPAJ_ONLINE@JLINDO', $where);
     }
+	
 	
     public function insertMutasiWelcoming($object)
     {
@@ -509,9 +510,9 @@ class Mmaster extends MY_Model {
 			'NOPERTANGGUNGAN' => $object['NOPERTANGGUNGAN'],
 			'KDMUTASI' => 52
 		]);
-		$this->db->update('TABEL_600_HISTORIS_MUTASI_PERT@nadm', ['FINALSTATUS' => 0]);
+		$this->db->update('TABEL_600_HISTORIS_MUTASI_PERT@JLINDO', ['FINALSTATUS' => 0]);
 
-        $this->db->insert('TABEL_600_HISTORIS_MUTASI_PERT@nadm', $object);
+        $this->db->insert('TABEL_600_HISTORIS_MUTASI_PERT@JLINDO', $object);
         return $this->db->affected_rows() > 0 ? true : false ;
     }
 }
