@@ -867,7 +867,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				"NOID" => $docs->NOID,
 				"NOAGEN" => $docs->NOAGEN,
 				"JENIS_DOKUMEN_ID" => $docs->JENIS_DOKUMEN,
-				"META_FILES" => $list[0]
+				"FILES" => $docs->META_FILES,
+                "META_FILES" => $list
 			];
 		}
 		$response = [
