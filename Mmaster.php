@@ -437,8 +437,8 @@ class Mmaster extends MY_Model {
 		$dba = $this->load->database('jlindo', TRUE);
         $sql = "SELECT c.*, z.*, to_char(z.TGLMUTASI, 'dd-mm-yyyy hh24:mi:ss' ) as tgl_mutasi, to_char(z.AGENDA_DATE, 'dd-mm-yyyy hh24:mi:ss' ) as AGENDA_DATE FROM 
 				(SELECT distinct a.NOSPAJ, a.BUILDID, b.PREFIXPERTANGGUNGAN, b.NOPERTANGGUNGAN, b.NOPOLBARU 
-				FROM TABEL_SPAJ_ONLINE a INNER JOIN TABEL_200_PERTANGGUNGAN b ON a.NOSPAJ = b.NOSP) c 
-				INNER JOIN TABEL_600_HISTORIS_MUTASI_PERT z ON c.PREFIXPERTANGGUNGAN||c.NOPERTANGGUNGAN = z.PREFIXPERTANGGUNGAN||z.NOPERTANGGUNGAN 
+				FROM TABEL_SPAJ_ONLINE@nadm a INNER JOIN TABEL_200_PERTANGGUNGAN@nadm b ON a.NOSPAJ = b.NOSP) c 
+				INNER JOIN TABEL_600_HISTORIS_MUTASI_PERT@nadm z ON c.PREFIXPERTANGGUNGAN||c.NOPERTANGGUNGAN = z.PREFIXPERTANGGUNGAN||z.NOPERTANGGUNGAN 
 				WHERE z.KDMUTASI = {$where['KDMUTASI']} AND z.KDSTATUS = {$where['KDSTATUS']}";
 				
 		if(@$where['AGENDA_DATE']){
@@ -461,8 +461,8 @@ class Mmaster extends MY_Model {
 	function get_polis_mutasi($where){
 		$dba = $this->load->database('jlindo', TRUE);
 		$this->db->select("a.NOSPAJ, a.BUILDID, b.PREFIXPERTANGGUNGAN, b.NOPERTANGGUNGAN, b.NOPOLBARU");
-		$this->db->from('TABEL_SPAJ_ONLINE@jlindo a');
-		$this->db->join('TABEL_200_PERTANGGUNGAN@jlindo b', 'a.NOSPAJ = b.NOSP', 'inner');
+		$this->db->from('TABEL_SPAJ_ONLINE@nadm a');
+		$this->db->join('TABEL_200_PERTANGGUNGAN@nadm b', 'a.NOSPAJ = b.NOSP', 'inner');
 		$this->db->where($where);
 		
 		return $this->db->get();
@@ -497,7 +497,7 @@ class Mmaster extends MY_Model {
             return [];
         }
         
-        return $dba->get_where('TABEL_SPAJ_ONLINE', $where);
+        return $dba->get_where('TABEL_SPAJ_ONLINE@nadm', $where);
     }
 	
 	
@@ -510,9 +510,9 @@ class Mmaster extends MY_Model {
 			'NOPERTANGGUNGAN' => $object['NOPERTANGGUNGAN'],
 			'KDMUTASI' => 52
 		]);
-		$dba->update('TABEL_600_HISTORIS_MUTASI_PERT', ['FINALSTATUS' => 0]);
+		$dba->update('TABEL_600_HISTORIS_MUTASI_PERT@nadm', ['FINALSTATUS' => 0]);
 
-        $dba->insert('TABEL_600_HISTORIS_MUTASI_PERT', $object);
+        $dba->insert('TABEL_600_HISTORIS_MUTASI_PERT@nadm', $object);
         return $dba->affected_rows() > 0 ? true : false ;
     }
 }

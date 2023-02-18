@@ -797,7 +797,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				"NOID" => $docs->NOID,
 				"NOAGEN" => $docs->NOAGEN,
 				"JENIS_DOKUMEN_ID" => $docs->JENIS_DOKUMEN,
-				"META_FILES" => C_URL_AIMS.$docs->META_FILES
+				"META_FILES" => $docs->META_FILES
 			];
 		}
 		$response = [
@@ -876,8 +876,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 			 'data' => $document,
 		];
         $this->ftp->close();
-        
-		$http = 201;
+
+		$http = 200;
 		$this->response($response, $http);
 		
 		
@@ -987,7 +987,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
                         $_FILES['upload']['error']      = $_FILES['item']['error'][$key]['upload'];
                         $_FILES['upload']['size']       = $_FILES['item']['size'][$key]['upload'];
                         
-                        $fileUpload = $this->upload_document($_FILES['upload'], $data);
+                        $this->upload_document($_FILES['upload'], $data);
+                        $fileUpload = $this->upload_document_local($_FILES['upload'], $data);
                         
                         if ($fileUpload['result']) { // Action upload success result is 'true'
                             $data['META_FILES'] = "'{$fileUpload['namefile']}'"; // collect name file after upload
@@ -1012,7 +1013,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								
 								// Added file attach
 								if(@$val['status'] == 6){
-									$addOn = '<b><a href="'.C_URL_AIMS.$href.'" target="_blank">Attach File!</a></b>';
+									$addOn = '<b><a href="'.C_URL_AIMS."/api/jsspaj/assets/web/upload/".$href.'" target="_blank">Attach File!</a></b>';
 								}
 								
                                 $response = [
@@ -1068,7 +1069,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 							$_FILES['upload']['error']      = $_FILES['item']['error'][$key]['upload'];
 							$_FILES['upload']['size']       = $_FILES['item']['size'][$key]['upload'];
 							
-							$fileUpload = $this->upload_document($_FILES['upload'], $data);
+							$this->upload_document($_FILES['upload'], $data);
+                            $fileUpload = $this->upload_document_local($_FILES['upload'], $data);
 							
 							if ($fileUpload['result']) { // Action upload success result is 'true'
 								$data['META_FILES'] = "'{$fileUpload['namefile']}'"; // collect name file after upload
@@ -1092,8 +1094,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								if($result){
 									// Added file attach
 									if(@$val['status'] == 6){
-										$addOn = '<b><a href="'.C_URL_AIMS.$href.'" target="_blank">Attach File!</a></b>';
-									}
+                                        $addOn = '<b><a href="'.C_URL_AIMS."/api/jsspaj/assets/web/upload/".$href.'" target="_blank">Attach File!</a></b>';
+                                    }
 									
 									$response = [
 										 'status' => true,
@@ -1205,7 +1207,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
                     $_FILES['upload']['error'] = $_FILES['item']['error'][$key]['upload'];
                     $_FILES['upload']['size'] = $_FILES['item']['size'][$key]['upload'];
 					
-                    $fileUpload = $this->upload_document($_FILES['upload'], $data);
+                    $this->upload_document($_FILES['upload'], $data);
+                    $fileUpload = $this->upload_document_local($_FILES['upload'], $data);
 					
                     if ($fileUpload['result']) {
                         $data['META_FILES'] = "'{$fileUpload['namefile']}'";
@@ -1301,7 +1304,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 					$config['max_size']			= 1024*10;
 				}
 
-                $config['upload_path']          = './assets/web/upload/'.strtolower(str_replace(' ','_', $getJenisDokumen->JENIS_DOKUMEN)).'/';
+                $config['upload_path']          = './assets/web/upload/';
 
                 //$keyTab = random_string('numeric', 6);
 				$keyTab = date('dmYHis');
@@ -1318,8 +1321,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
                 $this->load->library('upload',$config);
 				
                 if ($this->upload->do_upload('upload')){ 
-					$newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
-					$newFileName .= str_replace("'", "",$this->upload->data()['file_name']);
+					// $newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
+					$newFileName = str_replace("'", "",$this->upload->data()['file_name']);
 					
                     $return = array(
                         'result'    => true, 
@@ -1380,34 +1383,15 @@ class Master extends \Restserver\Libraries\REST_Controller {
                     $status = 'Penawaran';
                 }
 
-				/*
-                // Set the config upload
-                $config['allowed_types']        = 'pdf|jpeg|jpg|png|mp4|ogg|mp3|m4a|aac|gsm';
-                $config['overwrite']            = 1;
-                $config['remove_spaces']        = TRUE;
-				
-				if($support['JENIS_DOKUMEN_ID'] != 5){
-					$config['max_size']			= 1024;
-				}
-
-                $config['upload_path']          = './assets/web/upload/'.strtolower(str_replace(' ','_', $getJenisDokumen->JENIS_DOKUMEN)).'/';
-
-                $keyTab = random_string('numeric', 6);
-                // $config['file_name'] = strtolower(str_replace(' ', '_', "{$getJenisDokumen['jenis_dokumen']}/{$support['noagen']} {$support['buildid']} {$keyTab} {$status} ". $files['upload']['name']));
-				*/
 				$keyTab = date('dmYHis');
                 
                 $support['NOAGEN'] = preg_replace("/[^a-zA-Z0-9]/", "", $support['NOAGEN']);
-                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']} {$files['name']}")); //add $files[name]
+                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']}.{$files['type']}")); //add $files[type]
                 if($support['JENIS_DOKUMEN_ID'] == 6){
                     $filename .= " {$keyTab}";
                 }
 				$putObject = $this->_ftp_put_ci($files, $filename);
                 
-				/*
-				$config['file_name'] = $filename;
-                $this->load->library('upload',$config);
-				*/
                 if ($putObject){ 
 					//$newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
 					$filename = str_replace("'", "",$filename);

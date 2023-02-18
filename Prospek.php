@@ -101,6 +101,37 @@ class Prospek extends CI_Controller {
         $this->template->content->view("prospek/uploadfile_recording", $data);
         $this->template->publish();
     }
+
+    function getfileupload(){
+    	$files = base64_decode($this->input->get('files'));
+    	$file = FCPATH."api/jsspaj/assets/web/upload/{$files}";
+
+    	if (file_exists($file)) {
+			redirect("api/jsspaj/assets/web/upload/{$files}");
+		}else{
+			$this->load->library('ftp');
+			$this->load->helper('download');
+
+			$config['hostname'] = 'ftp://storage.ifg-life.id';
+			$config['username'] = 'root';
+			$config['password'] = 'ahc6y96uy7xik6x96hbwd94oi0f8ap';
+			$config['debug']    = TRUE;
+			$config['port']     = 21;
+			
+			$this->ftp->connect($config);
+
+			$list = $this->ftp->list_files('/VOLUME1/JLINDO/WELCOME/'.$files);
+
+			
+			$local = tempnam(sys_get_temp_dir(), $list[0]);
+			$download = $this->ftp->download($list[0], $local, FTP_BINARY);
+			$data = file_get_contents($local);
+			file_put_contents(FCPATH."api/jsspaj/assets/web/upload/{$list[0]}",$data);
+			
+			$this->ftp->close();
+			redirect("api/jsspaj/assets/web/upload/{$files}");
+		}
+    }
 	
 	function proposal() {
 		check_user_role_menu(C_MENU_PROSPEK_SAYA);
