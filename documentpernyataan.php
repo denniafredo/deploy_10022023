@@ -73,17 +73,18 @@ $response = makeRequest($url, true);
 	</tr>	
 </thead>	
 <tbody>	  
-	<?php $i = 1; foreach($response['data'] as $doc): ?>
+	<?php if(@$response['data']): $i = 1; foreach($response['data'] as $doc): ?>
 	<tr>
 		<td class="demo"><?php echo $i++; ?></td>
 		<td class="demo"><?php echo $doc['JENIS_DOKUMEN_ID'] ?></td>
 		<td class="demo" align="center">
 			<a align="center" href="./downloaddoc.php?file=<?= base64_encode("https://aims.ifg-life/api/jsspaj/assets/web/upload/".$doc['META_FILES']) ?>">Download</a>&nbsp;|&nbsp;
-			
+
 			<a href="<?php echo "https://aims.ifg-life.id/Prospek/getfileupload/?files=".$doc['META_FILES']?>">View</a>
 		</td>
 	</tr>
 	<?php endforeach ?>
+	<?php endif ?>
 	</tbody>
 </table>
 
