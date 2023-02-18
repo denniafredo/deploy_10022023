@@ -451,7 +451,7 @@ class Mmaster extends MY_Model {
 		
 		$sql .= " order by ".$order;
 		
-        $db = $dba->query($sql);
+        $db = $this->db->query($sql);
         $data = $db->result();
         $db->free_result();
         
@@ -497,22 +497,21 @@ class Mmaster extends MY_Model {
             return [];
         }
         
-        return $dba->get_where('TABEL_SPAJ_ONLINE@nadm', $where);
+        return $this->db->get_where('TABEL_SPAJ_ONLINE@nadm', $where);
     }
-	
 	
     public function insertMutasiWelcoming($object)
     {
         $dba = $this->load->database('jlindo', TRUE);
 		
-		$dba->where([
+		$this->db->where([
 			'PREFIXPERTANGGUNGAN' => $object['PREFIXPERTANGGUNGAN'],
 			'NOPERTANGGUNGAN' => $object['NOPERTANGGUNGAN'],
 			'KDMUTASI' => 52
 		]);
-		$dba->update('TABEL_600_HISTORIS_MUTASI_PERT@nadm', ['FINALSTATUS' => 0]);
+		$this->db->update('TABEL_600_HISTORIS_MUTASI_PERT@nadm', ['FINALSTATUS' => 0]);
 
-        $dba->insert('TABEL_600_HISTORIS_MUTASI_PERT@nadm', $object);
-        return $dba->affected_rows() > 0 ? true : false ;
+        $this->db->insert('TABEL_600_HISTORIS_MUTASI_PERT@nadm', $object);
+        return $this->db->affected_rows() > 0 ? true : false ;
     }
 }
