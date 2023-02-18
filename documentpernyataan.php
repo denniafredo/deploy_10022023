@@ -30,7 +30,7 @@ function makeRequest($url, $callDetails = false)
 
 }
 
-$url = "$HTTP_HOST_AIM/api/jsspaj/master/bundle-document-ftp?&nosp=$PER->nosp&noid=$KLN->noid";
+$url = "http://aims.ifg-life.id/api/jsspaj/master/bundle-document-local?&nosp=$PER->nosp&noid=$KLN->noid";
 
 $response = makeRequest($url, true);
 
@@ -78,8 +78,9 @@ $response = makeRequest($url, true);
 		<td class="demo"><?php echo $i++; ?></td>
 		<td class="demo"><?php echo $doc['JENIS_DOKUMEN_ID'] ?></td>
 		<td class="demo" align="center">
-			<a align="center" href="./downloaddoc.php?file=<?= base64_encode($doc['META_FILES']) ?>">Download</a>&nbsp;|&nbsp;
-			<a href="<?php echo $doc['META_FILES']?>">View</a>
+			<a align="center" href="./downloaddoc.php?file=<?= base64_encode("https://aims.ifg-life/api/jsspaj/assets/web/upload/".$doc['META_FILES']) ?>">Download</a>&nbsp;|&nbsp;
+			
+			<a href="<?php echo "https://aims.ifg-life.id/Prospek/getfileupload/?files=".$doc['META_FILES']?>">View</a>
 		</td>
 	</tr>
 	<?php endforeach ?>

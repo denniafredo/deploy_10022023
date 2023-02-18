@@ -16,7 +16,7 @@
 	$DB->execute();
 	$buildId = $DB->nextrow();
 	
-	$sqlDocument = "SELECT * FROM JAIM_302_DOKUMEN@jaim WHERE BUILDID ='{$buildId['BUILDID']}' AND NOID = '{$KLN->noid}' AND JENIS_DOKUMEN_ID = '5'";
+	$sqlDocument = "SELECT * FROM JAIM_302_DOKUMEN@jaim WHERE BUILDID ='{$buildId['BUILDID']}' AND JENIS_DOKUMEN_ID = '5'";
 		
 	$DB->parse($sqlDocument);
 	$DB->execute();
@@ -68,9 +68,8 @@ Historis Mutasi Polis <b> <? echo ($PER->nopolbaru?$PER->nopolbaru:$prefix."-".$
     echo "<td class=arial8 align=\"left\">".$his["NAMAMUTASI"]."</td>";
 	
 	$href = '';
-	if($his['KDSTATUS'] == 1){
-		$link = str_replace('/opt/bitnami/apps/jaim_ifglife/htdocs', '', $doc['META_FILES']);
-		$href = " | <a href='http://10.170.64.152{$doc['META_FILES']}' target='_blank'><strong>Check this File!</strong></a>"; 
+	if($his['KDSTATUS'] == 1 || $his['KDSTATUS'] == 2){
+		$href = " | <a href='https://aims.ifg-life.id/Prospek/getfileupload/?files={$doc['META_FILES']}' target='_blank'><strong>Check this File!</strong></a>"; 
 	}
     
     echo "<td class=arial8 >".$his["KETERANGANMUTASI"]."{$href}</td>";
