@@ -9,8 +9,11 @@ class Prospek extends CI_Controller {
 
         $this->load->model('master_model');
 
-        check_session_user();
-        check_kuesioner();
+        if(@$this->uri->segment(2) != 'getfileupload'){
+	        check_session_user();
+	        check_kuesioner();
+        }
+        
         $this->url = base_url('prospek');
     }
 
@@ -122,12 +125,12 @@ class Prospek extends CI_Controller {
 
 			$list = $this->ftp->list_files('/VOLUME1/JLINDO/WELCOME/'.$files);
 
-			
-			$local = tempnam(sys_get_temp_dir(), $list[0]);
-			$download = $this->ftp->download($list[0], $local, FTP_BINARY);
-			$data = file_get_contents($local);
-			file_put_contents(FCPATH."api/jsspaj/assets/web/upload/{$list[0]}",$data);
-			
+			foreach ($list as $val) {
+				$local = tempnam(sys_get_temp_dir(), $val);
+				$download = $this->ftp->download($val, $local, FTP_BINARY);
+				$data = file_get_contents($local);
+				file_put_contents(FCPATH."api/jsspaj/assets/web/upload/{$val}",$data);
+			}
 			$this->ftp->close();
 			redirect("api/jsspaj/assets/web/upload/{$files}");
 		}
