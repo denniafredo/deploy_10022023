@@ -228,6 +228,7 @@
 		$DB->parse($sql);
 		$DB->execute();
 
+
 		$i=1;
 		while ($arr=$DB->nextrow()) {
 			/*
