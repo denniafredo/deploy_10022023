@@ -82,7 +82,7 @@ $no=1;
 
 <?php 
 // while($rows=oci_fetch_object($parsesql)){
-//     echo "http://10.170.64.152" . $rows->META_FILES;
+//     echo "http://10.170.64.152" . base64_encode($rows->META_FILES);
 // };
 ?>
 
@@ -170,7 +170,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Needed Assesment</a>
+											<a target="_blank" href="<?= $filename.base64_encode($rows->META_FILES) ?>" >File Needed Assesment</a>
                                         <?php endif; ?>
 										<?php } ?>
                                         </span>   
@@ -240,7 +240,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Pernyataan Pemahaman</a>
+											<a target="_blank" href="<?= $filename.base64_encode($rows->META_FILES) ?>" >File Pernyataan Pemahaman</a>
                                         <?php endif; ?>
 										<?php } ?>   
                                         </span>   
@@ -309,7 +309,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Profil Resiko</a>
+											<a target="_blank" href="<?= $filename.base64_encode($rows->META_FILES) ?>" >File Profil Resiko</a>
                                         <?php endif; ?>
 										<?php } ?>
                                            
@@ -417,7 +417,7 @@ $no=1;
                                             {
                                         ?>
 										<?php if(@$rows): ?>
-											<a target="_blank" href="<?= $filename.$rows->META_FILES ?>" >File Recording Pernyataan</a>
+											<a target="_blank" href="<?= $filename.base64_encode($rows->META_FILES) ?>" >File Recording Pernyataan</a>
                                         <?php endif; ?>
 										<?php } ?>
                                         </span>

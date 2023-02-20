@@ -1392,7 +1392,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
                     $filename .= " {$keyTab}";
                 }
 
-                $filename .= ".{$files['type']}";
+                $filename .= ".{$extension}";
                 $filename = str_replace("'", "",$filename);
 
 				$putObject = $this->_ftp_put_ci($files, $filename);
@@ -1432,7 +1432,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 		$config['hostname'] = 'ftp://storage.ifg-life.id';
         $config['username'] = 'root';
         $config['password'] = 'ahc6y96uy7xik6x96hbwd94oi0f8ap';
-        $config['debug']    = TRUE;
+        $config['debug']    = FALSE;
         $config['port']     = 21;
 		
 		$this->ftp->connect($config);
