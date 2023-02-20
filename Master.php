@@ -860,7 +860,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 		}
 		$document = [];
 		foreach($getDocument->result() as $docs){
-			$list = $this->ftp->list_files('/VOLUME1/JLINDO/WELCOME/'.$docs->META_FILES);
+			$list = $this->ftp->list_files('data/VOLUME1/JLINDO/WELCOME/'.$docs->META_FILES);
 			$document[] = [
 				"ID" => $docs->ID,
 				"BUILDID" => $docs->BUILDID,
@@ -988,8 +988,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
                         $_FILES['upload']['error']      = $_FILES['item']['error'][$key]['upload'];
                         $_FILES['upload']['size']       = $_FILES['item']['size'][$key]['upload'];
                         
-                        $this->upload_document($_FILES['upload'], $data);
-                        $fileUpload = $this->upload_document_local($_FILES['upload'], $data);
+                        $fileUpload = $this->upload_document($_FILES['upload'], $data);
+                        //$fileUpload = $this->upload_document_local($_FILES['upload'], $data);
                         
                         if ($fileUpload['result']) { // Action upload success result is 'true'
                             $data['META_FILES'] = "'{$fileUpload['namefile']}'"; // collect name file after upload
@@ -1070,8 +1070,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 							$_FILES['upload']['error']      = $_FILES['item']['error'][$key]['upload'];
 							$_FILES['upload']['size']       = $_FILES['item']['size'][$key]['upload'];
 							
-							$this->upload_document($_FILES['upload'], $data);
-                            $fileUpload = $this->upload_document_local($_FILES['upload'], $data);
+							$fileUpload = $this->upload_document($_FILES['upload'], $data);
+                            //$fileUpload = $this->upload_document_local($_FILES['upload'], $data);
 							
 							if ($fileUpload['result']) { // Action upload success result is 'true'
 								$data['META_FILES'] = "'{$fileUpload['namefile']}'"; // collect name file after upload
@@ -1208,8 +1208,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
                     $_FILES['upload']['error'] = $_FILES['item']['error'][$key]['upload'];
                     $_FILES['upload']['size'] = $_FILES['item']['size'][$key]['upload'];
 					
-                    $this->upload_document($_FILES['upload'], $data);
-                    $fileUpload = $this->upload_document_local($_FILES['upload'], $data);
+                    $fileUpload = $this->upload_document($_FILES['upload'], $data);
+                    ////$fileUpload = $this->upload_document_local($_FILES['upload'], $data);
 					
                     if ($fileUpload['result']) {
                         $data['META_FILES'] = "'{$fileUpload['namefile']}'";
