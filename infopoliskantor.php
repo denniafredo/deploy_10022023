@@ -195,15 +195,19 @@
                     		AND nopertanggungan = a.nopertanggungan 
                     		AND kdbenefit = 'BNFTOPUPSG'
                     ) topup_sekaligus,
-					(SELECT * FROM 
-						(SELECT KETERANGANMUTASI 
-						FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT 
-						WHERE prefixpertanggungan = a.prefixpertanggungan 
-						AND NOPERTANGGUNGAN = a.nopertanggungan
-						$filter
-						
-						ORDER BY TGLMUTASI DESC) 
-					WHERE ROWNUM <= 1) KETERANGANMUTASI
+					(
+					SELECT
+							KETERANGANMUTASI
+						FROM
+							$DBUser.TABEL_600_HISTORIS_MUTASI_PERT zz
+						WHERE
+							prefixpertanggungan = a.prefixpertanggungan
+							AND NOPERTANGGUNGAN = a.nopertanggungan
+							AND TGLMUTASI = (SELECT max(tglmutasi)
+											 FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT
+											 WHERE prefixpertanggungan = zz.prefixpertanggungan
+											 AND NOPERTANGGUNGAN = zz.nopertanggungan)
+					) KETERANGANMUTASI
        			FROM $DBUser.tabel_200_pertanggungan a
 				LEFT JOIN $DBUser.tabel_100_klien b ON a.notertanggung = b.noklien
 				LEFT JOIN $DBUser.tabel_500_penagih c ON a.nopenagih = c.nopenagih 
@@ -261,7 +265,6 @@
 				
 				/* query untuk tambahan welcoming call */
 				//$sql2 = "SELECT * FROM (SELECT KDSTATUS, KETERANGANMUTASI FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT WHERE prefixpertanggungan = '".$arr["PREFIXPERTANGGUNGAN"]."' AND NOPERTANGGUNGAN = '".$arr["NOPERTANGGUNGAN"]."' AND KDMUTASI = '52' $wherex ORDER BY TGLMUTASI DESC) WHERE ROWNUM <= 1";
-				//$sql2 = "SELECT * FROM (SELECT KDSTATUS, KETERANGANMUTASI FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT WHERE prefixpertanggungan = '".$arr["PREFIXPERTANGGUNGAN"]."' AND NOPERTANGGUNGAN = '".$arr["NOPERTANGGUNGAN"]."' $wherex  ORDER BY TGLMUTASI DESC) WHERE ROWNUM <= 1";
 				$sql2 = "SELECT
 							KDSTATUS,KETERANGANMUTASI
 						FROM
@@ -274,7 +277,6 @@
 											 WHERE prefixpertanggungan = zz.prefixpertanggungan 
 											AND NOPERTANGGUNGAN = zz.nopertanggungan
 											$wherex)";
-				
 				/* selesai */
 
 				$DB2->parse($sql2);
