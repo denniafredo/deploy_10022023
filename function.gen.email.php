@@ -28,7 +28,7 @@
     echo "[".date('d-m-Y H:i:s')."] ##### Mulai proses pengiriman email bulanan laporan perkembangan nilai tunai produk JL4BPRO ##### \n";
     foreach($data as $arr) {
 
-        $noper = $arr['PREFIXPERTANGGUNGAN'].$arr['NOPERTANGGUNGAN'];
+        $noper = $arr['NOMOR_POLIS'];
         /** create PDF **/
         createPDF($noper);
         /** end create PDF **/
