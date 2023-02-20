@@ -203,10 +203,12 @@
 						WHERE
 							prefixpertanggungan = a.prefixpertanggungan
 							AND NOPERTANGGUNGAN = a.nopertanggungan
+							$filter
 							AND TGLMUTASI = (SELECT max(tglmutasi)
 											 FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT
 											 WHERE prefixpertanggungan = zz.prefixpertanggungan
-											 AND NOPERTANGGUNGAN = zz.nopertanggungan)
+											 AND NOPERTANGGUNGAN = zz.nopertanggungan
+											 $filter)
 					) KETERANGANMUTASI
        			FROM $DBUser.tabel_200_pertanggungan a
 				LEFT JOIN $DBUser.tabel_100_klien b ON a.notertanggung = b.noklien
@@ -272,10 +274,13 @@
 						WHERE
 							prefixpertanggungan = {$arr["PREFIXPERTANGGUNGAN"]}
 							AND NOPERTANGGUNGAN = {$arr["NOPERTANGGUNGAN"]}
+							AND KDMUTASI = '52'
+							$wherex
 							AND TGLMUTASI = (SELECT max(tglmutasi)
 											 FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT
 											 WHERE prefixpertanggungan = zz.prefixpertanggungan 
 											AND NOPERTANGGUNGAN = zz.nopertanggungan
+											AND KDMUTASI = '52'
 											$wherex)";
 				/* selesai */
 
