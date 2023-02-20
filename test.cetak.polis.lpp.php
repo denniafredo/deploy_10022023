@@ -640,10 +640,6 @@
 			$this->Cell(($this->pg_w-($this->num_space*2))/3, $height, NULL, 0, 0, 'C');
 			$this->Cell(($this->pg_w-($this->num_space*2))/3, $height, NULL, 0, 0, 'C');
 			$this->Cell(($this->pg_w-($this->num_space*2))/3, $height, "PT ASURANSI JIWA IFG", 0, 1, 'C');
-			$this->Cell($this->num_space, $height, NULL, 0, 0, 'C');
-            $this->Cell(($this->pg_w-($this->num_space*2))/3, $height, '', 0, 0, 'C');
-            $this->Cell(($this->pg_w-($this->num_space*2))/3, $height, NULL, 0, 0, 'C');
-            $this->Cell(($this->pg_w-($this->num_space*2))/3, $height, "", 0, 1, 'C');
             $this->Image('./images/ttd_drLanny.png', 130, $this->GetY()+2, 60);
 			
 			$this->Ln(28);
