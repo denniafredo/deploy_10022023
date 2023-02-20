@@ -1387,17 +1387,18 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				$keyTab = date('dmYHis');
                 
                 $support['NOAGEN'] = preg_replace("/[^a-zA-Z0-9]/", "", $support['NOAGEN']);
-                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']}.{$files['type']}")); //add $files[type]
+                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']}")); //add $files[type]
                 if($support['JENIS_DOKUMEN_ID'] == 6){
                     $filename .= " {$keyTab}";
                 }
+
+                $filename .= ".{$files['type']}";
                 $filename = str_replace("'", "",$filename);
 
 				$putObject = $this->_ftp_put_ci($files, $filename);
                 
                 if ($putObject){ 
 					//$newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
-					
 					
                     $return = array(
                         'result'    => true, 
