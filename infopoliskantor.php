@@ -137,7 +137,7 @@
 		}elseif($ket_welcomingcall == '1'){
 			$where = " AND g.KDSTATUS IN (1,2) AND g.KDMUTASI = '52' AND g.FINALSTATUS = 1";
 		}elseif($ket_welcomingcall == '2'){
-			$filter = " AND g.KDSTATUS NOT IN (0,1,2,9)";
+			$filter = " AND KDSTATUS NOT IN (0,1,2,9)";
 			$where = " AND g.KDSTATUS IS NULL ";
 		}elseif($ket_welcomingcall == '3'){
 			$where = " AND g.KDSTATUS = 0 AND g.KDMUTASI = '52' AND g.FINALSTATUS = 1";
@@ -174,51 +174,52 @@
 					to_char(a.tglcetak, 'DD/MM/YYYY') tglcetak,
 					to_char(f.tglverifikasi, 'DD/MM/YYYY') tglverifikasi, 
 					to_char(f.tglkirim, 'DD/MM/YYYY') tglkirim, 
-					f.noresi, 
-					/* selesai */
-					(SELECT komisiagencb 
-						FROM $DBUser.tabel_404_temp 
-						WHERE prefixpertanggungan=a.prefixpertanggungan 
-							AND nopertanggungan=a.nopertanggungan 
-							AND thnkomisi='1' 
+					f.noresi,
+					komisiagen.komisiagencb komisiagen,
+					topup_berkala.premi topup_berkala,
+					topup_sekaligus.premi topup_sekaligus,
+					KETERANGANMUTASI.KETERANGANMUTASI KETERANGANMUTASI
+					/* selesai */					
+       			FROM nadm.tabel_200_pertanggungan a
+				LEFT JOIN nadm.tabel_100_klien b ON a.notertanggung = b.noklien
+				LEFT JOIN nadm.tabel_500_penagih c ON a.nopenagih = c.nopenagih 
+				LEFT JOIN nadm.tabel_305_cara_bayar d ON a.kdcarabayar = d.kdcarabayar
+				LEFT JOIN nadm.tabel_299_status_file e ON e.kdstatusfile = a.kdstatusfile
+				LEFT JOIN nadm.tabel_214_verify_cetak_polis f ON f.prefixpertanggungan = a.prefixpertanggungan AND f.nopertanggungan = a.nopertanggungan
+				/**tambahan query welcoming call */
+				LEFT JOIN nadm.TABEL_600_HISTORIS_MUTASI_PERT g ON g.prefixpertanggungan = a.prefixpertanggungan AND g.nopertanggungan = a.nopertanggungan
+				/** selesai */
+				LEFT JOIN (SELECT komisiagencb,prefixpertanggungan,nopertanggungan
+						FROM nadm.tabel_404_temp 
+						WHERE 
+							thnkomisi='1' 
 							AND kdkomisiagen='01'
-					) komisiagen,
-					(SELECT premi 
-						FROM $DBUser.tabel_223_transaksi_produk 
-						WHERE prefixpertanggungan = a.prefixpertanggungan 
-							AND nopertanggungan = a.nopertanggungan 
-							AND kdbenefit = 'BNFTOPUP'
-					) topup_berkala,
-                    (SELECT premi 
-                    	FROM $DBUser.tabel_223_transaksi_produk 
-                    	WHERE prefixpertanggungan = a.prefixpertanggungan 
-                    		AND nopertanggungan = a.nopertanggungan 
-                    		AND kdbenefit = 'BNFTOPUPSG'
-                    ) topup_sekaligus,
-					(
+					) komisiagen  ON komisiagen.PREFIXPERTANGGUNGAN||komisiagen.NOPERTANGGUNGAN = a.PREFIXPERTANGGUNGAN||a.NOPERTANGGUNGAN
+				LEFT JOIN	(SELECT premi ,prefixpertanggungan,nopertanggungan
+						FROM nadm.tabel_223_transaksi_produk 
+						WHERE  
+							kdbenefit = 'BNFTOPUP'
+					) topup_berkala ON topup_berkala.PREFIXPERTANGGUNGAN||topup_berkala.NOPERTANGGUNGAN = a.PREFIXPERTANGGUNGAN||a.NOPERTANGGUNGAN
+                LEFT JOIN    (SELECT premi ,prefixpertanggungan,nopertanggungan
+                    	FROM nadm.tabel_223_transaksi_produk 
+                    	WHERE 
+                    		kdbenefit = 'BNFTOPUPSG'
+                    ) topup_sekaligus ON topup_sekaligus.PREFIXPERTANGGUNGAN||topup_sekaligus.NOPERTANGGUNGAN = a.PREFIXPERTANGGUNGAN||a.NOPERTANGGUNGAN
+				LEFT JOIN (
 					SELECT
-							KETERANGANMUTASI
+							KETERANGANMUTASI,prefixpertanggungan,nopertanggungan
 						FROM
-							$DBUser.TABEL_600_HISTORIS_MUTASI_PERT zz
+							nadm.TABEL_600_HISTORIS_MUTASI_PERT zz
 						WHERE
-							prefixpertanggungan = a.prefixpertanggungan
-							AND NOPERTANGGUNGAN = a.nopertanggungan
+							1=1
 							$filter
 							AND TGLMUTASI = (SELECT max(tglmutasi)
-											 FROM $DBUser.TABEL_600_HISTORIS_MUTASI_PERT
+											 FROM nadm.TABEL_600_HISTORIS_MUTASI_PERT
 											 WHERE prefixpertanggungan = zz.prefixpertanggungan
 											 AND NOPERTANGGUNGAN = zz.nopertanggungan
-											 $filter)
-					) KETERANGANMUTASI
-       			FROM $DBUser.tabel_200_pertanggungan a
-				LEFT JOIN $DBUser.tabel_100_klien b ON a.notertanggung = b.noklien
-				LEFT JOIN $DBUser.tabel_500_penagih c ON a.nopenagih = c.nopenagih 
-				LEFT JOIN $DBUser.tabel_305_cara_bayar d ON a.kdcarabayar = d.kdcarabayar
-				LEFT JOIN $DBUser.tabel_299_status_file e ON e.kdstatusfile = a.kdstatusfile
-				LEFT JOIN $DBUser.tabel_214_verify_cetak_polis f ON f.prefixpertanggungan = a.prefixpertanggungan AND f.nopertanggungan = a.nopertanggungan
-				/**tambahan query welcoming call */
-				LEFT JOIN $DBUser.TABEL_600_HISTORIS_MUTASI_PERT g ON g.prefixpertanggungan = a.prefixpertanggungan AND g.nopertanggungan = a.nopertanggungan
-				/** selesai */
+											 $filter
+											 )
+					) KETERANGANMUTASI ON KETERANGANMUTASI.PREFIXPERTANGGUNGAN||KETERANGANMUTASI.NOPERTANGGUNGAN = a.PREFIXPERTANGGUNGAN||a.NOPERTANGGUNGAN
            		WHERE a.kdpertanggungan='2' 
            			AND a.notertanggung is not null
            			".$filterkantor."
@@ -226,7 +227,7 @@
 					".$where."
 				ORDER BY a.prefixpertanggungan,a.nopertanggungan";
 		// echo $sql;
-		//die;
+		// die;
 		$DB->parse($sql);
 		$DB->execute();
 
