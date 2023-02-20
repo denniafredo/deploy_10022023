@@ -1014,7 +1014,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								
 								// Added file attach
 								if(@$val['status'] == 6){
-									$addOn = '<b><a href="'.C_URL_AIMS."/api/jsspaj/assets/web/upload/".$href.'" target="_blank">Attach File!</a></b>';
+									$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
 								}
 								
                                 $response = [
@@ -1095,7 +1095,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								if($result){
 									// Added file attach
 									if(@$val['status'] == 6){
-                                        $addOn = '<b><a href="'.C_URL_AIMS."/api/jsspaj/assets/web/upload/".$href.'" target="_blank">Attach File!</a></b>';
+                                        $addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
                                     }
 									
 									$response = [
@@ -1305,7 +1305,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 					$config['max_size']			= 1024*10;
 				}
 
-                $config['upload_path']          = './assets/web/upload/';
+                $config['upload_path']          = FCPATH."assets/web/upload/";
 
                 //$keyTab = random_string('numeric', 6);
 				$keyTab = date('dmYHis');
@@ -1391,11 +1391,13 @@ class Master extends \Restserver\Libraries\REST_Controller {
                 if($support['JENIS_DOKUMEN_ID'] == 6){
                     $filename .= " {$keyTab}";
                 }
+                $filename = str_replace("'", "",$filename);
+
 				$putObject = $this->_ftp_put_ci($files, $filename);
                 
                 if ($putObject){ 
 					//$newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
-					$filename = str_replace("'", "",$filename);
+					
 					
                     $return = array(
                         'result'    => true, 
@@ -1424,7 +1426,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 	
 	private function _ftp_put_ci($filex, $filename){
 		$this->load->library('ftp');
-		$remote_file = "/VOLUME1/JLINDO/WELCOME/$filename";
+		$remote_file = "/data/VOLUME1/JLINDO/WELCOME/$filename";
 		
 		$config['hostname'] = 'ftp://storage.ifg-life.id';
         $config['username'] = 'root';

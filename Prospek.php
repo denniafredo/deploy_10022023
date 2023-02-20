@@ -123,7 +123,7 @@ class Prospek extends CI_Controller {
 			
 			$this->ftp->connect($config);
 
-			$list = $this->ftp->list_files('/VOLUME1/JLINDO/WELCOME/'.$files);
+			$list = $this->ftp->list_files('/data/VOLUME1/JLINDO/WELCOME/'.$files);
 
 			foreach ($list as $val) {
 				$local = tempnam(sys_get_temp_dir(), $val);

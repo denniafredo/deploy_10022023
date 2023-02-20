@@ -61,7 +61,7 @@ $query4= "SELECT meta_files from JAIM_302_DOKUMEN where buildid='$build' and noi
  * }
  */
  /* ini cara oracle */
- $filename = "ftp://storage.ifg-life.id/VOLUME1/JLINDO/WELCOME/";
+ $filename = "https://aims.ifg-life.id/Prospek/getfileupload/?files=";
 $parsesql = oci_parse($conn, $query); // Document Needed Assesment 4
 oci_execute($parsesql);
 $no=1;
