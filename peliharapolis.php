@@ -3,7 +3,7 @@
  	include "../../includes/session.php";
  	include "../../includes/klien.php";
  	include "../../includes/pertanggungan.php";
-	include "../includes/listaccount_legacy.php";
+	include "../../includes/listaccount_legacy.php";
  	$DB=New database($userid, $passwd, $DBName);
   	$DB1=New database($userid, $passwd, $DBName);
   	$DB2=New database($userid, $passwd, $DBName);
