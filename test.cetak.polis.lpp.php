@@ -2111,7 +2111,7 @@
 					$arr['USIA_TH_NOW_PP'] += 1;
 				} 
 
-				$usia 			= intval($arr['USIA_TH_NOW_PP']);
+				$usia 			= intval($arr['USIA_TH_NOW']);
 				$allTotal 		= 0;
 
 				$arr_b = getData($arr["PREFIXPERTANGGUNGAN"],$arr["NOPERTANGGUNGAN"]);

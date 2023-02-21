@@ -3,7 +3,7 @@
  	include "../../includes/session.php";
  	include "../../includes/klien.php";
  	include "../../includes/pertanggungan.php";
-	include "../../includes/listaccount_legacy.php";
+	include "../includes/listaccount_legacy.php";
  	$DB=New database($userid, $passwd, $DBName);
   	$DB1=New database($userid, $passwd, $DBName);
   	$DB2=New database($userid, $passwd, $DBName);
@@ -90,9 +90,9 @@ $nomor = (strlen($prefixpertanggungan)==0 && strlen($nopertanggungan)==0 && strl
 	            "where $nomor";
 							
 			 //echo $sql;				
-		$DB->parse($sql);
-	   	$DB->execute();
-		$arx=$DB->nextrow();
+       $DB->parse($sql);
+	   	 $DB->execute();
+	   	 $arx=$DB->nextrow();
 			 
 			 
 			 			 
@@ -204,7 +204,7 @@ where JABATAN IN (
 select jabatan from $DBUser.UID_NON_CONFIDENTIAL
 )
 and userid = '$userid') boleh,
-			(SELECT keterangan FROM $DBUser.rpt_prefix_noper_restru WHERE prefixpertanggungan = a.prefixpertanggungan AND nopertanggungan = a.nopertanggungan) statusmigrasi
+			(SELECT keterangan FROM $DBUser.rpt_prefix_noper_restru WHERE prefixpertanggungan = a.prefixpertanggungan AND nopertanggungan = a.nopertanggungan AND keterangan LIKE 'STATUS.MIGRASI.POLIS%') statusmigrasi
 				from $DBUser.tabel_200_pertanggungan a, $DBUser.tabel_500_penagih b, $DBUser.TABEL_001_KANTOR c ".
 	            "where a.nopenagih=b.nopenagih and kdrayonpenagih=c.kdkantor and $nomor";
 			//echo $sql;
@@ -493,8 +493,7 @@ and userid = '$userid') boleh,
   </tr>	
   <tr>
     <td class="verdana8blk">Phone Tagih</td>
-    <td class="verdana8blk">:  
-	<? echo $arv["PHONETAGIH01"]; ?><? echo $arv["PHONETAGIH02"]=='' ? "" : ", ".$arv["PHONETAGIH02"] ; ?>  
+    <td class="verdana8blk">:  <? echo $arv["PHONETAGIH01"]; ?><? echo $arv["PHONETAGIH02"]=='' ? "" : ", ".$arv["PHONETAGIH02"] ; ?>  
 		Phone Tetap : <? echo $arv["PHONETETAP01"]; ?><? echo $arv["PHONETETAP02"]=='' ? "" : ", ".$arv["PHONETETAP02"] ; ?> </td>
 		<td class="verdana8blk"><b>No. Handphone Korespondensi</b></td>
     <td class="verdana8blk"><b> :  <? echo $arv["NOHP"]; ?></b></td>
@@ -876,8 +875,10 @@ a.kdfund=b.kdfund";
 				// printf("<input type=\"button\" name=\"tariftebus\" value=\"PESAN\" onclick=\"NewWindow('../customercare/pesan/entrypesan.php?nopolis=%s','popupmutasi','850','400','yes');return false\" style=\"font-size: 8pt\">",$prefixpertanggungan.$nopertanggungan);
 			}
 
+			printf("<input type=\"button\" name=\"tariftebus\" value=\"INFO REK\" onclick=\"NewWindow('../klaim/updaterekening.php?nopolis=%s','popupmutasi','760','350','yes');return false\" style=\"font-size: 8pt\">",$prefixpertanggungan.$nopertanggungan);
+
 			if ($user_cc) {
-				printf("<input type=\"button\" name=\"tariftebus\" value=\"INFO. REK\" onclick=\"NewWindow('../klaim/updaterekening.php?nopolis=%s','popupmutasi','760','350','yes');return false\" style=\"font-size: 8pt\">",$prefixpertanggungan.$nopertanggungan);
+				
 				
 				printf("<input type=\"button\" name=\"tariftebus\" value=\"LAYANAN\" onclick=\"NewWindow('../customercare/layanan/entrylayanan.php?nopolis=%s','popupmutasi','850','400','yes');return false\" style=\"font-size: 8pt\">",$prefixpertanggungan.$nopertanggungan);
 			}
@@ -886,14 +887,7 @@ a.kdfund=b.kdfund";
 		
 			 
 		?>
-		<? 	
-			if($usersaelegacy === true) {
-			$polisbaru_smart="$prefixpertanggungan-$nopertanggungan"; 
-			
-			printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN JIWASRAYA\" onclick=\"NewWindow('http://192.168.2.82/smart/list_legacy.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">");
-			printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN IFG LIFE\" onclick=\"NewWindow('http://sae-aws.ifg-life.id/smart_ifglife/list.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">");
-		} else {
-				printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN\" onclick=\"NewWindow('http://sae-aws.ifg-life.id/smart_ifglife/list.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">");
+		<? $polisbaru_smart="$prefixpertanggungan-$nopertanggungan"; printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN\" onclick=\"NewWindow('https://sae-aws.ifg-life.id/smart_ifglife/list.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">"); ?>");
 			}
 			echo "&nbsp";
 			
