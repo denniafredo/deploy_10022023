@@ -887,7 +887,12 @@ a.kdfund=b.kdfund";
 		
 			 
 		?>
-		<? $polisbaru_smart="$prefixpertanggungan-$nopertanggungan"; printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN\" onclick=\"NewWindow('https://sae-aws.ifg-life.id/smart_ifglife/list.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">"); ?>");
+		<? 	$polisbaru_smart="$prefixpertanggungan-$nopertanggungan"; 
+			if($usersaelegacy === true) {
+				printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN JIWASRAYA\" onclick=\"NewWindow('http://192.168.2.82/smart/list_legacy.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">");
+				printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN IFG LIFE\" onclick=\"NewWindow('http://sae-aws.ifg-life.id/smart_ifglife/list.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">");
+			} else {
+				printf("<input type=\"button\" name=\"docpolis\" value=\"DOKUMEN\" onclick=\"NewWindow('http://sae-aws.ifg-life.id/smart_ifglife/list.php?no_polis1=".base64_encode(base64_encode($polisbaru_smart))."','popupkomisi','700','400','yes');return false\" style=\"font-size: 8pt\">");
 			}
 			echo "&nbsp";
 			
