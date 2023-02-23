@@ -408,7 +408,7 @@ if ($insjabatan) {
 if ($act == "hapusriwjab") {
     $sql = "select keterangan
 			from $DBUser.tabel_417_histori_jabatan
-			where noagen='$noagen' and kdjabatanagen='$kja' and tgljabatan=to_date('$tgljab','dd/mm/yyyy')
+			where noagen='$noagen' and kdjabatanagen='$kja' and trunc(tgljabatan)=to_date('$tgljab','dd/mm/yyyy')
 				";
     $DB->parse($sql);
     $DB->execute();
@@ -417,7 +417,7 @@ if ($act == "hapusriwjab") {
     if ($kantornya == 'KP' or ($kantornya != 'KP' && empty($arr['KETERANGAN']))) {
         $sql = "delete from $DBUser.tabel_417_histori_jabatan " .
             "where noagen='$noagen' and kdjabatanagen='$kja' and " .
-            "tgljabatan=to_date('$tgljab','DD/MM/YYYY')";
+            "trunc(tgljabatan)=to_date('$tgljab','DD/MM/YYYY')";
         $DB->parse($sql);
         $DB->execute();
     } else {
