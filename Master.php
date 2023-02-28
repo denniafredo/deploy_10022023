@@ -1023,7 +1023,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								
 								// Added file attach
 								if(@$val['status'] == 6){
-									//$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
+									$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
 								}
 								
                                 $response = [
@@ -1106,7 +1106,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								if($result){
 									// Added file attach
 									if(@$val['status'] == 6){
-										//$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
+										$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
 									}
 									
 									$response = [
