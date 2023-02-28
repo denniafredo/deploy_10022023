@@ -2207,10 +2207,11 @@ $email = $ass["EMAILTETAP"];
                             <?
                             //echo(" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updjabatanagend3d1.php?noklien=$noagen&noagen=$noagen&kdjabatanagen=$kdjabatanagen&kdkelasagen=$kdkelasagen&tgljabatan=$tgljabatan&uraianjabatan=$uraian&ketjabatan=$keterangan&bo=$prefixagen','updclnt',500,250,1);\">Edit</a>");
                             // echo(" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updjabatanagen_d3d1.php?noklien=$noagen&noagen=$noagen&kdjabatanagen=$kdjabatanagen&kdjabatanagenold=$kdjabatanagen&kdkelasagen=$kdkelasagen&kdkelasagenold=$kdkelasagen&tgljabatan=$tgljabatan&tgljabatanold=$tgljabatan&uraianjabatan=$uraian&ketjabatan=$keterangan&kdkantorX=$prefixagen&namamutasi=$uraian','updclnt',500,250,1);\">Edit</a>");
-                            if ($kdjabatanagen == '29') {
-                                echo (" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updspa_new2020.php?&noagen=$noagen&preagen=$prefixagen&kdjabatanagen=$kdjabatanagen','updclnt',500,250,1);\">Edit</a>");
-                            } elseif (in_array($kdjabatanagen, $kodeJabatanWSBS)) {
+                            $kodeJabatanWSBS = array('31', '32', '33', '34', '35', '36', '37', '38');
+                            if (in_array($kdjabatanagen, $kodeJabatanWSBS)) {
                                 echo (" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updspa_new_lpa.php?&noagen=$noagen&preagen=$prefixagen&kdjabatanagen=$kdjabatanagen','updclnt',500,250,1);\">Edit</a>");
+                            } else {
+                                echo (" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updspa_new2020.php?&noagen=$noagen&preagen=$prefixagen&kdjabatanagen=$kdjabatanagen','updclnt',500,250,1);\">Edit</a>");
                             }
                             ?>
                         <? } ?>
