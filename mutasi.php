@@ -69,7 +69,7 @@ Historis Mutasi Polis <b> <? echo ($PER->nopolbaru?$PER->nopolbaru:$prefix."-".$
 	
 	$href = '';
 	if($his['KDSTATUS'] == 1 || $his['KDSTATUS'] == 2){
-		$href = " | <a href='https://aims.ifg-life.id/Prospek/getfileupload/?files={$doc['META_FILES']}' target='_blank'><strong>Check this File!</strong></a>"; 
+		$href = " | <a href='https://aims.ifg-life.id/Prospek/getfileupload/?files=".base64_encode($doc['META_FILES'])."' target='_blank'><strong>Check this File!</strong></a>"; 
 	}
     
     echo "<td class=arial8 >".$his["KETERANGANMUTASI"]."{$href}</td>";

@@ -643,7 +643,7 @@
 					$tglSaldoAwal2 	= date("t/m/Y");
 					/** end untuk mengambil */
 
-					$msquery = " SELECT   id_nasabah,
+						$msquery = " SELECT   id_nasabah,
 								 nomor_polis,
 								 TO_CHAR(trx_date, 'DD/MM/YYYY') AS tgltrans,
 								 trx_date,
@@ -672,18 +672,12 @@
 										   AND deskripsi = SUBSTR (a.description, 1,12))
 									status
 						  FROM   TABEL_UL_TRANSAKSI a
-						 WHERE   status IN ('GOOD FUND', 'SEND', 'NEW') 
-						 	and nomor_polis='$noper'
-						 	and st_proses<>'X' 
-						 	AND SUBSTR(kode_fund,-2)='".$arr2["KDFUND"]."'
+						 WHERE   status IN ('GOOD FUND', 'SEND', 'NEW') and nomor_polis='$noper'and st_proses<>'X' AND SUBSTR(kode_fund,-2)='".$arr2["KDFUND"]."'
 						 	AND trx_date <= TO_DATE ('$tglSaldoAwal2', 'DD/MM/YYYY')
-						 	AND DESCRIPTION LIKE 'SUBSCRIPTION%'
 						  ORDER BY trx_date";
-
 						$DB4->parse($msquery);
 						$DB4->execute();
 						$saldoAwal = $DB4->result();
-
 
 					$queryKdFund = "SELECT id_nasabah,
 	         				nomor_polis,
@@ -717,14 +711,14 @@
 							   WHERE     status IN ('GOOD FUND', 'SEND', 'NEW')
 							   		AND trx_date BETWEEN TO_DATE ('$startDate2', 'DD/MM/YYYY')
 							        AND TO_DATE ('$tglSaldoAwal2', 'DD/MM/YYYY')
-						       and nomor_polis='$noper' "."and st_proses<>'X' AND SUBSTR(kode_fund,-2)='".$arr2["KDFUND"]."' ORDER BY trx_date";     
+						       and nomor_polis='$noper' "."and st_proses<>'X' AND SUBSTR(kode_fund,-2)='".$arr2["KDFUND"]."' ORDER BY trx_date";  
+
 						$DB3->parse($queryKdFund);
 			    		$DB3->execute();
 			    		$aru = $DB3->result();
 
 			    		/** to get Nilai Saldo Awal **/
 						foreach ($saldoAwal as $saldoAwal) {
-
 							/** get data Unit saldo Awal **/
 							if($saldoAwal["TRX_TYPE"]=="S"){
 								$totalUnitNilaiAwal += str_replace(',', '.', $saldoAwal["UNIT"]);
@@ -868,7 +862,7 @@
 		    foreach($aru as $key){
 		    		
 		    	if(strpos($key['DESCRIPTION'], 'SUBSCRIPTION') !== false || strpos($key['DESCRIPTION'], 'Subscription') !== false){
-		    		$tglKet 	= substr($key['TGL_DESC'], 1, 10);
+		    		$tglKet 	= substr($key['TGL_DESC'], -10);
 			    	$ztglKet 	= strtotime($tglKet);
 			    	$xtglKet	= date("d-m-Y", $ztglKet);
 					$jt = 'Nilai Investasi dari Premi ('.$xtglKet.')';
@@ -877,7 +871,7 @@
 
 
 				if(strpos($key['DESCRIPTION'], 'TOPUP') !== false ){
-					$tglKet 	= substr($key['TGL_DESC'], 1, 10);
+					$tglKet 	= substr($key['TGL_DESC'], -10);
 			    	$ztglKet 	= strtotime($tglKet);
 			    	$xtglKet	= date("d-m-Y", $ztglKet);
 					$jt = 'Nilai Investasi Top Up Premi ('.$xtglKet.')';
@@ -885,7 +879,7 @@
 				}
 
 				if(strpos($key['DESCRIPTION'], 'COA') !== false){
-					$tglKet 	= substr($key['TGL_DESC'], 1, 10);
+					$tglKet 	= substr($key['TGL_DESC'], -10);
 			    	$ztglKet 	= strtotime($tglKet);
 			    	$xtglKet	= date("d-m-Y", $ztglKet);
 					$jt = 'Biaya Administrasi ('.$xtglKet.')';
@@ -893,7 +887,7 @@
 				}
 
 				if(strpos($key['DESCRIPTION'], 'COR') !== false){
-					$tglKet 	= substr($key['TGL_DESC'], 1, 10);
+					$tglKet 	= substr($key['TGL_DESC'], -10);
 			    	$ztglKet 	= strtotime($tglKet);
 			    	$xtglKet	= date("d-m-Y", $ztglKet);
 					$jt = 'Biaya Asuransi Rider ('.$xtglKet.')';
@@ -901,7 +895,7 @@
 				}
 
 				if(strpos($key['DESCRIPTION'], 'COI') !== false){
-					$tglKet 	= substr($key['TGL_DESC'], 1, 10);
+					$tglKet 	= substr($key['TGL_DESC'], -10);
 			    	$ztglKet 	= strtotime($tglKet);
 			    	$xtglKet	= date("d-m-Y", $ztglKet);
 					$jt = 'Biaya Asuransi ('.$xtglKet.')';
@@ -1268,7 +1262,7 @@
 	    $pdf->Cell(6,4,'PT ASURANSI JIWA IFG',0,0,'L');
 
 	    $pdf->Output('F', "./PDF/LAPORAN_PERKEMBANGAN_NILAITUNAI_".$nopertanggungan.".pdf", true);
-	    // $pdf->Output('I', "./PDF/LAPORAN_PERKEMBANGAN_NILAITUNAI_".$nopertanggungan.".pdf", true);
+	    //$pdf->Output('I', "./PDF/LAPORAN_PERKEMBANGAN_NILAITUNAI_".$nopertanggungan.".pdf", true);
 	}
 
 
