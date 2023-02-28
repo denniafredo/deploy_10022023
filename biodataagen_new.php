@@ -2211,7 +2211,7 @@ $email = $ass["EMAILTETAP"];
                             if (in_array($kdjabatanagen, $kodeJabatanWSBS)) {
                                 echo (" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updspa_new_lpa.php?&noagen=$noagen&preagen=$prefixagen&kdjabatanagen=$kdjabatanagen','updclnt',500,250,1);\">Edit</a>");
                             } else {
-                                echo (" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updspa_new2020.php?&noagen=$noagen&preagen=$prefixagen&kdjabatanagen=$kdjabatanagen','updclnt',500,250,1);\">Edit</a>");
+                                echo (" <a href=\"#\" class=\"verdana8blu\" onclick=\"NewWindow('updspa_new2020_edit.php?&noagen=$noagen&preagen=$prefixagen&kdjabatanagen=$kdjabatanagen','updclnt',500,250,1);\">Edit</a>");
                             }
                             ?>
                         <? } ?>
