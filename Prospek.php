@@ -9,11 +9,8 @@ class Prospek extends CI_Controller {
 
         $this->load->model('master_model');
 
-        if(@$this->uri->segment(2) != 'getfileupload'){
-	        check_session_user();
-	        check_kuesioner();
-        }
-        
+        check_session_user();
+        check_kuesioner();
         $this->url = base_url('prospek');
     }
 
@@ -104,8 +101,8 @@ class Prospek extends CI_Controller {
         $this->template->content->view("prospek/uploadfile_recording", $data);
         $this->template->publish();
     }
-
-    function getfileupload(){
+	
+	function getfileupload(){
     	$files = base64_decode($this->input->get('files'));
     	$file = FCPATH."api/jsspaj/assets/web/upload/{$files}";
 
@@ -118,7 +115,6 @@ class Prospek extends CI_Controller {
 			$config['hostname'] = 'ftp://storage.ifg-life.id';
 			$config['username'] = 'root';
 			$config['password'] = 'ahc6y96uy7xik6x96hbwd94oi0f8ap';
-			$config['debug']    = TRUE;
 			$config['port']     = 21;
 			
 			$this->ftp->connect($config);
@@ -135,6 +131,7 @@ class Prospek extends CI_Controller {
 			redirect("api/jsspaj/assets/web/upload/{$files}");
 		}
     }
+	
 	
 	function proposal() {
 		check_user_role_menu(C_MENU_PROSPEK_SAYA);
@@ -155,7 +152,7 @@ class Prospek extends CI_Controller {
 		$data['proposal'] = api_curl("/pos/agen/$noagen/$noktp", 'GET');
         $data['status'] = $this->session->flashdata('status');
 		
-		$data['key'] = @$this->session->TOKEN;
+		$data['key'] = $this->session->TOKEN;
 		
 
         $this->template->title = 'Proposal';

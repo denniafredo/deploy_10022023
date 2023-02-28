@@ -860,7 +860,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 		}
 		$document = [];
 		foreach($getDocument->result() as $docs){
-			$list = $this->ftp->list_files('data/VOLUME1/JLINDO/WELCOME/'.$docs->META_FILES);
+			$list = $this->ftp->list_files('/data/VOLUME1/JLINDO/WELCOME/'.$docs->META_FILES);
 			$document[] = [
 				"ID" => $docs->ID,
 				"BUILDID" => $docs->BUILDID,
@@ -878,10 +878,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 		];
         $this->ftp->close();
 
-		$http = 200;
+		$http = 201;
 		$this->response($response, $http);
-		
-		
 
         /*
 		foreach ($list as $val) {
@@ -952,6 +950,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
             $data = [
                 'NOID' => "'{$this->input->post('noid')}'",
                 'NOAGEN' => "'{$this->input->post('noagen')}'",
+				'BUILDID' => ''
             ];
 
             // Collect Build id from SPAJ ONLINE in NADM Database
@@ -964,7 +963,15 @@ class Master extends \Restserver\Libraries\REST_Controller {
 
                 if ($getSPAJOnline->num_rows() > 0) {
                     $data['BUILDID'] = $collectSPAJOnline->BUILDID; // Collect Build Id to processed
-                }
+                }else{
+					$response = [
+						 'status' => false,
+						 'massage' => 'Polis not found',
+						 'data' => []
+					];
+					$http = 404;
+					$this->response($response, $http);
+				}
             }
 			
 			$tanggal = date('d-m-Y H:i:s');
@@ -988,13 +995,15 @@ class Master extends \Restserver\Libraries\REST_Controller {
                         $_FILES['upload']['error']      = $_FILES['item']['error'][$key]['upload'];
                         $_FILES['upload']['size']       = $_FILES['item']['size'][$key]['upload'];
                         
-                        $fileUpload = $this->upload_document($_FILES['upload'], $data);
-                        //$fileUpload = $this->upload_document_local($_FILES['upload'], $data);
+                        $keyTab = random_string('numeric', 6);
+
+                        $this->upload_document($_FILES['upload'], $data, $keyTab);
+                        $fileUpload = $this->upload_document_local($_FILES['upload'], $data, $keyTab);
                         
                         if ($fileUpload['result']) { // Action upload success result is 'true'
                             $data['META_FILES'] = "'{$fileUpload['namefile']}'"; // collect name file after upload
 							
-                            $href = $fileUpload['namefile'];
+                            $href = base64_encode($fileUpload['namefile']);
 							
 							$tanggal = date('d-m-Y');
                             if ($getId->num_rows() > 0) {
@@ -1014,7 +1023,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								
 								// Added file attach
 								if(@$val['status'] == 6){
-									$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
+									//$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
 								}
 								
                                 $response = [
@@ -1070,13 +1079,15 @@ class Master extends \Restserver\Libraries\REST_Controller {
 							$_FILES['upload']['error']      = $_FILES['item']['error'][$key]['upload'];
 							$_FILES['upload']['size']       = $_FILES['item']['size'][$key]['upload'];
 							
-							$fileUpload = $this->upload_document($_FILES['upload'], $data);
-                            //$fileUpload = $this->upload_document_local($_FILES['upload'], $data);
+                            $keyTab = random_string('numeric', 6);
+
+							$this->upload_document($_FILES['upload'], $data, $keyTab);
+                            $fileUpload = $this->upload_document_local($_FILES['upload'], $data, $keyTab);
 							
 							if ($fileUpload['result']) { // Action upload success result is 'true'
 								$data['META_FILES'] = "'{$fileUpload['namefile']}'"; // collect name file after upload
 								
-								$href = $fileUpload['namefile'];
+								$href = base64_encode($fileUpload['namefile']);
 								
 								$tanggal = date('d-m-Y');
 								if ($getId->num_rows() > 0) {
@@ -1095,8 +1106,8 @@ class Master extends \Restserver\Libraries\REST_Controller {
 								if($result){
 									// Added file attach
 									if(@$val['status'] == 6){
-                                        $addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
-                                    }
+										//$addOn = '<b><a href="'.C_URL_AIMS."/Prospek/getfileupload/?files=".$href.'" target="_blank">Attach File!</a></b>';
+									}
 									
 									$response = [
 										 'status' => true,
@@ -1145,7 +1156,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				if($result){
 					$response = [
 						'status' => true,
-						'massage' => 'Successfully Upload Welcoming Call',
+						'massage' => 'Successfully Update Welcoming Call',
 						'data' => [],
 						'result' => 0
 					];
@@ -1153,7 +1164,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				}else{
 					$response = [
 						'status' => false,
-						'massage' => 'Error Upload! Please Try Again.',
+						'massage' => 'Error Update! Please Try Again.',
 						'data' => [],
 						'result' => 0
 					];
@@ -1200,16 +1211,17 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				$data['JENIS_DOKUMEN_ID'] = $val['status'];
 				
                 if (@$_FILES['item']['name'][$key]) {
-                    
-
+					
                     $_FILES['upload']['name'] = $_FILES['item']['name'][$key]['upload'];
                     $_FILES['upload']['type'] = $_FILES['item']['type'][$key]['upload'];
                     $_FILES['upload']['tmp_name'] = $_FILES['item']['tmp_name'][$key]['upload'];
                     $_FILES['upload']['error'] = $_FILES['item']['error'][$key]['upload'];
                     $_FILES['upload']['size'] = $_FILES['item']['size'][$key]['upload'];
 					
-                    $fileUpload = $this->upload_document($_FILES['upload'], $data);
-                    ////$fileUpload = $this->upload_document_local($_FILES['upload'], $data);
+                    $keyTab = random_string('numeric', 6);
+
+                    $this->upload_document($_FILES['upload'], $data, $keyTab);
+                    $fileUpload = $this->upload_document_local($_FILES['upload'], $data, $keyTab);
 					
                     if ($fileUpload['result']) {
                         $data['META_FILES'] = "'{$fileUpload['namefile']}'";
@@ -1260,7 +1272,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
         }
     }
 	
-	private function upload_document_local($files, $support)
+	private function upload_document_local($files, $support, $keyTab)
     {
         $check = TRUE;
         $message = '';
@@ -1287,6 +1299,19 @@ class Master extends \Restserver\Libraries\REST_Controller {
                 $getJenisDokumen = $this->mmaster->get_jenis_document([
                     'ID' => "'{$support['JENIS_DOKUMEN_ID']}'"
                 ])->row();
+				
+				if($support['JENIS_DOKUMEN_ID'] != 6){
+					$getLink = $this->mmaster->get_BuildId([
+						'BUILDID' => "{$support['BUILDID']}",
+						'JENIS_DOKUMEN_ID' => "{$support['JENIS_DOKUMEN_ID']}"
+					]);
+					
+					if($getLink->num_rows() > 0){
+						$path = FCPATH."assets/web/upload/".$getLink->row_array()['META_FILES'];
+						unlink($path);
+					}
+				}
+				
 
                 if ($support['JENIS_DOKUMEN_ID'] == 5) {
                     $status = 'Welcoming Call';
@@ -1306,23 +1331,15 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				}
 
                 $config['upload_path']          = FCPATH."assets/web/upload/";
-
-                //$keyTab = random_string('numeric', 6);
-				$keyTab = date('dmYHis');
 				
 				$support['NOAGEN'] = preg_replace("/[^a-zA-Z0-9]/", "", $support['NOAGEN']);
-				$filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']}"));
-				//$putObject = $this->_ftp_put_ci($files, $filename);
-                
-				if($support['JENIS_DOKUMEN_ID'] == 6){
-					$filename .= " {$keyTab}";
-				}
-				
+				$filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$keyTab}"));
+
 				$config['file_name'] = $filename;
                 $this->load->library('upload',$config);
 				
                 if ($this->upload->do_upload('upload')){ 
-					// $newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
+					
 					$newFileName = str_replace("'", "",$this->upload->data()['file_name']);
 					
                     $return = array(
@@ -1348,7 +1365,7 @@ class Master extends \Restserver\Libraries\REST_Controller {
         }
     }
 
-    private function upload_document($files, $support)
+    private function upload_document($files, $support, $keyTab)
     {
         $check = TRUE;
         $message = '';
@@ -1383,14 +1400,9 @@ class Master extends \Restserver\Libraries\REST_Controller {
                 }else{
                     $status = 'Penawaran';
                 }
-
-				$keyTab = date('dmYHis');
                 
                 $support['NOAGEN'] = preg_replace("/[^a-zA-Z0-9]/", "", $support['NOAGEN']);
-                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$support['NOID']}")); //add $files[type]
-                if($support['JENIS_DOKUMEN_ID'] == 6){
-                    $filename .= " {$keyTab}";
-                }
+                $filename = strtolower(str_replace(' ', '_', "{$getJenisDokumen->JENIS_DOKUMEN} {$support['NOAGEN']} {$support['BUILDID']} {$status} {$keyTab}")); //add $files[type]
 
                 $filename .= ".{$extension}";
                 $filename = str_replace("'", "",$filename);
@@ -1398,8 +1410,6 @@ class Master extends \Restserver\Libraries\REST_Controller {
 				$putObject = $this->_ftp_put_ci($files, $filename);
                 
                 if ($putObject){ 
-					//$newFileName = str_replace('/opt/bitnami/apps/aims/htdocs', '', $this->upload->data()['file_path']);
-					
                     $return = array(
                         'result'    => true, 
                         'file'      => [],
